@@ -7,7 +7,8 @@ _<font size = "">
 
 
 ### Communication Tool/Techniques
-    Communication tools we will use outside of school would consist of Facebook Messenger, or the SFU Canvas discussion page.
+    Communication tools we will use outside of school would consist of Facebook Messenger, 
+    or the SFU Canvas discussion page.
     
 ### Details of Software Methology
     N/A
