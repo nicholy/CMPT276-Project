@@ -4,10 +4,11 @@ _<font size = "">
 </font>_
 
 ### Meeting Schedule
-
+   Members are expected to show up at weekly meetings scheduled on Mondays at 10:30 AM for an hour, before class.
 
 ### Communication Tool/Techniques
-    Communication tools we will use outside of school would consist of Facebook Messenger, or the SFU Canvas discussion page.
+    Communication tools we will use outside of school would consist of Facebook Messenger, 
+    or the SFU Canvas discussion page.
     
 ### Details of Software Methology
     N/A
