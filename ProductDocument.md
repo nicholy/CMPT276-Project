@@ -42,7 +42,7 @@ _<font size = "3">
 
 | Release   | Date  | Tasks Expected to Finish  |
 | --------  | ----  | ------------------------  |
-| Release 0 | Jan 8 | Product Document Finished |
+| Release 0 | Jan 18 | Product Document Finished |
 | Release 0 (Presentation) | Jan 21 | Powerpoint detailing product Document <br/> Finish at least part of the code <br/> Hex Keyboard |
 | Release 1 | Feb 6 | Software work breakdown - teams finalized <br/> Working emulator <br/> Visualizer for Chip 8 |
 | Release 2 | Feb 27 | Complete 1 game |
