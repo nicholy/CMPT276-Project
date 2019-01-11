@@ -1,3 +1,10 @@
+<!doctype html>
+
+<p></p>
+
+<script>
+let p = document.querySelector("p");
+
 function chip8(){
   this.pc = 0;
   this.stack = new Array(16);
@@ -25,4 +32,5 @@ function chip8(){
   
 }
 var a = new chip8();
-console.log(a.keys)
+ p.textContent = a.memory;
+</script>
