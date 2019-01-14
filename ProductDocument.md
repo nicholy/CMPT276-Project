@@ -4,7 +4,7 @@ _<font size = "3">
 </font>_
 
 ### Meeting Schedule
-    Members are expected to show up at weekly meetings scheduled on Mondays at 10:30 AM for an hour, <br/> before class.
+    Members are expected to show up at weekly meetings scheduled on Mondays at 10:30 AM for an hour, before class.
 
 ### Communication Tool/Techniques
     Communication tools we will use outside of school would consist of Facebook Messenger, or Skype.
@@ -16,7 +16,7 @@ _<font size = "3">
 
 ### Testing and Quality Assurance Tools
 
-    Tools we will use for testing and assuring the quality would consist of <br/> Javascript Sandbox and a manual code in a separate Javascript file. <br/>
+    Tools we will use for testing and assuring the quality would consist of  Javascript Sandbox and a manual code in a separate Javascript file.
     (Build up with each release)
 
 ### Main Implementation Language/ Software Repository
