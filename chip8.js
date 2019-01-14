@@ -6,38 +6,64 @@
 let p = document.querySelector("p");
 
 function chip8(){
-
-  this.DisplayRows = 32;
-  this.DisplayColumns = 64;
-  this.resolution = (this.DisplayRows * this.DisplayColumns);
-  this.bitMap = new Array(this.resolution);
-
   this.pc = 0;
   this.stack = new Array(16);
   this.memory = new Uint8Array(4096);
   this.v = new Uint8Array(16);
   this.startAddr = 0x200;
-  this.keys = [
-        0xF0, 0x90, 0x90, 0x90, 0xF0, // 0
-        0x20, 0x60, 0x20, 0x20, 0x70, // 1
-        0xF0, 0x10, 0xF0, 0x80, 0xF0, // 2
-        0xF0, 0x10, 0xF0, 0x10, 0xF0, // 3
-        0x90, 0x90, 0xF0, 0x10, 0x10, // 4
-        0xF0, 0x80, 0xF0, 0x10, 0xF0, // 5
-        0xF0, 0x80, 0xF0, 0x90, 0xF0, // 6
-        0xF0, 0x10, 0x20, 0x40, 0x40, // 7
-        0xF0, 0x90, 0xF0, 0x90, 0xF0, // 8
-        0xF0, 0x90, 0xF0, 0x10, 0xF0, // 9
-        0xF0, 0x90, 0xF0, 0x90, 0x90, // A
-        0xE0, 0x90, 0xE0, 0x90, 0xE0, // B
-        0xF0, 0x80, 0x80, 0x80, 0xF0, // C
-        0xE0, 0x90, 0x90, 0x90, 0xE0, // D
-        0xF0, 0x80, 0xF0, 0x80, 0xF0, // E
-        0xF0, 0x80, 0xF0, 0x80, 0x80  // F
-    ];
-
+  this.displayWidth = 64;
+  this.displayHeight = 32;
+  this.display = new Array(this.displayWidth * this.displayHeight);
+  this.i = null;
+  this.sp = null;
 }
 
+function program(){
+  	for (i = 0x200; i < 0x06A0; i++) {
+    	this.memory[i] = 1;
+    }
+}
+
+function stack(){
+  for(i = 0x06A0; i<0x06D0; i++){
+      this.memory[i] = 2;
+  }
+}
+
+function workarea(){
+  for(i = 0x06D0; i<0x06F0; i++){
+      this.memory[i] = 3;
+  }
+}
+
+function variable(){
+  for(i = 0x06F0; i<0x0700; i++){
+      this.memory[i] = 4;
+  }
+}
+
+function display(){
+  for(i = 0x0700; i<this.memory.length; i++){
+      this.memory[i] = 5;
+  }
+}
+
+function opcode1(){
+	for (var i = 0; i < this.display.length; i++) {
+    	this.display[i] = 0;
+    }
+}
+
+
+chip8();
+program();
+stack();
+workarea();
+variable();
+display();
+opcode1();
+console.log(memory);
+</script>
 var a = new chip8();
 p.textContent = a.memory;
 
