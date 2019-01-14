@@ -1,5 +1,5 @@
 # **Product Document** - CMPT 276 Team 3
-_<font size = "3"> 
+_<font size = "3">
    Members: Nichol Yip, Jeremy Lee, Mac Liu, Eric Wong, Tanvir Khan
 </font>_
 
@@ -8,17 +8,17 @@ _<font size = "3">
 
 ### Communication Tool/Techniques
     Communication tools we will use outside of school would consist of Facebook Messenger, or Skype.
-    
-### Details of Software Methology
 
-    Memebrs are expected to follow an incremental development model while working on the project, where 
+### Details of Software Methodology
+
+    Members are expected to follow an incremental development model while working on the project, where
     the project will be divided into smaller releases.
-    
-   
-    
+
+
+
 ### Testing and Quality Assurance Tools
 
-    Tools we will use for testing and assuring the quality would consist of Javascript Sandbox and 
+    Tools we will use for testing and assuring the quality would consist of Javascript Sandbox and
     a manual code in a separate Javascript file. (Build up with each release)
 ### Main Implementation Language/ Software Repository
     Main implementation language would be Javascript and all code would be stored using GitHub.
@@ -50,7 +50,3 @@ _<font size = "3">
 | Release 3 | Mar 13 | Complete creating a Chip8 tool |
 | Release 4 (presentation) | Apr 1 | Finish all Games |
 | Release 4 | Apr 8 | Product is finished |                      
-
-
-
-
