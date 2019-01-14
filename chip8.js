@@ -6,6 +6,12 @@
 let p = document.querySelector("p");
 
 function chip8(){
+
+  this.DisplayRows = 32;
+  this.DisplayColumns = 64;
+  this.resolution = (this.DisplayRows * this.DisplayColumns);
+  this.bitMap = new Array(this.resolution);
+
   this.pc = 0;
   this.stack = new Array(16);
   this.memory = new Uint8Array(4096);
@@ -33,23 +39,9 @@ function chip8(){
 }
 
 var a = new chip8();
- p.textContent = a.memory;
+p.textContent = a.memory;
 
 
- var display = function display() {
-
-     this.rows = 32;
-     this.columns = 64;
-     this.resolution = this.rows * thiscolumns;
-     this.bitMap = new Array(this.resolution);
-
-     @method clear;
-
-     this.clear = function {
-
-         this.bitMap = new Array(this.resolution);
-     }
 
 
- }
 </script>
