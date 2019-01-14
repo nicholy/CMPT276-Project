@@ -29,8 +29,27 @@ function chip8(){
         0xF0, 0x80, 0xF0, 0x80, 0xF0, // E
         0xF0, 0x80, 0xF0, 0x80, 0x80  // F
     ];
-  
+
 }
+
 var a = new chip8();
  p.textContent = a.memory;
+
+
+ var display = function display() {
+
+     this.rows = 32;
+     this.columns = 64;
+     this.resolution = this.rows * thiscolumns;
+     this.bitMap = new Array(this.resolution);
+
+     @method clear;
+
+     this.clear = function {
+
+         this.bitMap = new Array(this.resolution);
+     }
+
+
+ }
 </script>
