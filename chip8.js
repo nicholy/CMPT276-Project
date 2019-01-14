@@ -13,7 +13,8 @@ function chip8(){
   this.startAddr = 0x200;
   this.displayWidth = 64;
   this.displayHeight = 32;
-  this.display = new Array(this.displayWidth * this.displayHeight);
+  this.resolution = this.displayWidth * this.displayHeight
+  this.display = new Array(resolution);
   this.i = null;
   this.sp = null;
 }
