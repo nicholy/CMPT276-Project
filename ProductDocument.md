@@ -11,19 +11,14 @@ _<font size = "3">
 
 ### Details of Software Methodology
 
-<<<<<<< HEAD
-    Memebrs are expected to follow an incremental development model while working on the project, where
-=======
-    Members are expected to follow an incremental development model while working on the project, where
->>>>>>> 447807b19ef07c007d038c950ac8f3939cd48b92
-    the project will be divided into smaller releases.
-
+    Members are expected to follow an incremental development model while working on the project, where the project will be divided into smaller releases.
 
 
 ### Testing and Quality Assurance Tools
 
     Tools we will use for testing and assuring the quality would consist of Javascript Sandbox and
     a manual code in a separate Javascript file. (Build up with each release)
+
 ### Main Implementation Language/ Software Repository
     Main implementation language would be Javascript and all code would be stored using GitHub.
 ### Detailed Use Cases For Next Release
