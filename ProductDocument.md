@@ -11,7 +11,11 @@ _<font size = "3">
 
 ### Details of Software Methodology
 
+<<<<<<< HEAD
     Memebrs are expected to follow an incremental development model while working on the project, where
+=======
+    Members are expected to follow an incremental development model while working on the project, where
+>>>>>>> 447807b19ef07c007d038c950ac8f3939cd48b92
     the project will be divided into smaller releases.
 
 
