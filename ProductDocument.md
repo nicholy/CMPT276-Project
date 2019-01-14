@@ -1,6 +1,6 @@
 # **Product Document** - CMPT 276 Team 3
 _<font size = "3"> 
-   Members: Nichol Yip, Jeremy Lee, Mac Liu, Eric Wong
+   Members: Nichol Yip, Jeremy Lee, Mac Liu, Eric Wong, Tanvir Khan
 </font>_
 
 ### Meeting Schedule
@@ -37,6 +37,7 @@ _<font size = "3">
 | Jeremy |      |
 | Mac    |      |
 | Eric   |      |
+| Tanvir |      |
 
 ### Future Schedules
 
