@@ -64,11 +64,9 @@ variable();
 display();
 opcode1();
 console.log(memory);
-</script>
-var a = new chip8();
-p.textContent = a.memory;
+  
 
-emulateCycle: function(){
+function emulationcycle(){
 
   var opcode = this.memory[this.pc] << 8 | this.memory[this.pc+1];
   var x = (opcode & 0x0F00) >> 8;
@@ -77,7 +75,48 @@ emulateCycle: function(){
   this.pc += 2;
 
   switch(opcode & 0xF000) {
+    case 0x0000:
 
+	switch (opcode) {
+		case 0x00E0:
+			for (var i = 0; i < this.display.length; i++) {
+				this.display[i] = 0;
+			}
+			break;
+		case 0x00EE:
+                	this.pc = this.stack[--this.sp];
+                	break;      
+        }
+	break;
+		  
+    case 0x1000:
+	this.pc = opcode & 0xFFF;
+        break;  
+    case 0x2000:
+            this.stack[this.sp] = this.pc;
+            this.sp++;
+            this.pc = opcode & 0x0FFF;
+            break;
+     case 0x3000:
+            if (this.v[x] === (opcode & 0xFF)) {
+            	this.pc += 2;
+            }
+            break;
+     case 0x4000:
+			if (this.v[x] != (opcode & 0x00FF)) {
+				this.pc += 2;
+			}
+			break;
+     case 0x5000:
+			if (this.v[x] === this.v[y]) {
+				this.pc += 2;
+			}
+			break;
+     case 0x6000:
+			this.v[x] = opcode & 0xFF;
+			break;
+  
+	
     case 0x7000:
       this.v[x] = this.v[x] + (opcode & 0x00FF);
       break;
