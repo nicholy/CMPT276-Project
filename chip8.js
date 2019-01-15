@@ -68,6 +68,19 @@ console.log(memory);
 var a = new chip8();
 p.textContent = a.memory;
 
+emulateCycle: function () {
+
+  var opcode = this.memory[this.pc] << 8 | this.memory[this.pc+1];
+  var x = (opcode & 0x0F00) >> 8;
+  var y = (opcode & 0x00F0) >> 4;
+
+  this.pc += 2;
+
+  switch(opcode & 0xF000) {
+
+  }
+}
+
 
 
 
