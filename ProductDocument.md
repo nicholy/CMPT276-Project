@@ -22,21 +22,68 @@ _<font size = "3">
 ### Main Implementation Language/ Software Repository
     Main implementation language would be Javascript and all code would be stored using GitHub.
 ### Detailed Use Cases For Next Release
-    Software Work Breakdown - Teams finalized
-    Working Emulator
-        - Registers
-        - Memory
-        - Display
-    Visualizer for Chip 8
+  Chip8 core
+    - Memory
+    - Register
+    - Stack
+    - Opcode
+
+  Chip8 functions
+    - Load program
+    - Reset
+    - Start
+    - Stop
+
+  Display
+    - chip8 display
+    - html canvas
+
+  Visualizer
+    - Display memory, stack, register, pc, etc..
+    - Show steps for each memory allocation
+
+  Automated Testing
+    - Testing for each Opcode
+    - Testing for display
+    - Testing for core function for chip8
+    - Performance testing
+    - Output error log for each error
+
 ### Work Breakdown
 
-| Name   | Role |
-| ------ | ---- |
-| Nichol |      |
-| Jeremy |      |
-| Mac    |      |
-| Eric   |      |
-| Tanvir |      |
+| Name   | Release 1 Tasks |
+| ------ | --------------- |
+| Nichol | Display         |
+| Jeremy | Automated Testing |
+| Mac    | Display         |
+| Eric   | Visualizer      |
+| Tanvir | Visualizer      |
+
+| Name   | Release 2 Tasks |
+| ------ | --------------- |
+| Nichol | Sound / Start Game 1 |
+| Jeremy | Timers / Start Game 1 |
+| Mac    | Hex Keyboard / Start Game 1 |
+| Eric   | Chip 8 Tool     |
+| Tanvir | Chip 8 Tool     |
+
+| Name   | Release 3 Tasks |
+| ------ | --------------- |
+| Nichol |           |
+| Jeremy |
+| Mac    |
+| Eric   |
+| Tanvir |
+
+| Name   | Release 4 Tasks |
+| ------ | --------------- |
+| Nichol |           |
+| Jeremy |
+| Mac    |
+| Eric   |
+| Tanvir |
+
+**NOTE** All group members are expected to work on the debugging process of the code together.
 
 ### Future Schedules
 
@@ -52,8 +99,8 @@ _<font size = "3">
 | Jan 17 - Jan 28 | Visualizer |
 | Jan 28 - Jan 30 | Link Work Together |
 | Jan 30 - Feb 6 | Debugging |
-| Feb 4 - Feb 6 | Product Document Update |
-| Feb 6 | Release 1 Due |
+| Jan 30 - Feb 6 | Product Document Update |
+| Feb 6 | **Release 1 Due** |
 | Feb 6 - Feb 13 | Hex Keyboard |
 | Feb 6 - Feb 13 | Timers |
 | Feb 6 - Feb 13 | Sound |
@@ -63,12 +110,12 @@ _<font size = "3">
 | Feb 19 - Feb 21 | Link work together |
 | Feb 21 - Feb 25 | Debugging |
 | Feb 25 - Feb 27 | Update Product Document |
-| Feb 27 | Release 2 Due |
+| Feb 27 | **Release 2 Due** |
 | Feb 28 - Mar 7 | Finish Game 1 |
 | Feb 28 - Mar 7 | Start Game 2 With Application |
 | Mar 8 - Mar 9 | Link Work together |
 | Mar 10 - Mar 12 | Debugging |
 | Mar 10 - Mar 12  | Update Product Document |
-| Mar 13 | Release 3 Due |
+| Mar 13 | **Release 3 Due** |
 | Mar 23 | Finish Game 2 |
 |
