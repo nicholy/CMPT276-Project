@@ -40,12 +40,35 @@ _<font size = "3">
 
 ### Future Schedules
 
-| Release   | Date  | Tasks Expected to Finish  |
-| --------  | ----  | ------------------------  |
-| Release 0 | Jan 18 | Product Document Finished |
-| Release 0 (Presentation) | Jan 21 | Powerpoint detailing product Document <br/> Finish at least part of the code <br/> Hex Keyboard |
-| Release 1 | Feb 6 | Software work breakdown - teams finalized <br/> Working emulator <br/> Visualizer for Chip 8 |
-| Release 2 | Feb 27 | Complete 1 game |
-| Release 3 | Mar 13 | Complete creating a Chip8 tool |
-| Release 4 (presentation) | Apr 1 | Finish all Games |
-| Release 4 | Apr 8 | Product is finished |                      
+| Date  | Tasks Expected to Finish  |
+| ----  | ------------------------  |
+| Jan 13 - Jan 14 | Chip 8 Constructor and Initializer |
+| Jan 14 - Jan 16 | Opcode |
+| Jan 18 | Product Document |
+| Jan 21 | Powerpoint |
+| Jan 25 | Release 0 Presentation |
+| Jan 17 - Jan 28 | Automated testing |
+| Jan 17 - Jan 28 | Display |
+| Jan 17 - Jan 28 | Visualizer |
+| Jan 28 - Jan 30 | Link Work Together |
+| Jan 30 - Feb 6 | Debugging |
+| Feb 4 - Feb 6 | Product Document Update |
+| Feb 6 | Release 1 Due |
+| Feb 6 - Feb 13 | Hex Keyboard |
+| Feb 6 - Feb 13 | Timers |
+| Feb 6 - Feb 13 | Sound |
+| Feb 6 - Feb 13 | Finish Application |
+| Feb 6 - Feb 13 | Game 1 Design Concept |
+| Feb 13 - Feb 19 | Part of The Game Done ( Animation/Title Screen ) |
+| Feb 19 - Feb 21 | Link work together |
+| Feb 21 - Feb 25 | Debugging |
+| Feb 25 - Feb 27 | Update Product Document |
+| Feb 27 | Release 2 Due |
+| Feb 28 - Mar 7 | Finish Game 1 |
+| Feb 28 - Mar 7 | Start Game 2 With Application |
+| Mar 8 - Mar 9 | Link Work together |
+| Mar 10 - Mar 12 | Debugging |
+| Mar 10 - Mar 12  | Update Product Document |
+| Mar 13 | Release 3 Due |
+| Mar 23 | Finish Game 2 |
+|
