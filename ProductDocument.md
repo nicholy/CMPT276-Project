@@ -3,27 +3,27 @@ _<font size = "3">
    Members: Nichol Yip, Jeremy Lee, Mac Liu, Eric Wong, Tanvir Khan
 </font>_
 
-### _Meeting Schedule_
+### __Meeting Schedule__
 <br>    Members are expected to show up at weekly meetings scheduled on Mondays at 10:30 AM for an hour, 
 <br>    before class and 12:30 - 1:30 after class on Monday, Wednesday, and Friday. Also our group 
 <br>    will have an online discussion Saturday night at 8:30PM - 9:30PM using Skype/Facebook Messenger/Discord.
 
-### _Communication Tool/Techniques_
+### __Communication Tool/Techniques__
    Communication tools we will use outside of school would consist of Facebook Messenger, or Skype.
 
-### _Details of Software Methodology_
+### __Details of Software Methodology__
 
 <br>    Members are expected to follow an incremental development model while working on the project, 
 <br>    where the project will be divided into smaller releases.
 
-### _Testing and Quality Assurance Tools_
+### __Testing and Quality Assurance Tools__
 
 <br>    Tools we will use for testing and assuring the quality would consist of  Javascript Sandbox and a 
 <br>    manual code in a separate Javascript file.(Build up with each release)
 
-### Main Implementation Language/ Software Repository
+### __Main Implementation Language/ Software Repository__
    Main implementation language would be Javascript and all code would be stored using GitHub.
-### _Detailed Use Cases For Next Release_
+### __Detailed Use Cases For Next Release__
 
   
 **Chip8 Core**
@@ -54,7 +54,7 @@ _<font size = "3">
 <br>    - Performance testing
 <br>    - Output error log for each error
 
-### _Work Breakdown_
+### __Work Breakdown__
 
 | Name   | Release 1 Tasks |
 | ------ | --------------- |
@@ -90,7 +90,7 @@ _<font size = "3">
 
 **NOTE:** All group members are expected to work on the debugging process of the code together.
 
-### _Future Schedules_
+### __Future Schedules__
 
 | Date  | Tasks Expected to Finish  |
 | ----  | ------------------------  |
