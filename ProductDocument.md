@@ -4,49 +4,55 @@ _<font size = "3">
 </font>_
 
 ### Meeting Schedule
-    Members are expected to show up at weekly meetings scheduled on Mondays at 10:30 AM for an hour, before class and 12:30 - 1:30 after class on Monday, Wednesday, and Friday. Also our group will have an online discussion Saturday night at 8:30PM - 9:30PM using Skype/Facebook Messenger/Discord.
+<br>    Members are expected to show up at weekly meetings scheduled on Mondays at 10:30 AM for an hour, 
+<br>    before class and 12:30 - 1:30 after class on Monday, Wednesday, and Friday. Also our group 
+<br>    will have an online discussion Saturday night at 8:30PM - 9:30PM using Skype/Facebook Messenger/Discord.
 
 ### Communication Tool/Techniques
-    Communication tools we will use outside of school would consist of Facebook Messenger, or Skype.
+   Communication tools we will use outside of school would consist of Facebook Messenger, or Skype.
 
 ### Details of Software Methodology
 
-    Members are expected to follow an incremental development model while working on the project, where the project will be divided into smaller releases.
+<br>    Members are expected to follow an incremental development model while working on the project, 
+<br>    where the project will be divided into smaller releases.
 
 ### Testing and Quality Assurance Tools
 
-    Tools we will use for testing and assuring the quality would consist of  Javascript Sandbox and a manual code in a separate Javascript file.
-    (Build up with each release)
+<br>    Tools we will use for testing and assuring the quality would consist of  Javascript Sandbox and a 
+<br>    manual code in a separate Javascript file.(Build up with each release)
 
 ### Main Implementation Language/ Software Repository
-    Main implementation language would be Javascript and all code would be stored using GitHub.
+   Main implementation language would be Javascript and all code would be stored using GitHub.
 ### Detailed Use Cases For Next Release
-  Chip8 core
-    - Memory
-    - Register
-    - Stack
-    - Opcode
 
-  Chip8 functions
-    - Load program
-    - Reset
-    - Start
-    - Stop
+  
+**Chip8 Core**
+<br>    - Memory
+<br>    - Register
+<br>    - Stack
+<br>   - Opcode
 
-  Display
-    - chip8 display
-    - html canvas
 
-  Visualizer
-    - Display memory, stack, register, pc, etc..
-    - Show steps for each memory allocation
+  **Chip8 Functions**
+<br>    - Load program
+<br>    - Reset
+<br>    - Start
+<br>    - Stop
 
-  Automated Testing
-    - Testing for each Opcode
-    - Testing for display
-    - Testing for core function for chip8
-    - Performance testing
-    - Output error log for each error
+  **Display**
+<br>    - chip8 display
+<br>    - html canvas
+
+ **Visualizer**
+<br>    - Display memory, stack, register, pc, etc..
+<br>    - Show steps for each memory allocation
+
+  **Automated Testing**
+<br>    - Testing for each Opcode
+<br>    - Testing for display
+<br>    - Testing for core function for chip8
+<br>    - Performance testing
+<br>    - Output error log for each error
 
 ### Work Breakdown
 
