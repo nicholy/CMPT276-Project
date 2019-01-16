@@ -3,27 +3,27 @@ _<font size = "3">
    Members: Nichol Yip, Jeremy Lee, Mac Liu, Eric Wong, Tanvir Khan
 </font>_
 
-### Meeting Schedule
+### _Meeting Schedule_
 <br>    Members are expected to show up at weekly meetings scheduled on Mondays at 10:30 AM for an hour, 
 <br>    before class and 12:30 - 1:30 after class on Monday, Wednesday, and Friday. Also our group 
 <br>    will have an online discussion Saturday night at 8:30PM - 9:30PM using Skype/Facebook Messenger/Discord.
 
-### Communication Tool/Techniques
+### _Communication Tool/Techniques_
    Communication tools we will use outside of school would consist of Facebook Messenger, or Skype.
 
-### Details of Software Methodology
+### _Details of Software Methodology_
 
 <br>    Members are expected to follow an incremental development model while working on the project, 
 <br>    where the project will be divided into smaller releases.
 
-### Testing and Quality Assurance Tools
+### _Testing and Quality Assurance Tools_
 
 <br>    Tools we will use for testing and assuring the quality would consist of  Javascript Sandbox and a 
 <br>    manual code in a separate Javascript file.(Build up with each release)
 
 ### Main Implementation Language/ Software Repository
    Main implementation language would be Javascript and all code would be stored using GitHub.
-### Detailed Use Cases For Next Release
+### _Detailed Use Cases For Next Release_
 
   
 **Chip8 Core**
@@ -54,7 +54,7 @@ _<font size = "3">
 <br>    - Performance testing
 <br>    - Output error log for each error
 
-### Work Breakdown
+### _Work Breakdown_
 
 | Name   | Release 1 Tasks |
 | ------ | --------------- |
@@ -88,9 +88,9 @@ _<font size = "3">
 | Eric   | N/A             |
 | Tanvir | N/A             |
 
-**NOTE** All group members are expected to work on the debugging process of the code together.
+**NOTE:** All group members are expected to work on the debugging process of the code together.
 
-### Future Schedules
+### _Future Schedules_
 
 | Date  | Tasks Expected to Finish  |
 | ----  | ------------------------  |
