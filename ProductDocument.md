@@ -4,7 +4,7 @@ _<font size = "3">
 </font>_
 
 ### Meeting Schedule
-    Members are expected to show up at weekly meetings scheduled on Mondays at 10:30 AM for an hour, before class and 12:30 - 1:30 after class on Monday, Wednesday, and Friday. Also our group will have an online discussion Saturday night at 8:30PM - 9:30PM using Skype/Facebook Messenger/Discord.
+    Members are expected to show up at weekly meetings scheduled on Mondays at 10:30 AM for an hour, before class and 12:30 - 1:30 after class on Monday, Wednesday, and Friday. Also our group will have an online discussion Saturday night at 8:30PM - 9:30PM using either Skype/Facebook Messenger/Discord.
 
 ### Communication Tool/Techniques
     Communication tools we will use outside of school would consist of Facebook Messenger, or Skype.
