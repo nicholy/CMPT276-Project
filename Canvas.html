@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="640" height="320"    //inistaillize canvas with width and height
+style="border:1px solid #c3c3c3;">
+Your browser does not support the canvas element.
+</canvas>
+
+<script>
+var canvas = document.getElementById("myCanvas");  //get canvas function from html
+var ctx = canvas.getContext("2d");                     
+ctx.fillStyle = "black";
+ctx.fillRect(0,0,640,320);                         //fill the canvas with black background
+var dot = canvas.getContext("2d");
+dot.fillStyle = "white";                           
+for (i = 0; i < 320; i ++){                        //dot function fill the first half of row
+  dot.fillRect(i,1,10,10);                         //fillRect is the fill funciton (x, y, fill width, fill height)
+}
+
+</script>
+
+</body>
+</html>
+
