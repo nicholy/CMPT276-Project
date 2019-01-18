@@ -4,25 +4,30 @@ _<font size = "3">
 </font>_
 
 ### __Meeting Schedule__
-<br>    Members are expected to show up at weekly meetings scheduled on Mondays at 10:30 AM for an hour, 
+
+<br>    Team members are expected to show up at weekly meetings scheduled on Mondays at 10:30 AM for an hour,
 <br>    before class and 12:30 - 1:30 after class on Monday, Wednesday, and Friday. Also our group 
 <br>    will have an online discussion Saturday night at 8:30PM - 9:30PM using Skype/Facebook Messenger/Discord.
 
 ### __Communication Tool/Techniques__
-   Communication tools we will use outside of school would consist of Facebook Messenger, or Skype.
+
+<br>    Communication tools utilized outside of school would consist of Facebook Messenger, and Skype. 
+<br>    Most of the planning documents and presentation materials(Powerpoint) will be completed in the form of Google Docs and Google Slides for ease of access.
 
 ### __Details of Software Methodology__
 
 <br>    Members are expected to follow an incremental development model while working on the project, 
-<br>    where the project will be divided into smaller releases.
+<br>    where the project will be divided into smaller releases. Early releases would consist of the core properties of Chip-8, with later releases containing various add-ons(the games, the application).
 
 ### __Testing and Quality Assurance Tools__
 
 <br>    Tools we will use for testing and assuring the quality would consist of  Javascript Sandbox and a 
-<br>    manual code in a separate Javascript file.(Build up with each release)
+<br>    manual code in a separate Javascript file(Build up with each release).
 
 ### __Main Implementation Language/ Software Repository__
-   Main implementation language would be Javascript and all code would be stored using GitHub.
+
+<br>   Main implementation language would be Javascript and all code would be stored using GitHub.
+   
 ### __Detailed Use Cases For Next Release__
 
   
