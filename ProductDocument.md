@@ -4,10 +4,9 @@ _<font size = "3">
 </font>_
 
 ### __Meeting Schedule__
-
 <br>    Team members are expected to show up at weekly meetings scheduled on Mondays at 10:30 AM for an hour,
 <br>    before class and 12:30 - 1:30 after class on Monday, Wednesday, and Friday. Also our group 
-<br>    will have an online discussion Saturday night at 8:30PM - 9:30PM using Skype/Facebook Messenger/Discord.
+<br>    will have an online discussion Saturday night at 8:30PM - 9:30PM using Skype.
 
 ### __Communication Tool/Techniques__
 
