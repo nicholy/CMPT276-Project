@@ -172,7 +172,101 @@ function emulationcycle(){
         case 0x0006:
           this.v[0xF] = this.v[x] & 0x01;
           this.v[x] = v[x] >> 1;
+
+        // 8xy7
+        case 0x0007:
+            this.v[0xF] = +(this.v[y]>this.v[x]); //changes Vf(Flag variable to no borrowing)
+            this.v[x] = this.v[y] - this.v[x]; //sets Vx to Vy - Vx
+            if (this.v[x] < 0) { //if Vx is negative, add 256 to make it a positive value of the same bit values
+                this.v[x] += 256;
+            }
+            break;
+
+
+        // 8xyE
+        case 0x000E:
+            this.v[0xF] = +(this.v[x] & 0x80); //sets flag variable to
+            this.v[x] <<= 1; //shifting the variable of x to the left by 1 position
+            if (this.v[x] > 255) { //if Vx is out of the range of 255
+                this.v[x] -= 256;	//bring Vx back into the byte range
+            }
+            break;
       }
+      break;
+        // 9xy0
+       case 0x9000:
+           if (this.v[x] != this.v[y]) { //if Vx does not equal Vy
+               this.pc += 2;	//increase the program counter pointer by 2, skipping the next instruction
+           }
+           break;
+
+
+       // Annn
+       case 0xA000:
+           this.i = opcode & 0xFFF; //sets address register to the address in opcode
+           break;
+
+
+       // Bnnn
+       case 0xB000:
+           this.pc = (opcode & 0xFFF) + this.v[0]; //sets the program counter pointer to where the register is, starting from the first register
+           break;
+
+       // Cxkk
+       case 0xC000:
+           this.v[x] = Math.floor(Math.random() * 0xFF) & (opcode & 0xFF) //math operation - round number from 0 - 255
+           break;
+
+       // DRW Vx, Vy, nibble
+       // Dxyn
+       // Display n-byte sprite starting at memory location I at (Vx, Vy), set VF equal to collision.
+       case 0xD000:
+           this.v[0xF] = 0;
+
+           var height = opcode & 0x000F;
+           var registerX = this.v[x];
+           var registerY = this.v[y];
+           var x, y, spr;
+
+           for (y = 0; y < height; y++) {
+               spr = this.memory[this.i + y];
+               for (x = 0; x < 8; x++) {
+                   if ((spr & 0x80) > 0) {
+                       if (this.setPixel(registerX + x, registerY + y)) {
+                           this.v[0xF] = 1;
+                       }
+                   }
+                   spr <<= 1;
+               }
+           }
+           this.drawFlag = true;
+
+           break;
+
+       case 0xE000:
+           switch (opcode & 0x00FF) {
+
+               // SKP Vx
+               // Ex9E
+               // Skip next instruction if the key with the value Vx is pressed.
+               case 0x009E:
+                   if (this.keys[this.v[x]]) {
+                       this.pc += 2;
+                   }
+                   break;
+
+               // SKNP Vx
+               // ExA1
+               // Skip  next instruction if the key with the value Vx is NOT pressed.
+               case 0x00A1:
+                   if (!this.keys[this.v[x]]) {
+                       this.pc += 2;
+                   }
+                   break;
+
+           }
+
+           break;
     case 0xF000:
       switch(opcode & 0x00FF){
         case 0x0007:
