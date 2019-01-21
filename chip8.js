@@ -57,6 +57,25 @@ function opcode1(){
     }
 }
 
+function SetPixel(x,y) {
+  width = this.displayWidth;
+  height= this.displayHeight;
+
+  if ( x > width ){
+    x = x - width;
+  } else if ( x < 0 ) {
+    x = x + width;
+  }
+
+  if ( y > height) {
+    y = y - height;
+  } else if ( y < 0 ) {
+    y = y + height;
+  }
+
+  this.display[x + (y * width)] ^= 1;
+  return !this.display[x + (y * width)];
+}
 
 chip8();
 program();
@@ -68,7 +87,8 @@ opcode1();
 console.log(memory);
 
 
-function emulationcycle(){
+
+function StartCycle(){
 
   var opcode = this.memory[this.pc] << 8 | this.memory[this.pc+1];
   var x = (opcode & 0x0F00) >> 8;
