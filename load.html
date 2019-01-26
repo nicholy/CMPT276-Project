@@ -17,6 +17,8 @@ chip8.prototype = {
          for (i = 0; i < program.length; i++) {
              this.memory[i + 0x200] = program[i];
          }
+         
+       //it create an string and convert memroy into hex and put into string [.toString(16)] with newline break for each 24 character
        var output = "";
        for(var i = 0; i < ch.memory.length; i++){
          output += ch.memory[i].toString(16) + " ";
@@ -26,6 +28,7 @@ chip8.prototype = {
        }
        p.textContent = output;
      },
+    
      visualizer: function(){
        for (i = 0; i < this.memory.length; i++) {
           if(i < 0x200){
