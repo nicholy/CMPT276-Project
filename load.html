@@ -17,7 +17,14 @@ chip8.prototype = {
          for (i = 0; i < program.length; i++) {
              this.memory[i + 0x200] = program[i];
          }
-       p.textContent = ch.memory;
+       var output = "";
+       for(var i = 0; i < ch.memory.length; i++){
+         output += ch.memory[i].toString(16) + " ";
+         if (!((i + 1) % 24)){
+         	output += "\n";
+         }
+       }
+       p.textContent = output;
      },
      visualizer: function(){
        for (i = 0; i < this.memory.length; i++) {
