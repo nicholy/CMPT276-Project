@@ -11,19 +11,20 @@ function chip8(){
   this.memory = new Uint8Array(4096);
   this.v = new Uint8Array(16);
   this.startAddr = 0x200;
-  this.displayWidth = 64;
-  this.displayHeight = 32;
-  this.resolution = this.displayWidth * this.displayHeight;
-  this.display = new Array(resolution);
+  //this.displayWidth = 64;
+  //this.displayHeight = 32;
+  this.screen = { clear: function() {}, render: function() {}, setpixel: function() {} };
+  //this.resolution = this.displayWidth * this.displayHeight;
+  //this.display = new Array(resolution);
   this.i = null;
   this.sp = null;
   this.delayTimer = null;
   this.soundTimer = null;
 }
 
-function program(){
+function loadProgram(program){
     for (i = 0x200; i < 0x06A0; i++) {
-      this.memory[i] = 1;
+      this.memory[i] = program[i];
     }
 }
 
@@ -56,8 +57,8 @@ function opcode1(){
       this.display[i] = 0;
     }
 }
-
-function SetPixel(x,y) {
+/**
+ function SetPixel(x,y) {
   width = this.displayWidth;
   height= this.displayHeight;
 
@@ -73,10 +74,34 @@ function SetPixel(x,y) {
     y = y + height;
   }
 
-  this.display[x + (y * width)] ^= 1;
+  location = x + ( y * width );
+  this.display[location] = this.display[location] ^ 1;
   return !this.display[x + (y * width)];
 }
 
+function HTMLScreen(ctx,scale) {
+
+  this.scale = scale || 10;
+  var width = ctx.canvas.width = this.displayWidth * this.scale;
+  var height = ctx.canvas.height = this.displayHeight * this.scale;
+
+  this.render = function() {
+
+    var i, x, y;
+    ctx.clearRect(0, 0, width, height);
+    for( i = 0, i < this.resolution, i++) {
+      x = (i % this.displayWidth) * this.scale;
+      y = Math.floor(i / this.displayHeight) * this.scale;
+
+      if (this.bitMap[i]) {
+        ctx.fillStyle = "#000";
+        ctx.fillRect = (x, y, this.scale, this.scale);
+      }
+    }
+
+  }
+}
+*/
 chip8();
 program();
 stack();
@@ -84,7 +109,7 @@ workarea();
 variable();
 display();
 opcode1();
-console.log(memory);
+loadProgram();
 
 
 
@@ -325,6 +350,11 @@ function StartCycle(){
           break;
       }
   }
+
+  this.render = function() {
+    this.screen.render();
+  }
+
 }
 
 
