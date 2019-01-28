@@ -1,63 +1,16 @@
 <!DOCTYPE html>
 <html>
 <p>Please Select Rom file:</p>
-    <input type="file" id="files" name="files[]" multiple />
-    <output id="list"></output>
-
-    <script>
-      let p = document.querySelector("p");
-      var chip8 = function () {
-  this.memory = new Uint8Array(4096);
-};
 
 
-chip8.prototype = {
-     loadProgram: function (program) {
-         // Load program into memory
-         for (i = 0; i < program.length; i++) {
-             this.memory[i + 0x200] = program[i];
-         }
-         
-       //it create an string and convert memroy into hex and put into string [.toString(16)] with newline break for each 24 character
-       var output = "";
-       for(var i = 0; i < ch.memory.length; i++){
-         output += ch.memory[i].toString(16) + " ";
-         if (!((i + 1) % 24)){
-         	output += "\n";
-         }
-       }
-       p.textContent = output;
-     },
-    
-     visualizer: function(){
-       for (i = 0; i < this.memory.length; i++) {
-          if(i < 0x200){
-    	  	this.memory[i] = 1;
-          }
-          else if(i < 0x06A0){
-    	  	this.memory[i] = 2;
-          }
-         else if(i < 0x06D0){
-    	  	this.memory[i] = 3;
-          }
-         else if(i < 0x06F0){
-    	  	this.memory[i] = 4;
-          }
-         else if(i < 0x0700){
-    	  	this.memory[i] = 5;
-          }
-         else{
-    	  	this.memory[i] = 6;
-          }
-         
-       }
-       
-     }
-  
- }
+<input type="file" id="files" name="files[]" multiple />
+<output id="list"></output>
+<script src = "chip8.js"></script>
+<script>
+  let p = document.querySelector("p");
 
-var ch = new chip8;
-ch.visualizer();
+  var ch = new chip8;
+  //ch.visualizer();
   function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
     // Loop through the FileList and render image files as thumbnails.
@@ -71,11 +24,11 @@ ch.visualizer();
           var rawBytes = new Uint8Array(raw);
           ch.loadProgram(rawBytes);
           var hex = "";
-          for (var cycle = 0 ; cycle < raw.byteLength ; cycle++) {
+          for (var cycle = 0; cycle < raw.byteLength; cycle++) {
             hex += rawBytes[cycle].toString(16) + " ";
             // TODO: more elegance
             if (!((cycle + 1) % 8))
-                hex += "\n";
+              hex += "\n";
           }
           // Render thumbnail.
           var span = document.createElement('pre');
@@ -88,7 +41,7 @@ ch.visualizer();
     }
   }
   document.getElementById('files').addEventListener('change', handleFileSelect, false);
-  
-    </script>
+</script>
 </body>
+
 </html>
