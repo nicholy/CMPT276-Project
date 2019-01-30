@@ -30,28 +30,28 @@ _<font size = "3">
 ### __Detailed Use Cases For Next Release__
 
   
-**Chip8 Core**
+**Chip8 Core** **DONE**
 <br>    - Memory
 <br>    - Register
 <br>    - Stack
-<br>   - Opcode
+<br>    - Opcode
 
 
-  **Chip8 Functions**
+  **Chip8 Functions** **DONE**
 <br>    - Load program
 <br>    - Reset
 <br>    - Start
 <br>    - Stop
 
-  **Display**
+  **Display** **CANVAS DISPLAY RELEASE 2**
 <br>    - chip8 display
 <br>    - html canvas
 
- **Visualizer**
+ **Visualizer** **(MOVED TO RELEASE 2)**
 <br>    - Display memory, stack, register, pc, etc..
 <br>    - Show steps for each memory allocation
 
-  **Automated Testing**
+ **Automated Testing** **DONE**
 <br>    - Testing for each Opcode
 <br>    - Testing for display
 <br>    - Testing for core function for chip8
