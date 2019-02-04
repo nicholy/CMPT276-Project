@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <p>Please Select Rom file:</p>
-<div id = "a">Stack:</div> <div id = "b"></div> <div id = "c"></div> <div id = "e"></div> <div id = "f"></div>
+<div id = "a"></div> <div id = "b"></div> <div id = "c"></div> <div id = "e"></div> <div id = "f"></div>
 <canvas id="myCanvas" width="640" height="320"    //inistaillize canvas with width and height
 style="border:10px solid #c3c3c3;">
 Your browser does not support the canvas element.
@@ -68,6 +68,7 @@ Your browser does not support the canvas element.
           ch.stop();
           ch.loadProgram(rawBytes);
           ch.start();
+          /*
           var hex = "";
           for (var cycle = 0; cycle < raw.byteLength; cycle++) {
             hex += rawBytes[cycle].toString(16) + " ";
@@ -79,6 +80,7 @@ Your browser does not support the canvas element.
           var span = document.createElement('pre');
           span.innerHTML = hex;
           document.getElementById('list').insertBefore(span, null);
+          */
         };
       })(f);
       // Read in the image file as a data URL.

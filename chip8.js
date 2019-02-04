@@ -1,4 +1,5 @@
 var chip8 = function() {
+
   this.displayWidth = 64;
   this.displayHeight = 32;
   this.display = new Array(this.displayWidth * this.displayHeight);
@@ -24,7 +25,7 @@ chip8.prototype = {
       i++;
     }
 
-    this.list();
+    //this.list();
   },
 
   //it create an string and convert memroy into hex and put into string [.toString(16)] with newline break for each 24 character
@@ -41,7 +42,7 @@ chip8.prototype = {
     p.textContent = this.output;
   },
 
-
+  //Fills the canvas display with pixels according to the game
   candisplay: function() {
 
     dot.fillStyle = "black";
@@ -62,16 +63,19 @@ chip8.prototype = {
 
   //it create an string and convert memroy into hex and put into string [.toString(16)] with newline break for each 24 character
   listdisplay: function() {
-    for (var i = 0; i < this.display.length; i++) {
+    var i = 0;
+    while (i < this.display.length) {
       this.outdisplay += this.display[i].toString() + " ";
       if (!((i + 1) % 64)) {
         this.outdisplay += "\n";
       }
+      i++;
     }
     this.outdisplay += "============================================================================================";
     p.textContent = this.outdisplay;
   },
 
+  //Displays Opcode
   opCo: function(s) {
     this.opnumber = s;
     this.opnumber += " \n";
@@ -97,7 +101,7 @@ chip8.prototype = {
     }
   },
 
-
+  //Starts the program but loads only for 1000 cycle (as a limit) since we do not have a stop key yet.
   start: function() {
 
     this.running = true;
@@ -226,15 +230,10 @@ chip8.prototype = {
           // OOE0
           // CLear the display.
           case 0x00E0:
-            //this.opCo("check2");
-            //this.renderer();
-            //this.opCo("check3");
-            //this.candisplay().clear();
             dot.clearRect(0, 0, 640, 320);
             for (var i = 0; i < this.display.length; i++) {
               this.display[i] = 0;
             }
-            //this.candisplay();
             this.opCo("0x00E0");
             break;
 
@@ -242,7 +241,8 @@ chip8.prototype = {
             // 00EE
             // Return from subroutine.
           case 0x00EE:
-            this.pc = this.stack[--this.sp];
+            this.sp = this.sp - 1;
+            this.pc = this.stack[this.sp];
             this.opCo("0x00EE");
             break;
 
