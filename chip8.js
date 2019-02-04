@@ -231,8 +231,10 @@ chip8.prototype = {
           // CLear the display.
           case 0x00E0:
             dot.clearRect(0, 0, 640, 320);
-            for (var i = 0; i < this.display.length; i++) {
+            var i = 0;
+            while (i < this.display.length) {
               this.display[i] = 0;
+              i++;
             }
             this.opCo("0x00E0");
             break;
@@ -336,7 +338,7 @@ chip8.prototype = {
             // 8xu1
             // Set vX equal to vX OR Vy;
           case 0x0001:
-            this.v[x] |= this.v[y];
+            this.v[x] = this.v[x] | this.v[y];
             this.opCo("0x8001");
             break;
 
@@ -344,7 +346,7 @@ chip8.prototype = {
             // 8xy2
             // Set Vx equal to Vx AMD Vy
           case 0x0002:
-            this.v[x] &= this.v[y];
+            this.v[x] = this.v[x] & this.v[y];
             this.opCo("0x0002");
             break;
 
@@ -352,7 +354,7 @@ chip8.prototype = {
             // 8xy3
             // Set Vx equal to Vx XOR Vy.
           case 0x0003:
-            this.v[x] ^= this.v[y];
+            this.v[x] = this.v[x] ^ this.v[y];
             this.opCo("0x0003");
             break;
 
