@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <h1>Team 3 Chip 8 Testing</h1>
+  <p></p>
+  <div id="a"></div>
+  <div id="b"></div>
+  <div id=""></div>
+  <div id="e"></div>
+  <div id="f"></div>
+  <div id="testing"></div>
+  <div id="output"></div>
+  <div id="a"></div>
+  <div id="b"></div>
+  <div id=""></div>
+  <div id="e"></div>
+  <div id="f"></div>
+  <canvas id="myCanvas" width="640" height="320"
+  Your browser does not support the canvas element.
+  </canvas>
+    <script src = "chip8.js"></script>
+    <script>
+    let p = document.querySelector("p");
+    let b = document.getElementById("b");
+    let c = document.getElementById("c");
+    let e = document.getElementById("e");
+    let f = document.getElementById("f");
+    var bre = "&nbsp";
+    var check = false;
+
+    var canvas = document.getElementById("myCanvas"); //get canvas function from html
+    var dot = canvas.getContext("2d");
+      let output = document.getElementById("output");
+      var input = "";
+      let testing = document.getElementById("testing");
+//TEST FUNCTIONS
+    function stackCheck(){
+    if(cpu.stack && cpu.stack.length == 16){
+    console.log("stack is enabled");
+    }
+    else{
+    console.log("stack is disabled");
+    }
+    }
+
+    function memoryCheck(){
+    if(cpu.stack.length == 4096){
+    console.log("memory is enabled");
+    }
+    else{
+    console.log("memory is disabled");
+    }
+    }
+      function test00E0() {
+        var ch = new chip8;
+        input += "Test 00E0(Clears the Screen):" + "<br />";
+        var detector = true;
+        input += bre + "*If the screen is not clear, reading will read false*" + "<br />";
+        ch.reset();
+        ch.display[100] = 1;
+        input += bre + "Adding a 1 into the screen(making the screen not cleared)" + "<br />";
+        //ch.listdisplay();
+        for (i = 0; i < 64 * 32; i++) {
+          if (ch.display[i] == 1) {
+            detector = false;
+            input += bre + "1 detected at " + i + ": ";
+            break;
+          } else {
+            detector = true;
+          }
+        }
+        input += detector + "<br />";
+        ch.memory[512] = 0x00;
+        ch.memory[513] = 0xE0;
+        ch.pc = 512;
+        ch.StartCycle();
+        input += bre + "Performing 00E0" + "<br />";
+        for (i = 0; i < 64 * 32; i++) {
+          if (ch.display[i] == 1) {
+            detector = false;
+            input += bre + "1 detected at" + i + "<br />";
+            break;
+          } else {
+            detector = true;
+          }
+        }
+        if(detector){
+          check = true;
+          input += bre + "No 1's detected: " + detector + "<br />";
+        }
+        input += bre + "Operation is: " + check + "<br />";
+        input += "<br />";
+        check = false;
+      }
+
+      function test00EE(){
+        var ch = new chip8;
+        input += "Test 00EE(Returns from Subroutine):" + "<br />";
+        input += bre + "*Will return true if the stack pointer is 1 integer less after function*" + "<br />";
+        ch.reset();
+        //setting location 06A0 with an array
+        input += bre + "Creating a Stack of 4 Subroutines labeled 1 to 4" + "<br />";
+        ch.memory[1696] = 1;
+        ch.memory[1697] = 2;
+        ch.memory[1698] = 3;
+        ch.memory[1699] = 4;
+        ch.sp = 1699;
+        var comp = ch.sp;
+        input += bre + "Stack pointer located at: " + ch.sp + "<br />";
+        ch.memory[512] = 0x00;
+        ch.memory[513] = 0xEE;
+        ch.pc = 512;
+        input += bre + "Performing 00EE" + "<br />";
+        ch.StartCycle();
+
+        input += bre + "Stack pointer located at: " + ch.sp + "<br />";
+        if(ch.sp == comp - 1){
+          check = true;
+        }
+        //ch.list();
+        input += bre + "Operation is: " + check + "<br />";
+        input += "<br />";
+        check = false;
+      }
+
+      function test1NNN(){
+        var ch = new chip8;
+        input += "Test 1NNN(Jumps to Address NNN):" + "<br />";
+        input += bre + "*Will return true if program counter jumps to address NNN*" + "<br />";
+        ch.reset();
+        input += bre + "Program counters current position(in hex): 0x" + ch.pc.toString(16) + "<br />";
+        input += bre + "Jumping to address 234(hex)" + "<br />";
+        var comp = ch.pc;
+        ch.memory[512] = 0x12;
+        ch.memory[513] = 0x34;
+        input += bre + "Performing 1234" + "<br />";
+        ch.StartCycle();
+        input += bre + "Program counters new position(in hex): 0x" + ch.pc.toString(16) + "<br />";
+        if(ch.pc == 564/*234 in hex*/){
+          check = true;
+        }
+        input += bre + "Operation is: " + check + "<br />";
+        input += "<br />";
+        check = false;
+      }
+
+      function test2NNN(){
+        var ch = new chip8;
+        input += "Test 2NNN(Calls Subroutine at NNN):" + "<br />";
+        input += bre + "*Will return true if sp jumps to address NNN*" + "<br />";
+        ch.reset();
+        input += bre + "Program Counters Current Position: " + ch.pc.toString(16) + "<br />";
+        ch.memory[1696] = 1;
+        ch.memory[1697] = 2;
+        ch.memory[1698] = 3;
+        ch.memory[1699] = 4;
+        ch.sp = 1699;
+        var comp = ch.sp;
+        input += bre + "Stack Pointers Current Position: " + ch.sp.toString(16) + "<br />";
+
+        ch.memory[512] = 0x22;
+        ch.memory[513] = 0x34;
+        input += bre + "Performing 2234" + "<br />";
+        ch.StartCycle();
+        //input += bre + ch.memory[ch.sp];
+        input += bre + "Program Counters Current Position: " + ch.pc.toString(16) + "<br />";
+        input += bre + "Stack Pointers Current Position: " + ch.sp.toString(16) + "<br />";
+        if(ch.sp == comp+1){
+          check = true;
+        }
+        input += bre + "Operation is: " + check + "<br />";
+        input += "<br />";
+        check = false;
+      }
+
+      function test3XNN(){//needs fixing
+        var ch = new chip8;
+        input += "Test 3XNN(Skips the next instruction if VX == NN):" + "<br />";
+        input += bre + "*True if the instruction is skipped*" + "<br />";
+        ch.reset();
+        ch.v[5] = 23;
+        input += bre + "Setting Var[5] to " + ch.v[5] + "<br />";
+        input += bre + "If Vx != NN:" + "<br />";
+        ch.memory[512] = 0x35;
+        ch.memory[513] = 0x18;
+        ch.pc = 512;
+        var comp = ch.pc;
+        input += bre + "Program Counters Current Position: " + ch.pc.toString(16) + "<br />";
+        ch.StartCycle();
+        input += bre + "Program Counters New Position: " + ch.pc.toString(16) + "<br />";
+        if(comp + 3 < ch.pc){
+          check = true;
+        }
+        input += bre + "Operation is: " + check + "<br />";
+        check = false;
+        input += "<br />";
+
+        input += bre + "If Vx == NN:" + "<br />";
+
+        ch.memory[512] = 0x35;
+        ch.memory[513] = 0x17;
+        ch.pc = 512;
+        input += bre + "Program Counters Current Position: " + ch.pc.toString(16) + "<br />";
+        ch.StartCycle();
+
+        input += bre + "Program Counters New Position: " + ch.pc.toString(16) + "<br />";
+        input += ch.pc.toString(16) + comp.toString(16);
+        if(comp + 3 < ch.pc){
+          check = true;
+        }
+        input += bre + "Operation is: " + check + "<br />";
+        input += "<br />";
+        check = false;
+      }
+
+      function test4XNN(){
+        var ch = new chip8;
+        input += "Test 4XNN(Skips the next instruction if VX != NN):" + "<br />";
+        input += bre + "*True if the instruction is skipped*" + "<br />";
+        ch.reset();
+        ch.v[5] = 23;
+        input += bre + "Setting Var[5] to " + ch.v[5] + "<br />";
+        input += bre + "If Vx != NN:" + "<br />";
+        ch.memory[512] = 0x45;
+        ch.memory[513] = 0x18;
+        ch.pc = 512;
+        var comp = ch.pc;
+        input += bre + "Program Counters Current Position: " + ch.pc.toString(16) + "<br />";
+        ch.StartCycle();
+        input += bre + "Program Counters New Position: " + ch.pc.toString(16) + "<br />";
+        if(comp + 3 < ch.pc){
+          check = true;
+        }
+        input += bre + "Operation is: " + check + "<br />";
+        check = false;
+        input += "<br />";
+
+        input += bre + "If Vx == NN:" + "<br />";
+
+        ch.memory[512] = 0x45;
+        ch.memory[513] = 0x17;
+        ch.pc = 512;
+        input += bre + "Program Counters Current Position: " + ch.pc.toString(16) + "<br />";
+        ch.StartCycle();
+
+        input += bre + "Program Counters New Position: " + ch.pc.toString(16) + "<br />";
+        input += ch.pc.toString(16) + comp.toString(16);
+        if(comp + 3 < ch.pc){
+          check = true;
+        }
+        input += bre + "Operation is: " + check + "<br />";
+        input += "<br />";
+        check = false;
+      }
+
+      function test5XY0(){
+        var ch = new chip8;
+        input += "Test 5XY0(Skips instruction if Vx == Vy):" + "<br />";
+        input += bre + "*True if the instruction is skipped*" + "<br />";
+        ch.reset();
+        input += bre + "Instruction Not Skipped(v[x] != v[y])" + "<br />";
+        input += bre + "Setting 6 to v[5] and 7 to v[10]" + "<br />";
+        ch.v[5] = 6;
+        ch.v[10] = 7;
+
+        ch.memory[512] = 0x55;
+        ch.memory[513] = 0xA0;
+        ch.pc = 512;
+        var comp = ch.pc;
+        input += bre + "Program Counters Current Position: " + ch.pc.toString(16) + "<br />";
+        ch.StartCycle();
+        input += bre + "Performing 55A0" + "<br />";
+        input += bre + "Program Counters New Position: " + ch.pc.toString(16) + "<br />";
+        if(ch.pc > comp + 3){
+          check = true;
+        }
+        input += bre + "Operation is: " + check + "<br />";
+        check = false;
+
+        input += "<br />";
+        input += bre + "Instruction Skipped(v[x] == v[y])" + "<br />";
+        input += bre + "Setting 6 to v[5] and 6 to v[10]" + "<br />";
+        ch.v[5] = 6;
+        ch.v[10] = 6;
+
+        ch.memory[512] = 0x55;
+        ch.memory[513] = 0xA0;
+        ch.pc = 512;
+        var comp = ch.pc;
+        input += bre + "Program Counters Current Position: " + ch.pc.toString(16) + "<br />";
+        ch.StartCycle();
+        input += bre + "Performing 55A0" + "<br />";
+        input += bre + "Program Counters New Position: " + ch.pc.toString(16) + "<br />";
+        //input += comp + ch.pc.toString(16);
+        if(ch.pc > comp + 3){
+          check = true;
+        }
+        input += bre + "Operation is: " + check + "<br />";
+        input += "<br />";
+        check = false;
+      }
+
+      function test6XNN(){
+        var ch = new chip8;
+        input += "Test 6XNN(Sets Vx to NN):" + "<br />";
+        input += bre + "*True if Vx is set to NN*" + "<br />";
+        ch.reset();
+        input += bre + "putting 23 into v[5]" + "<br />";
+        ch.v[5] = 23;
+        input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
+        input += bre + "inserting 164 into v[5]" + "<br />";
+        ch.memory[512] = 0x65;
+        ch.memory[513] = 0xA4;
+        ch.pc = 512;
+        ch.StartCycle();
+        input += bre + "Performing 65A4" + "<br />";
+        input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
+        if(ch.v[5] == 164){
+          check = true;
+        }
+        input += bre + "Operation is: " + check + "<br />";
+        input += "<br />";
+        check = false;
+      }
+
+      function test7XNN(){
+        var ch = new chip8;
+        input += "Test 7XNN(Adds NN to Vx):" + "<br />";
+        input += bre + "*True if Vx == Vx+NN*" + "<br />";
+        ch.reset();
+        input += bre + "Setting 23 to v[5]" + "<br />";
+        ch.v[5] = 23;
+        input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
+        input += bre + "Adding 5 to 23" + "<br />";
+        ch.memory[512] = 0x75;
+        ch.memory[513] = 0x05;
+        ch.pc = 512;
+        ch.StartCycle();
+        input += bre + "Performing 7505" + "<br />";
+        input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
+        if(ch.v[5] == 28){
+          check = true;
+        }
+        input += bre + "Operation is: " + check + "<br />";
+        input += "<br />";
+        check = false;
+      }
+
+      //TEST FUNCTION CALL:
+      test00E0();
+      test00EE();
+      test1NNN();
+      test2NNN();
+      test3XNN();
+      test4XNN();
+      test5XY0();
+      test6XNN();
+      test7XNN();
+
+      document.getElementById("output").innerHTML = input;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<p>Please Select Rom file:</p>
+<div id="a"></div>
+<div id="b"></div>
+<div id="c"></div>
+<div id="e"></div>
+<div id="f"></div>
+<div id = "testing"></div>
+<div id="output"></div>
+
+<script src="autotest.js"></script>
+<script>
+  let p = document.querySelector("p");
+  let b = document.getElementById("b");
+  let c = document.getElementById("c");
+  let e = document.getElementById("e");
+  let f = document.getElementById("f");
+  let output = document.getElementById("output");
+  var input = "";
+  let testing = document.getElementById("testing");
+
+  function test00E0(){
+    input +="test 00E0:" + "\n";
+    var ch = new chip8;
+    var detector = true;
+    ch.reset();
+    ch.display[100]=1;
+    //ch.listdisplay();
+    for(i = 0; i < 64*32; i++){
+      if(ch.display[i] == 1){
+        detector = false;
+        input += "1 detected at" + i;
+        break;
+      }
+      else{
+        detector = true;
+      }
+    }
+    input +=detector;
+    //ch.list();
+    ch.emulateCycle(0x00E0);
+    //ch.listdisplay();
+    for(i = 0; i < 64*32; i++){
+      if(ch.display[i] == 1){
+        detector = false;
+        input += "1 detected at" + i;
+        break;
+      }
+      else{
+        detector = true;
+      }
+    }
+    input += "clearing the display(0x00E0):" + detector;
+  }
+
+  function test00EE() {
+    input += "test 00EE:" + '\n';
+    var ch = new chip8;
+    ch.reset();
+    //b.textContent = ch.pc;
+    ch.stack = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+    ch.sp = 5;
+    input += "ch.stack: " + ch.stack + "\n";
+    input += "ch.sp before: " + ch.stack[ch.sp] + "\n";
+    ch.emulateCycle(0x00EE);
+    input += "ch.sp after: " + ch.stack[ch.sp] + "\n";
+    //ch.list();
+  }
+
+  function test1NNN(){
+    input += "test 1NNN:" + '\n';
+    var ch = new chip8;
+    ch.reset();
+    ch.emulateCycle(0x1234);
+    input += "program counter located at:" + ch.pc.toString(16);
+  }
+
+  function test2NNN(){
+    input += "test 2NNN:" + '\n';
+    var ch = new chip8;
+    ch.reset();
+    ch.stack = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+    ch.sp = 5;
+    ch.pc = 10;
+    ch.emulateCycle(0x2345);
+    input += ch.stack + " " + ch.sp + " " + ch.pc.toString(16);
+  }
+
+  function test3XNN(){
+    input += "test 3XNN:" + '\n';
+    var ch = new chip8;
+    ch.reset();
+    ch.v[5] = 23;
+    ch.pc = 0;
+    input += ch.pc + " ";
+    ch.emulateCycle(0x3534);
+    input += "NN !== Vx: " + ch.pc + " ";
+    ch.emulateCycle(0x3517);
+    input += "NN == Vx:" + ch.pc + " ";
+  }
+
+  function test4XNN(){
+    input += "test 4XNN:" + '\n';
+    var ch = new chip8;
+    ch.reset();
+    ch.v[5] = 23;
+    ch.pc = 0;
+    input += ch.pc + " ";
+    ch.emulateCycle(0x4517);
+    input += "NN == Vx:" + ch.pc + " ";
+    ch.emulateCycle(0x4510);
+    input += "NN !== Vx: " + ch.pc + " ";
+  }
+
+  function test5XY0(){
+    input += "test 5XY0:" + '\n';
+    var ch = new chip8;
+    ch.reset();
+    ch.v[5] = 23;
+    ch.v[10]=23;
+    ch.pc = 0;
+    input += ch.pc + " ";
+    ch.emulateCycle(0x5537);
+    input += "Vx != Vy:" + ch.pc + " ";
+    ch.emulateCycle(0x55A7);
+    input += "Vx == Vy: " + ch.pc + " ";
+  }
+  //FUNCTIONS RUNNING
+//  test0NNN();
+  test00EE();
+  test00E0();
+  test1NNN();
+  test2NNN();
+  test3XNN();
+  test4XNN();
+  test5XY0();
+  //testing.innerHTML = "hello\n";
+  output.textContent = input;
+</script>
+</body>
+
+</html>
