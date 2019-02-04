@@ -23,9 +23,9 @@ _<font size = "3">
 <br>    Tools we will use for testing and assuring the quality would consist of  Javascript Sandbox and a
 <br>    manual code in a separate Javascript file(Build up with each release).
 
-### __Main Implementation Language/ Software Repository__
+### __Main Implementation Language/ Software Repository (UPDATED)__
 
-<br>   Main implementation language would be Javascript and all code would be stored using GitHub.
+<br>   Main implementation language would be Javascript and code will be stored using Google Drive during coding stages while the Final update of the code will be stored in Github.
 
 ### __Detailed Use Cases For Next Release ( UPDATED )__
 
@@ -139,3 +139,13 @@ _<font size = "3">
 | Apr 1 | Release 4 Presentation |
 | Apr 5 | Finish All Code and Debugging Stages |
 | **Apr 8** | **Release 4 Due** |
+
+### __References **( NEW )**__
+
+http://devernay.free.fr/hacks/chip8/C8TECH10.HTM
+
+https://en.wikipedia.org/wiki/CHIP-8
+
+http://blog.alexanderdickson.com/javascript-chip-8-emulator
+
+https://github.com/reu/chip8.js/
