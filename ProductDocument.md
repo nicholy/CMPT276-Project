@@ -30,14 +30,23 @@ _<font size = "3">
 ### __Detailed Use Cases For Next Release ( UPDATED )__
 
 **Sound**
+<br>
+
 **Timers**
+<br>
+
 **Running Display**
 <br> - Usable display that shows the game running.
+
 **Hex Keyboard**
 <br> - Usable Keyboard for playing a game
+
 **Chip 8 Tool**
+<br>
+
 **Game 1**
 <br> - Create Start up Page for the game ( Snake )
+
 **Visualizer**
 <br> - Moved from Release 1
 
@@ -80,7 +89,6 @@ _<font size = "3">
 **NOTE:** All group members are expected to work on the debugging process of the code together.
 
 ### __Completed Tasks ( NEW )__
-
 <br> - CHIP 8 Core
 <br> - CHIP 8 Functions
 <br> - Canvas Display ( Loads initial start up page for the game)
@@ -110,8 +118,8 @@ _<font size = "3">
 | Feb 7 - Feb 13 | Sound |
 | Feb 7 - Feb 13 | Finish Application |
 | Feb 7 - Feb 13 | Game 1 Design Concept |
-| Feb 7 - Feb 13 | Running Display | **( NEW )**
-| Feb 7 - Feb 13 | Finish Visualizer | **( NEW )**
+| Feb 7 - Feb 13 | Running Display **( NEW )** |
+| Feb 7 - Feb 13 | Finish Visualizer **( NEW )** |
 | Feb 14 - Feb 19 | Part of The Game Done ( Animation/Title Screen ) |
 | Feb 20 - Feb 21 | Link work together |
 | Feb 22 - Feb 25 | Debugging |
