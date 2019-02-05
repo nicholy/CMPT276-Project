@@ -54,17 +54,17 @@ _<font size = "3">
 | Nichol | Display(1 week)/ Updates to Product Document(2 days) |
 | Jeremy | Automated Testing(1 week) |
 | Mac    | Display(1 week) |
-| Eric   | Visualizer(1 week) |
-| Tanvir | Visualizer(1 week) |
+| Eric   | Visualizer(1 week) (MOVED TO RELEASE 2) |
+| Tanvir | Visualizer(1 week) (MOVED TO RELEASE 2) |
 | all    | debug(1 week)   |
 
 | Name   | Release 2 Tasks |
 | ------ | --------------- |
-| Nichol | Sound (1 week)/Game 1 Design & animation(1 week) / Updates to Product Document(2 days) |
-| Jeremy | Timers (1 week)/Game 1 Design & animation(1 week)|
-| Mac    | Hex Keyboard(1 week) /Game 1 Design & animation(1 week)|
-| Eric   | Chip 8 Tool(1 week)     |
-| Tanvir | Chip 8 Tool(1 week)     |
+| Nichol | Sound (1 week) / Game 1 Design & animation(1 week) / Updates to Product Document(2 days) |
+| Jeremy | Timers (1 week) / Game 1 Design & animation(1 week) / Finish Vizualiser (UPDATED) |
+| Mac    | Hex Keyboard(1 week) / Game 1 Design & animation(1 week) / Finish Vizualizer (UPDATED) |
+| Eric   | Chip 8 Tool(1 week) / Game 1 Design & animation(1 week) (UPDATED) |
+| Tanvir | Chip 8 Tool(1 week) / Game 1 Design & animation(1 week) (UPDATED) |
 | all    | debug(1 week)|
 
 | Name   | Release 3 Tasks |
