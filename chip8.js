@@ -1,14 +1,25 @@
 var chip8 = function() {
 
+  // Display ( 64 * 32 )
   this.displayWidth = 64;
   this.displayHeight = 32;
   this.display = new Array(this.displayWidth * this.displayHeight);
+
+  // Memory
   this.memory = new Uint8Array(4096);
+
+  // Registers
   this.v = new Array(16);
   this.i = null;
+
+  // Stack
   this.stack = new Array(16);
   this.sp = null;
+
+  // Reset function
   this.reset();
+
+  // Variable Initializer
   this.output = "";
   this.opnumber = "";
   this.ophex = "";
@@ -61,7 +72,7 @@ chip8.prototype = {
     }
   },
 
-  //it create an string and convert memroy into hex and put into string [.toString(16)] with newline break for each 24 character
+  //it create an string and convert memory into hex and put into string [.toString(16)] with newline break for each 24 character
   listdisplay: function() {
     var i = 0;
     while (i < this.display.length) {
@@ -80,7 +91,6 @@ chip8.prototype = {
     this.opnumber = s;
     this.opnumber += " \n";
   },
-
 
 
   visualizer: function() {
@@ -118,6 +128,7 @@ chip8.prototype = {
     }
   },
 
+  // Stops the Program ( Do not have working keys yet so function is not usable )
   stop: function() {
     this.running = false;
   },
@@ -315,7 +326,7 @@ chip8.prototype = {
         var val = (opcode & 0xFF) + this.v[x]
 
         if (val > 255) {
-          val -= 256;
+          val = val - 256;
         }
 
         this.v[x] = val;
