@@ -29,10 +29,7 @@ _<font size = "3">
 
 ### __Detailed Use Cases For Next Release ( UPDATED )__
 
-**Sound**
-<br>
-
-**Timers**
+**Sound/Timers**
 <br>
 
 **Running Display**
@@ -42,7 +39,7 @@ _<font size = "3">
 <br> - Usable Keyboard for playing a game
 
 **Chip 8 Tool**
-<br>
+<br> - Have not yet to decide the function of the tool
 
 **Game 1**
 <br> - Create Start up Page for the game ( Snake )
