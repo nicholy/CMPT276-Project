@@ -4,7 +4,7 @@
 <body>
   <h1>Team 3 Chip 8 Testing</h1>
 
-  <div id = "finalS"></div>
+  <div id = "finalS" style = "font-weight : bold; font-size : 20px;"></div>
   <div id="output"></div>
   <div id="outdisplay"></div>
   <div id="opnumber"></div>
@@ -21,7 +21,7 @@
     canvas.width = 640;
     canvas.height = 320;
     canvas.style.left = "10px";
-    canvas.style.top = "4390px";
+    canvas.style.top = "4430px";
     canvas.style.position = "absolute";
 
     var bre = "&nbsp";
@@ -881,6 +881,7 @@
 
       //input += bre + "random: " + (Math.floor(Math.random() * 0xFF) & (0xC534 & 0xFF)) + "<br />";
       check = true;
+      tally ++;
       if (check) {
         symbol = " &#x2705";
       } else {
@@ -910,6 +911,7 @@
         if (ch.display[i] == 1) {
           detector = true;
           input += bre + "1 detected at " + i + "<br />";
+          tally ++;
           break;
         } else {
           detector = false;
@@ -947,6 +949,7 @@
       input += bre + "ch.i: " + ch.i + "<br />";
       if (ch.i = ch.v[5] + comp) {
         check = true;
+        tally ++;
       }
       if (detector) {
         symbol = " &#x2705";
@@ -978,6 +981,7 @@
       input += bre + "ch.i: " + ch.i + "<br />";
       if (ch.i == ch.v[5] * 5) {
         check = true;
+        tally ++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -1026,6 +1030,7 @@
 
       if (doublecheck) {
         symbol = " &#x2705";
+        tally ++;
       } else {
         symbol = " &#10060";
       }
@@ -1071,6 +1076,7 @@
 
       if (doublecheck) {
         symbol = " &#x2705";
+        tally ++;
       } else {
         symbol = " &#10060";
       }
@@ -1113,6 +1119,7 @@
 
       if (doublecheck) {
         symbol = " &#x2705";
+        tally ++;
       } else {
         symbol = " &#10060";
       }
@@ -1160,7 +1167,21 @@
 
 
     document.getElementById("output").innerHTML = input;
-    document.getElementById("finalS").innerHTML = tally + "/31 Successful.";
+    if(tally == 33){
+      correct = tally + " out of 33 tests Successful." + "<br />" + "<br />";
+      //correct.fontcolor("Lime");
+      //document.write(correct.fontcolor( "lime" ));
+      document.getElementById("finalS").style.color = "Lime";
+      document.getElementById("finalS").innerHTML = correct;
+    }
+    else{
+      var incorrect = tally + " out of 33 tests Successful." + "<br />" + "<br />";
+      //incorrect.fontcolor("red");
+      //document.write(incorrect.fontcolor( "red" ));
+      document.getElementById("finalS").style.color = "Red";
+      document.getElementById("finalS").innerHTML = incorrect;
+    }
+
   </script>
 </body>
 

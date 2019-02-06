@@ -6,7 +6,7 @@ _<font size = "3">
 ### __Meeting Schedule__
 <br>    Team members are expected to show up at weekly meetings scheduled on Mondays at 10:30 AM for an hour,
 <br>    before class and 12:30 - 1:30 after class on Monday, Wednesday, and Friday. Also our group
-<br>    will have an online discussion Saturday night at 8:30PM - 9:30PM using Skype.
+<br>    will have an online meeting on Saturday night at 8:30PM - 9:30PM using Discord and Teletype atom .
 
 ### __Communication Tool/Techniques__
 
@@ -25,12 +25,12 @@ _<font size = "3">
 
 ### __Main Implementation Language/ Software Repository (UPDATED)__
 
-<br>   Main implementation language would be Javascript and code will be stored using Google Drive during coding stages while the Final update of the code will be stored in Github.
+<br>   Main implementation language would be JavaScript and code will be stored using Google Drive during coding stages while the Final update of the code will be stored in GitHub.
 
 ### __Detailed Use Cases For Next Release ( UPDATED )__
 
 **Sound/Timers**
-<br>
+<br> - Display fps and make a beep noise when the game needs
 
 **Running Display**
 <br> - Usable display that shows the game running.
@@ -39,13 +39,13 @@ _<font size = "3">
 <br> - Usable Keyboard for playing a game
 
 **Chip 8 Tool**
-<br> - Have not yet to decide the function of the tool
+<br> - Sprite Editor - By Release 2 have entire concept fleshed out, and parts of code completed
 
 **Game 1**
-<br> - Create Start up Page for the game ( Snake )
+<br> - Create Start up Page for the game (Snake)
 
 **Visualizer**
-<br> - Moved from Release 1
+<br> - Finishing the vi
 
 ### __Work Breakdown__
 
@@ -60,9 +60,9 @@ _<font size = "3">
 
 | Name   | Release 2 Tasks |
 | ------ | --------------- |
-| Nichol | Sound (1 week) / Game 1 Design & animation(1 week) / Updates to Product Document(2 days) |
-| Jeremy | Timers (1 week) / Game 1 Design & animation(1 week) / Finish Vizualiser (UPDATED) |
-| Mac    | Hex Keyboard(1 week) / Game 1 Design & animation(1 week) / Finish Vizualizer (UPDATED) |
+| Nichol | Sound (1 week) / Game 1 Design(1 week) / Updates to Product Document(2 days) |
+| Jeremy | Timers (1 week) / Game 1 Design(1 week) / Finish Visualizer (UPDATED) |
+| Mac    | Hex Keyboard(1 week) / Game 1 Design & animation(1 week) / Finish Visualizer (UPDATED) |
 | Eric   | Chip 8 Tool(1 week) / Game 1 Design & animation(1 week) (UPDATED) |
 | Tanvir | Chip 8 Tool(1 week) / Game 1 Design & animation(1 week) (UPDATED) |
 | all    | debug(1 week)|

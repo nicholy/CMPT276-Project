@@ -295,9 +295,8 @@ chip8.prototype = {
         //this.listOpcode("0x6000");
         break;
 
-        // ADD Vx, byte
-        // 7xkk
-        // Set Vx equal to Vx + kk.
+        // 7xkk - ADD Vx, byte
+        // Set Vx = Vx + kk.
       case 0x7000:
         var val = (opcode & 0xFF) + this.v[x]
 
@@ -313,41 +312,36 @@ chip8.prototype = {
 
         switch (opcode & 0x000f) {
 
-          // LD Vx, Vy
-          // 8xy0
-          // Stores register Vy in Vx
+          // 8xy0 - LD Vx, Vy
+          // Set Vx = Vy.
           case 0x0000:
             this.v[x] = this.v[y];
             //this.listOpcode("0x8000");
             break;
 
-            // OR Vx, Vy
-            // 8xu1
-            // Set vX equal to vX OR Vy;
+            // 8xu1 - OR Vx, Vy
+            // Set vX = vX OR Vy.
           case 0x0001:
             this.v[x] = this.v[x] | this.v[y];
             //this.listOpcode("0x8001");
             break;
 
-            // AND Vx, Vy
-            // 8xy2
-            // Set Vx equal to Vx AMD Vy
+            // 8xy2 - AND Vx, Vy
+            // Set Vx = Vx AND Vy.
           case 0x0002:
             this.v[x] = this.v[x] & this.v[y];
             //this.listOpcode("0x0002");
             break;
 
-            // XOR Vx, Vy
-            // 8xy3
-            // Set Vx equal to Vx XOR Vy.
+            // 8xy3X - OR Vx, Vy
+            // Set Vx = Vx XOR Vy.
           case 0x0003:
             this.v[x] = this.v[x] ^ this.v[y];
             //this.listOpcode("0x0003");
             break;
 
-            // ADD Vx, Vy
-            // 8xy4
-            // Set Vx equal to Vx + Vy, set Vf equal to carry.
+            // 8xy4 - ADD Vx, Vy
+            // Set Vx = Vx + Vy, set Vf = carry.
           case 0x0004:
             this.v[x] = this.v[x] + this.v[y];
             this.v[0xF] = +(this.v[x] > 255);
@@ -357,9 +351,8 @@ chip8.prototype = {
             //this.listOpcode("0x0004");
             break;
 
-            // SUB Vx, Vy
-            // 8xy5
-            // Set Vx equal to Vx - Vy, set Vf equal to NOT borrow.
+            // 8xy5 - SUB Vx, Vy
+            // Set Vx = Vx - Vy, set Vf = NOT borrow.
           case 0x0005:
             this.v[0xF] = +(this.v[x] > this.v[y]);
             this.v[x] = this.v[x] - this.v[y];
@@ -369,18 +362,16 @@ chip8.prototype = {
             //this.listOpcode("0x0005");
             break;
 
-            // SHR Vx, Vy
-            // 8xy6
-            // Set Vx SHR 1.
+            // 8xy6 - SHR Vx, Vy
+            // Set Vx = Vx SHR 1.
           case 0x0006:
             this.v[0xF] = this.v[x] & 0x1;
             this.v[x] = this.v[x] >> 1;
             //this.listOpcode("0x0006");
             break;
 
-            // SUBN Vx, Vy
-            // 8xy7
-            // Set Vx equal to Vy - Vx, set Vf equal to NOT borrow.
+            // 8xy7 - SUBN Vx, Vy
+            // Set Vx = Vy - Vx, set Vf = NOT borrow.
           case 0x0007:
             this.v[0xF] = +(this.v[y] > this.v[x]);
             this.v[x] = this.v[y] - this.v[x];
@@ -391,9 +382,8 @@ chip8.prototype = {
             break;
 
 
-            // SHL Vx, Vy
-            // 8xyE
-            // Set Vx equal to Vx SHL 1.
+            // 8xyE - SHL Vx, Vy
+            // Set Vx = Vx SHL 1.
           case 0x000E:
             this.v[0xF] = +(this.v[x] & 0x80);
             this.v[x] = this.v[x] << 1;
@@ -407,9 +397,8 @@ chip8.prototype = {
 
         break;
 
-        // SNE Vx, Vy
-        // 9xy0
-        // Skip next instruction if Vx is not equal to Vy.
+        // 9xy0 - SNE Vx, Vy
+        // Skip next instruction if Vx != Vy.
       case 0x9000:
         if (this.v[x] != this.v[y]) {
           this.pc += 2;
@@ -417,33 +406,29 @@ chip8.prototype = {
         //this.listOpcode("0x9000");
         break;
 
-        // LD I, addr
-        // Annn
-        // Set I equal to nnn.
+        // Annn - LD I, addr
+        // Set I = nnn.
       case 0xA000:
         this.i = opcode & 0xFFF;
         //this.listOpcode("0xA000");
         break;
 
-        // JP V0, addr
-        // Bnnn
-        // Jump to location V0 + nnn.
+        // Bnnn - JP V0, addr
+        // Jump to location nnn + V0.
       case 0xB000:
         this.pc = (opcode & 0xFFF) + this.v[0];
         //this.listOpcode("0xB000");
         break;
 
-        // RND Vx, byte
-        // Cxkk
-        // Set Vx equal to random byte AND kk.
+        // Cxkk - RND Vx, byte
+        // Set Vx = random byte AND kk.
       case 0xC000:
         this.v[x] = Math.floor(Math.random() * 0xFF) & (opcode & 0xFF)
         //this.listOpcode("0xC000");
         break;
 
-        // DRW Vx, Vy, nibble
-        // Dxyn
-        // Display n-byte sprite starting at memory location I at (Vx, Vy), set VF equal to collision.
+        // Dxyn - DRW Vx, Vy, nibble
+        // Display n-byte sprite starting at memory location I at (Vx, Vy), set VF = collision.
       case 0xD000:
         this.v[0xF] = 0;
 
@@ -471,21 +456,19 @@ chip8.prototype = {
 
       case 0xE000:
         switch (opcode & 0x00FF) {
-          // SKP Vx
-          // Ex9E
+          // TODO: fix case 0x009E, wait for keyboard
+          // Ex9E - SKP Vx
           // Skip next instruction if the key with the value Vx is pressed.
           case 0x009E:
-            //incomplete wait for keyboard
             this.pc += 2;
             //this.listOpcode("0xE000");
 
             break;
 
-            // SKNP Vx
-            // ExA1
-            // Skip  next instruction if the key with the value Vx is NOT pressed.
+          // TODO: fix case 0x00A1, wait for keyboard
+          // ExA1 - SKNP Vx
+          // Skip next instruction if the key with the value Vx is NOT pressed.
           case 0x00A1:
-            //incomplete wait for keyboard
             this.pc += 2;
             //this.listOpcode("0x00A1");
 
@@ -499,73 +482,63 @@ chip8.prototype = {
 
         switch (opcode & 0x00FF) {
 
-          // LD Vx, DT
-          // Fx07
-          // Place value of DT in Vx.
+          // TODO: fix case 0x0007, wait for timer
+          // Fx07 - LD Vx, DT
+          // Set Vx = delay timer value.
           case 0x0007:
-            //incomplete wait for timer
             //this.listOpcode("0x0007");
             break;
 
-            // LD Vx, K
-            // Fx0A
-            // Wait for keypress, then store it in Vx.
+          // TODO: fix case 0x000A, wait for keyboard
+          // Fx0A - LD Vx, K
+          // Wait for a keypress, then store the value of the key in Vx.
           case 0x000A:
-            //incomplete wait for keyboard
             this.stop();
             //this.listOpcode("0x000A");
             return;
 
-            // LD DT, Vx
-            // Fx15
-            // DT is set to Vx.
+          // TODO: fix case 0x0015, wait for timer
+          // Fx15 - LD DT, Vx
+          // Set delay timer = Vx.
           case 0x0015:
-            //incomplete wait for timer
             //this.listOpcode("0x0015");
             break;
 
-            // LD ST, Vx
-            // Fx18
-            // Set sound timer to Vx.
+          // TODO: fix case 0x0018, wait for timer
+          // Fx18 - LD ST, Vx
+          // Set sound timer = Vx.
           case 0x0018:
-            //incomplete wait for Sound
             //this.listOpcode("0x0018");
             break;
 
-            // ADD I, Vx
-            // Fx1E
-            // Set I equal to I + Vx
+          // Fx1E - ADD I, Vx
+          // Set I = I + Vx.
           case 0x001E:
             this.i += this.v[x];
             //this.listOpcode("0x001E");
             break;
 
-            // LD F, Vx
-            // Fx29
-            // Set I equal to location of sprite for digit Vx.
+          // Fx29 - LD F, Vx
+          // Set I = location of sprite for digit Vx.
           case 0x0029:
             // Multiply by number of rows per character.
             this.i = this.v[x] * 5;
             //this.listOpcode("0x0029");
             break;
 
-            // LD B, Vx
-            // Fx33
-            // Store BCD representation of Vx in memory location starting at location I.
+          // Fx33 - LD B, Vx
+          //Store BCD representation of Vx in memory locations I, I+1, and I+2.
           case 0x0033:
-            var number = this.v[x],
-              i;
-
-            for (i = 3; i > 0; i--) {
+            var number = this.v[x];
+            for (var i = 3; i > 0; i--) {
               this.memory[this.i + i - 1] = parseInt(number % 10);
               number /= 10;
             }
             //this.listOpcode("0x0033");
             break;
 
-            // LD [I], Vx
-            // Fx55
-            // Store registers V0 through Vx in memory starting at location I.
+          // Fx55 - LD [I], Vx
+          // Store registers V0 through Vx in memory starting at location I.
           case 0x0055:
             for (var i = 0; i <= x; i++) {
               this.memory[this.i + i] = this.v[i];
@@ -573,8 +546,7 @@ chip8.prototype = {
             //this.listOpcode("0x0055");
             break;
 
-            // LD Vx, [I]
-            // Fx65
+            // Fx65 - LD Vx, [I]
             // Read registers V0 through Vx from memory starting at location I.
           case 0x0065:
             for (var i = 0; i <= x; i++) {
@@ -588,7 +560,7 @@ chip8.prototype = {
         break;
 
       default:
-        throw new Error("Error opcode: " + opcode.toString(16) + "Now Terminating the program...");
+        throw new Error("Error at opcode: " + opcode.toString(16) + ".\n Now Terminating the program...");
     }
 
   }
