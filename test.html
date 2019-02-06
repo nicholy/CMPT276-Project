@@ -4,27 +4,32 @@
 <body>
   <h1>Team 3 Chip 8 Testing</h1>
 
+  <div id = "finalS"></div>
   <div id="output"></div>
   <div id="outdisplay"></div>
   <div id="opnumber"></div>
-  <canvas id="myCanvas" width="640" height="320" style="border:5px solid green;">
+  <canvas id="myCanvas" width="640" height="320">
     Your browser does not support the canvas element.
   </canvas>
 
+  <link rel = "stylesheet" href = "style.css">
   <script src="chip8.js"></script>
   <script>
     var canvas = document.getElementById("myCanvas"); //get canvas function from html
     var dot = canvas.getContext("2d");
+
     canvas.width = 640;
     canvas.height = 320;
     canvas.style.left = "10px";
-    canvas.style.top = "4300px";
+    canvas.style.top = "4390px";
     canvas.style.position = "absolute";
 
     var bre = "&nbsp";
     var input = "";
     var check = false;
     var symbol = "";
+    var tally = 0; //counter variable
+
     //TEST FUNCTIONS
     function stackCheck() {
       var ch = new chip8;
@@ -34,11 +39,12 @@
       input += bre + "*Will return true if Stack exists and stack length is 16*" + "<br />";
       if (ch.stack && ch.stack.length == 16) {
         check = true;
+        tally ++;
       }
       input += bre + "Stack length: " + ch.stack.length + "<br />";
 
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -56,9 +62,10 @@
 
       if (ch.memory.length == 4096) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -72,7 +79,7 @@
     function test00E0() {
       var ch = new chip8;
       input += "<strong>" + "Test 00E0(Clears the Screen):" + "</strong>" + "<br />";
-      var detector = true;
+      var detector = false;
       input += bre + "*If the screen is not clear, reading will read false*" + "<br />";
       ch.reset();
       ch.display[100] = 1;
@@ -91,7 +98,7 @@
       ch.memory[512] = 0x00;
       ch.memory[513] = 0xE0;
       ch.pc = 512;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 00E0" + "</strong>" + "<br />";
       for (i = 0; i < 64 * 32; i++) {
         if (ch.display[i] == 1) {
@@ -104,10 +111,11 @@
       }
       if (detector) {
         check = true;
+        tally ++;
         input += bre + "No 1's detected: " + detector + "<br />";
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -135,15 +143,16 @@
       ch.memory[513] = 0xEE;
       ch.pc = 512;
       input += bre + "Performing 00EE" + "<br />";
-      ch.emulateCycle();
+      ch.opCycle();
 
       input += bre + "Stack pointer located at: " + ch.sp + "<br />";
       if (ch.sp == comp - 1) {
         check = true;
+        tally ++;
       }
       //ch.list();
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -164,13 +173,14 @@
       ch.memory[512] = 0x12;
       ch.memory[513] = 0x34;
       input += bre + "Performing 1234" + "<br />";
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Program counters new position(in hex): 0x" + ch.pc.toString(16) + "<br />";
       if (ch.pc == 564 /*234 in hex*/ ) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -197,15 +207,16 @@
       ch.memory[512] = 0x22;
       ch.memory[513] = 0x34;
       input += bre + "Performing 2234" + "<br />";
-      ch.emulateCycle();
+      ch.opCycle();
       //input += bre + ch.memory[ch.sp];
       input += bre + "Program Counters New Position: " + ch.pc.toString(16) + "<br />";
       input += bre + "Stack Pointers New Position: " + ch.sp.toString(16) + "<br />";
       if (ch.sp == comp + 1) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -227,15 +238,16 @@
       ch.memory[513] = 0x17;
       ch.pc = 512;
       input += bre + "Program Counters Current Position: " + ch.pc.toString(16) + "<br />";
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 3517" + "<br />";
       input += bre + "Program Counters New Position: " + ch.pc.toString(16) + "<br />";
       //input += ch.pc.toString(16) + comp.toString(16);
       if (comp + 3 < ch.pc) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -257,15 +269,16 @@
       ch.memory[513] = 0x18;
       ch.pc = 512;
       input += bre + "Program Counters Current Position: " + ch.pc.toString(16) + "<br />";
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 4517" + "<br />";
       input += bre + "Program Counters New Position: " + ch.pc.toString(16) + "<br />";
       //input += ch.pc.toString(16) + comp.toString(16);
       if (comp + 3 < ch.pc) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -292,15 +305,16 @@
       ch.pc = 512;
       var comp = ch.pc;
       input += bre + "Program Counters Current Position: " + ch.pc.toString(16) + "<br />";
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 55A0" + "<br />";
       input += bre + "Program Counters New Position: " + ch.pc.toString(16) + "<br />";
       //input += comp + ch.pc.toString(16);
       if (ch.pc > comp + 3) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -322,14 +336,15 @@
       ch.memory[512] = 0x65;
       ch.memory[513] = 0xA4;
       ch.pc = 512;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 65A4" + "<br />";
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       if (ch.v[5] == 164) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -351,14 +366,15 @@
       ch.memory[512] = 0x75;
       ch.memory[513] = 0x05;
       ch.pc = 512;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 7505" + "<br />";
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       if (ch.v[5] == 28) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -381,14 +397,15 @@
       ch.memory[512] = 0x85;
       ch.memory[513] = 0xA0;
       ch.pc = 512;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 85A0" + "<br />";
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       if (ch.v[5] == ch.v[10]) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -412,16 +429,17 @@
       ch.memory[512] = 0x85;
       ch.memory[513] = 0xA1;
       ch.pc = 512;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 85A1" + "<br />";
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       //input += bre + "ch.v[10]: " + ch.v[10] + "<br />";
       //input += ch.v[5] + bre + ch.v[10] + bre + comp + bre + comp2;
       if (ch.v[5] == 31) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -443,16 +461,17 @@
       ch.memory[512] = 0x85;
       ch.memory[513] = 0xA2;
       ch.pc = 512;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 85A2" + "<br />";
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       //input += bre + "ch.v[10]: " + ch.v[10] + "<br />";
       //input += ch.v[5] + bre + ch.v[10] + bre + comp + bre + comp2;
       if (ch.v[5] == 17) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -474,16 +493,17 @@
       ch.memory[512] = 0x85;
       ch.memory[513] = 0xA3;
       ch.pc = 512;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 85A3" + "<br />";
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       //input += bre + "ch.v[10]: " + ch.v[10] + "<br />";
       //input += ch.v[5] + bre + ch.v[10] + bre + comp + bre + comp2;
       if (ch.v[5] == 14) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -510,15 +530,16 @@
       ch.memory[512] = 0x85;
       ch.memory[513] = 0xA4;
       //ch.pc = 512;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 85A4" + "<br />";
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       input += bre + "ch.v[0xF](carry flag - if 0 then no borrow): " + ch.v[0xF] + "<br />";
       if (ch.v[0xF] == 0 && ch.v[5] == comp + comp2) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -537,15 +558,16 @@
       input += bre + "ch.v[10]: " + ch.v[10] + "<br />";
       ch.memory[512] = 0x85;
       ch.memory[513] = 0xA4;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 85A4" + "<br />";
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       input += bre + "ch.v[0xF](carry flag - if 1 then borrow): " + ch.v[0xF] + "<br />";
       if (ch.v[0xF] == 1 && ch.v[5] == comp + comp2 - 256) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -571,15 +593,16 @@
       ch.memory[512] = 0x85;
       ch.memory[513] = 0xA5;
       //ch.pc = 512;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 85A5" + "<br />";
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       input += bre + "ch.v[0xF](borrow flag - if 1 then no borrow): " + ch.v[0xF] + "<br />";
       if (ch.v[0xF] == 1 && ch.v[5] == comp - comp2) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -598,15 +621,16 @@
       input += bre + "ch.v[10]: " + ch.v[10] + "<br />";
       ch.memory[512] = 0x85;
       ch.memory[513] = 0xA5;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 85A5" + "<br />";
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       input += bre + "ch.v[0xF](borrow flag - if 0 then borrow): " + ch.v[0xF] + "<br />";
       if (ch.v[0xF] == 0 && ch.v[5] == comp - comp2 + 256) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -627,7 +651,7 @@
       input += bre + "ch.v[5](in binary): " + ch.v[5].toString(2) + "<br />";
       ch.memory[512] = 0x85;
       ch.memory[513] = 0x06;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 8506" + "<br />";
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       input += bre + "ch.v[5](in binary): " + ch.v[5].toString(2) + "<br />";
@@ -638,9 +662,10 @@
       //input += comp;
       if (comp == comp2) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -666,15 +691,16 @@
       ch.memory[512] = 0x85;
       ch.memory[513] = 0xA7;
       //ch.pc = 512;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 85A7" + "<br />";
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       input += bre + "ch.v[0xF](borrow flag - if 1 then no borrow): " + ch.v[0xF] + "<br />";
       if (ch.v[0xF] == 1 && ch.v[5] == comp2 - comp) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -693,15 +719,16 @@
       input += bre + "ch.v[10]: " + ch.v[10] + "<br />";
       ch.memory[512] = 0x85;
       ch.memory[513] = 0xA7;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 85A7" + "<br />";
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       input += bre + "ch.v[0xF](borrow flag - if 0 then borrow): " + ch.v[0xF] + "<br />";
       if (ch.v[0xF] == 0 && ch.v[5] == comp2 - comp + 256) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -722,16 +749,17 @@
       input += bre + "ch.v[5](in binary): " + ch.v[5].toString(2) + "<br />";
       ch.memory[512] = 0x85;
       ch.memory[513] = 0x0E;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 850E" + "<br />";
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       input += bre + "ch.v[5](in binary): " + ch.v[5].toString(2) + "<br />";
       input += bre + "ch.v[0xF]: " + ch.v[0xF] + "<br />";
       if (comp * 2 == ch.v[5]) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -757,15 +785,16 @@
       ch.pc = 512;
       var comp = ch.pc;
       input += bre + "Program Counters Current Position: " + ch.pc.toString(16) + "<br />";
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing 95A0" + "<br />";
       input += bre + "Program Counters New Position: " + ch.pc.toString(16) + "<br />";
       //input += comp + ch.pc.toString(16);
       if (ch.pc > comp + 3) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -785,14 +814,15 @@
       ch.memory[512] = 0xA2;
       ch.memory[513] = 0x34;
       ch.pc = 512;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing A234" + "<br />";
       input += bre + "I New Position(hex): " + ch.i.toString(16) + "<br />";
       if (ch.i == 564) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -814,14 +844,15 @@
       ch.memory[512] = 0xB2;
       ch.memory[513] = 0x34;
       ch.pc = 512;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing A234" + "<br />";
       input += bre + "PC New Position: " + ch.pc + "<br />";
       if (ch.pc == 568) {
         check = true;
+        tally ++;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -844,14 +875,14 @@
       ch.memory[512] = 0xC5;
       ch.memory[513] = 0x32;
       ch.pc = 512;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing C534" + "<br />";
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
 
       //input += bre + "random: " + (Math.floor(Math.random() * 0xFF) & (0xC534 & 0xFF)) + "<br />";
-      //check = true;
+      check = true;
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -873,7 +904,7 @@
       ch.memory[512] = 0xD5;
       ch.memory[513] = 0xA5;
       ch.pc = 512;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing D5AF" + "<br />";
       for (i = 0; i < 64 * 32; i++) {
         if (ch.display[i] == 1) {
@@ -884,13 +915,17 @@
           detector = false;
         }
       }
-      input += bre + "Operation is: " + detector + "<br />" ;
+      if (detector) {
+        symbol = " &#x2705";
+      } else {
+        symbol = " &#10060";
+      }
+
+      input += "<strong>" + bre + "Operation is: " + detector + symbol + "</strong>" + "<br />";
       for( j = 0; j < 20; j++) {
         input += "<br />";
       }
-
       check = false;
-
       //ch.i = 0xf + 0xf + 0xf;
     }
 
@@ -907,13 +942,19 @@
       ch.memory[512] = 0xF5;
       ch.memory[513] = 0x1E;
       ch.pc = 512;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing F51E" + "<br />";
       input += bre + "ch.i: " + ch.i + "<br />";
       if (ch.i = ch.v[5] + comp) {
         check = true;
       }
-      input += bre + "Operation is: " + detector + "<br />";
+      if (detector) {
+        symbol = " &#x2705";
+      } else {
+        symbol = " &#10060";
+      }
+
+      input += "<strong>" + bre + "Operation is: " + detector + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
     }
@@ -931,7 +972,7 @@
       ch.memory[512] = 0xF5;
       ch.memory[513] = 0x29;
       ch.pc = 512;
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing F529" + "<br />";
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       input += bre + "ch.i: " + ch.i + "<br />";
@@ -939,7 +980,7 @@
         check = true;
       }
       if (check) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -968,7 +1009,7 @@
       ch.memory[513] = 0x33;
       ch.pc = 512;
       //ch.list();
-      ch.emulateCycle();
+      ch.opCycle();
       input += bre + "Performing F533" + "<br />";
       input += bre + "Memory[ch.i + 2] to Memory[ch.i - 1]  after: " + "<br />";
       for (i = 3; i > 0; i--) {
@@ -984,7 +1025,7 @@
       }
 
       if (doublecheck) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -1017,7 +1058,7 @@
       ch.memory[513] = 0x55;
       ch.pc = 512;
       //ch.list();
-      ch.emulateCycle();
+      ch.opCycle();
       var doublecheck = true;
       input += bre + "Performing F555" + "<br />";
       input += bre + "memory from 0 to ch.i after: " + "<br />";
@@ -1029,7 +1070,7 @@
       }
 
       if (doublecheck) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -1059,7 +1100,7 @@
       ch.memory[512] = 0xF5;
       ch.memory[513] = 0x65;
       ch.pc = 512;
-      ch.emulateCycle();
+      ch.opCycle();
       var doublecheck = true;
       input += bre + "Performing F565" + "<br />";
       input += bre + "register from 0 to ch.i after: " + "<br />";
@@ -1071,7 +1112,7 @@
       }
 
       if (doublecheck) {
-        symbol = " &#x2714";
+        symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
@@ -1119,6 +1160,7 @@
 
 
     document.getElementById("output").innerHTML = input;
+    document.getElementById("finalS").innerHTML = tally + "/31 Successful.";
   </script>
 </body>
 

@@ -1,58 +1,38 @@
 <!DOCTYPE html>
 <html>
-<p>Please Select Rom file:</p>
-<div id = "a"></div> <div id = "b"></div> <div id = "c"></div> <div id = "e"></div> <div id = "f"></div>
-<canvas id="myCanvas" width="640" height="320"    //inistaillize canvas with width and height
-style="border:10px solid #c3c3c3;">
-Your browser does not support the canvas element.
+<body>
+<img id = "titlepic" src = "images/Title.png">
+<canvas id="myCanvas" width="640" height="320">
+  Your browser does not support the canvas element.
 </canvas>
 
+<div id = "chooseRom">
+    <label for="files">
+        <img id = "button1" src="images/button1.jpg">
+    </label>
 
-<input type="file" id="files" name="files[]" multiple />
-<output id="list"></output>
-<script src = "chip8.js"></script>
+    <input type="file" id="files" name="files[]" multiple />
+</div>
+
+<div id = "autoTest">
+  <a href = "test.html">
+    <img id = "button2" src = "images/button2.jpg">
+  </a>
+</div>
+
+<div id="list"></div>
+
+<div id="output"></div>
+<div id="outdisplay"></div>
+<div id="opnumber"></div>
+
+<link rel = "stylesheet" href = "style.css">
+<script src="chip8.js"></script>
 <script>
-  let p = document.querySelector("p");
-  let b = document.getElementById("b");
-  let c = document.getElementById("c");
-  let e = document.getElementById("e");
-  let f = document.getElementById("f");
-  var canvas = document.getElementById("myCanvas"); //get canvas function from html
+  var canvas = document.getElementById("myCanvas");
   var dot = canvas.getContext("2d");
-
   var ch = new chip8;
-/*
-  (function() {
 
-    var translateKeys = {
-        49: 0x1,  // 1
-        50: 0x2,  // 2
-        51: 0x3,  // 3
-        52: 0x4,  // 4
-        81: 0x5,  // Q
-        87: 0x6,  // W
-        69: 0x7,  // E
-        82: 0x8,  // R
-        65: 0x9,  // A
-        83: 0xA,  // S
-        68: 0xB,  // D
-        70: 0xC,  // F
-        90: 0xD,  // Z
-        88: 0xE,  // X
-        67: 0xF,  // C
-        86: 0x10  // V
-    };
-
-    document.addEventListener("keydown", function(event) {
-        ch.setKey(translateKeys[event.keyCode]);
-    });
-
-    document.addEventListener("keyup", function(event) {
-        ch.unsetKey(translateKeys[event.keyCode]);
-    });
-})();
-*/
-  //ch.visualizer();
   function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
     // Loop through the FileList and render image files as thumbnails.
@@ -62,25 +42,11 @@ Your browser does not support the canvas element.
       reader.onload = (function(theFile) {
         return function(e) {
           var raw = e.target.result;
-          // https://developer.mozilla.org/en/JavaScript_typed_arrays
           var rawBytes = new Uint8Array(raw);
           ch.reset();
           ch.stop();
           ch.loadProgram(rawBytes);
           ch.start();
-          /*
-          var hex = "";
-          for (var cycle = 0; cycle < raw.byteLength; cycle++) {
-            hex += rawBytes[cycle].toString(16) + " ";
-            // TODO: more elegance
-            if (!((cycle + 1) % 8))
-              hex += "\n";
-          }
-          // Render thumbnail.
-          var span = document.createElement('pre');
-          span.innerHTML = hex;
-          document.getElementById('list').insertBefore(span, null);
-          */
         };
       })(f);
       // Read in the image file as a data URL.

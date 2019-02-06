@@ -1,0 +1,36 @@
+#myCanvas{
+  border : 5px solid MediumBlue;
+  background-color : white;
+  display : block;
+  margin-left : auto;
+  margin-right : auto;
+  margin-top : 5px;
+}
+
+#chooseRom > input
+{
+    display : none;
+}
+
+#button1, #button2{
+  margin-top : 10px;
+  height : 50px;
+  width : auto;
+  display : block;
+  margin-left : auto;
+  margin-right : auto;
+}
+
+html{
+  background-color : black;
+  font-family : "Courier New", Courier, monospace ;
+  color : white;
+}
+
+#titlepic{
+  height : 210px;
+  width : auto;
+  display : block;
+  margin-left : auto;
+  margin-right : auto;
+}
