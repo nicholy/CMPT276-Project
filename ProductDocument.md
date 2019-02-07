@@ -8,9 +8,9 @@ _<font size = "3">
 <br>    before class and 12:30 - 1:30 after class on Monday, Wednesday, and Friday. Also our group
 <br>    will have an online meeting on Saturday night at 8:30PM - 9:30PM using Discord and Teletype atom .
 
-### __Communication Tool/Techniques__
+### __Communication Tool/Techniques(UPDATED)__
 
-<br>    Communication tools utilized outside of school would consist of Facebook Messenger, and Skype.
+<br>    Communication tools utilized outside of school would consist of Facebook Messenger, Discord and Teletype atom.
 <br>    Most of the planning documents and presentation materials(Powerpoint) will be completed in the form of Google Docs and Google Slides for ease of access.
 
 ### __Details of Software Methodology__
@@ -20,8 +20,7 @@ _<font size = "3">
 
 ### __Testing and Quality Assurance Tools__
 
-<br>    Tools we will use for testing and assuring the quality would consist of  Javascript Sandbox and a
-<br>    manual code in a separate Javascript file(Build up with each release).
+<br>    Tools we will use for testing and assuring the quality would consist of  Javascript Sandbox and a manual code in a separate Javascript file(Build up with each release).
 
 ### __Main Implementation Language/ Software Repository (UPDATED)__
 
@@ -42,10 +41,10 @@ _<font size = "3">
 <br> - Sprite Editor - By Release 2 have entire concept fleshed out, and parts of code completed
 
 **Game 1**
-<br> - Create Start up Page for the game (Snake)
+<br> - Create Start up animation for the game (Snake)
 
 **Visualizer**
-<br> - Finishing the vi
+<br> - Finishing the visualizer, prints out opcode operation while the game is running
 
 ### __Work Breakdown__
 
@@ -58,14 +57,14 @@ _<font size = "3">
 | Tanvir | Visualizer(1 week) (MOVED TO RELEASE 2) |
 | all    | debug(1 week)   |
 
-| Name   | Release 2 Tasks |
+| Name   | Release 2 Tasks ( UPDATED )|
 | ------ | --------------- |
-| Nichol | Sound (1 week) / Game 1 Design(1 week) / Updates to Product Document(2 days) |
-| Jeremy | Timers (1 week) / Game 1 Design(1 week) / Finish Visualizer (UPDATED) |
-| Mac    | Hex Keyboard(1 week) / Game 1 Design & animation(1 week) / Finish Visualizer (UPDATED) |
-| Eric   | Chip 8 Tool(1 week) / Game 1 Design & animation(1 week) (UPDATED) |
-| Tanvir | Chip 8 Tool(1 week) / Game 1 Design & animation(1 week) (UPDATED) |
-| all    | debug(1 week)|
+| Nichol | Sound & Timers(1 week) / Updates to Product Document(2 days) |
+| Jeremy | Animation(1 week) / Visualizer (1 week) |
+| Mac    | Animation(1 week) / Visualizer (1 week) |
+| Eric   | Chip 8 Tool(1 week) / Local program loader(1 week) |
+| Tanvir | Research Octo(1 week) / Game 1 prototype(1 week)|
+| all    | debug(1 week) / Game 1 prototype(1 week)|
 
 | Name   | Release 3 Tasks |
 | ------ | --------------- |
@@ -86,8 +85,8 @@ _<font size = "3">
 **NOTE:** All group members are expected to work on the debugging process of the code together.
 
 ### __Completed Tasks ( NEW )__
-<br> - CHIP 8 Core
-<br> - CHIP 8 Functions
+<br> - CHIP 8 Core ( Memory, Stack, Registers, Display)
+<br> - CHIP 8 Functions ( Display, Visualizer Prototype, Start, Reset, Stop)
 <br> - Canvas Display ( Loads initial start up page for the game)
 <br> - Automated Testing
 
@@ -136,6 +135,16 @@ _<font size = "3">
 | Apr 1 | Release 4 Presentation |
 | Apr 5 | Finish All Code and Debugging Stages |
 | **Apr 8** | **Release 4 Due** |
+
+### __Release 1 Discussions**(NEW):**__
+<ul style = "font-size : 17.5px;">
+  <li> Visualizer completion pushed to release 2 - visualizer is just a log of the first 1000 operations of the program loaded into memory</li>
+  <li> Screen completion (animations) for the programs and games done by release 2 - using window.requestAnimationFrame object - need more in depth research</li>
+  <li> Currently with the load function, it is possible to load anything. We want to make it only possible to run the rom files in a specified folder so it wont give any errors
+  <li> One of the problems that was encountered was that one of our team members did not do any of the work associated with release one. Because of this, some progress was pushed back to later releases, making the development process frustrating to work on with the remaining team members. On top of that, it was very difficult to contact him, as he does not read any forms of communication that we have been using as a group. Attendance to meetings has been sparse (he have not come to the past 6 meetings). As a temporary solution, the group has decided to split up the code amongst the four remaining members. </li>
+</ul>
+
+
 
 ### __References **( NEW )**__
 

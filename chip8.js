@@ -206,10 +206,13 @@ chip8.prototype = {
   },
 
   opCycle: function() {
-
+    //sets the opcode as the same as the program counter - "loads" the opcode in
     var opcode = this.memory[this.pc] << 8 | this.memory[this.pc + 1];
+    //shifts the opcode value for X into a var x
     var x = (opcode & 0x0F00) >> 8;
+    //shifts the opcode value for Y into a var y
     var y = (opcode & 0x00F0) >> 4;
+    //increments the program counter by 2 positions(1 opcode occupies 2 positions in memory)
     this.pc += 2;
 
     console.log("opcode: "+opcode.toString(16));
@@ -221,8 +224,7 @@ chip8.prototype = {
 
         switch (opcode) {
 
-          // OOE0 - CLS
-          // CLear the display.
+// 00E0(Clears the Screen):
           case 0x00E0:
           dot.clearRect(0, 0, 640, 320);
           var i = 0;
@@ -233,8 +235,7 @@ chip8.prototype = {
             //this.listOpcode("0x00E0");
             break;
 
-            // 00EE - RET
-            // Return from subroutine.
+// 00EE(Returns from Subroutine):
           case 0x00EE:
             this.sp = this.sp - 1;
             this.pc = this.stack[this.sp];
@@ -245,15 +246,13 @@ chip8.prototype = {
 
         break;
 
-        // 1nnnn - JP addr
-        // Jump to location nnn.
+// 1NNN(Jumps to Address NNN):
       case 0x1000:
         this.pc = opcode & 0xFFF;
         //this.listOpcode("0x1000");
         break;
 
-        // 2nnnn - CALL addr
-        // Call subroutine at nnnn.
+// 2NNN(Calls Subroutine at NNN):
       case 0x2000:
         this.stack[this.sp] = this.pc;
         this.sp++;
@@ -261,8 +260,7 @@ chip8.prototype = {
         //this.listOpcode("0x2000");
         break;
 
-        // 2xkk - SE Vx, byte
-        // Skip next instruction if vX = kk.
+// 3XNN(Skips the next instruction if VX == NN):
       case 0x3000:
         if (this.v[x] === (opcode & 0xFF)) {
           this.pc += 2;
@@ -270,8 +268,7 @@ chip8.prototype = {
         //this.listOpcode("0x3000");
         break;
 
-        // 4xkk - SNE Vx, byte
-        // Skip next instruction if vX != kk.
+// 4XNN(Skips the next instruction if VX == NN):
       case 0x4000:
         if (this.v[x] != (opcode & 0x00FF)) {
           this.pc += 2;
@@ -279,8 +276,7 @@ chip8.prototype = {
         //this.listOpcode("0x4000");
         break;
 
-        // 5xy0 - SE Vx, Vy
-        // Skip next instruction if vX = vY.
+// 5XY0(Skips instruction if Vx == Vy):
       case 0x5000:
         if (this.v[x] === this.v[y]) {
           this.pc += 2;
@@ -288,15 +284,13 @@ chip8.prototype = {
         //this.listOpcode("0x5000");
         break;
 
-        // 6xkk - LD Vx, byte
-        // Set Vx = kk.
+// 6XNN(Sets Vx to NN):
       case 0x6000:
         this.v[x] = opcode & 0xFF;
         //this.listOpcode("0x6000");
         break;
 
-        // 7xkk - ADD Vx, byte
-        // Set Vx = Vx + kk.
+// 7XNN(Adds NN to Vx):
       case 0x7000:
         var val = (opcode & 0xFF) + this.v[x]
 
@@ -308,40 +302,34 @@ chip8.prototype = {
         //this.listOpcode("0x7000");
         break;
 
+//NUMERICAL OPERATIONS
       case 0x8000:
-
         switch (opcode & 0x000f) {
-
-          // 8xy0 - LD Vx, Vy
-          // Set Vx = Vy.
+// 8XY0(Sets Vx to the value of Vy):
           case 0x0000:
             this.v[x] = this.v[y];
             //this.listOpcode("0x8000");
             break;
 
-            // 8xu1 - OR Vx, Vy
-            // Set vX = vX OR Vy.
+// 8XY1(Sets Vx to the value of Vy or Vx):
           case 0x0001:
             this.v[x] = this.v[x] | this.v[y];
             //this.listOpcode("0x8001");
             break;
 
-            // 8xy2 - AND Vx, Vy
-            // Set Vx = Vx AND Vy.
+// 8XY2(Sets Vx to the value of Vy and Vx):
           case 0x0002:
             this.v[x] = this.v[x] & this.v[y];
             //this.listOpcode("0x0002");
             break;
 
-            // 8xy3X - OR Vx, Vy
-            // Set Vx = Vx XOR Vy.
+// 8XY3(Sets Vx to the value of Vy xor Vx):
           case 0x0003:
             this.v[x] = this.v[x] ^ this.v[y];
             //this.listOpcode("0x0003");
             break;
 
-            // 8xy4 - ADD Vx, Vy
-            // Set Vx = Vx + Vy, set Vf = carry.
+// 8XY4(Adds Vy to Vx):
           case 0x0004:
             this.v[x] = this.v[x] + this.v[y];
             this.v[0xF] = +(this.v[x] > 255);
@@ -351,8 +339,7 @@ chip8.prototype = {
             //this.listOpcode("0x0004");
             break;
 
-            // 8xy5 - SUB Vx, Vy
-            // Set Vx = Vx - Vy, set Vf = NOT borrow.
+// 8XY5(Vx -= Vy):
           case 0x0005:
             this.v[0xF] = +(this.v[x] > this.v[y]);
             this.v[x] = this.v[x] - this.v[y];
@@ -362,16 +349,14 @@ chip8.prototype = {
             //this.listOpcode("0x0005");
             break;
 
-            // 8xy6 - SHR Vx, Vy
-            // Set Vx = Vx SHR 1.
+// 8XY6(Stores Least Significant Bit and shifts Vx to the right by 1):
           case 0x0006:
             this.v[0xF] = this.v[x] & 0x1;
             this.v[x] = this.v[x] >> 1;
             //this.listOpcode("0x0006");
             break;
 
-            // 8xy7 - SUBN Vx, Vy
-            // Set Vx = Vy - Vx, set Vf = NOT borrow.
+// 8XY7(Subtracts Vx from Vy):
           case 0x0007:
             this.v[0xF] = +(this.v[y] > this.v[x]);
             this.v[x] = this.v[y] - this.v[x];
@@ -382,8 +367,7 @@ chip8.prototype = {
             break;
 
 
-            // 8xyE - SHL Vx, Vy
-            // Set Vx = Vx SHL 1.
+// 8XYE(Stores Most Significant Bit and shifts Vx to the left by 1):
           case 0x000E:
             this.v[0xF] = +(this.v[x] & 0x80);
             this.v[x] = this.v[x] << 1;
@@ -397,8 +381,7 @@ chip8.prototype = {
 
         break;
 
-        // 9xy0 - SNE Vx, Vy
-        // Skip next instruction if Vx != Vy.
+//Test 9XY0(Skips instruction if Vx != Vy):
       case 0x9000:
         if (this.v[x] != this.v[y]) {
           this.pc += 2;
@@ -406,29 +389,25 @@ chip8.prototype = {
         //this.listOpcode("0x9000");
         break;
 
-        // Annn - LD I, addr
-        // Set I = nnn.
+//Test ANNN(Sets I to Address NNN):
       case 0xA000:
         this.i = opcode & 0xFFF;
         //this.listOpcode("0xA000");
         break;
 
-        // Bnnn - JP V0, addr
-        // Jump to location nnn + V0.
+//Test BNNN(Sets PC to V[0] + NNN):
       case 0xB000:
         this.pc = (opcode & 0xFFF) + this.v[0];
         //this.listOpcode("0xB000");
         break;
 
-        // Cxkk - RND Vx, byte
-        // Set Vx = random byte AND kk.
+//Test CXNN(Sets Vx to bitwise and operation on random number and NN):
       case 0xC000:
         this.v[x] = Math.floor(Math.random() * 0xFF) & (opcode & 0xFF)
         //this.listOpcode("0xC000");
         break;
 
-        // Dxyn - DRW Vx, Vy, nibble
-        // Display n-byte sprite starting at memory location I at (Vx, Vy), set VF = collision.
+      //Test DXYN(Displays sprite at (Vx,Vy), with height of N):
       case 0xD000:
         this.v[0xF] = 0;
 
@@ -511,23 +490,19 @@ chip8.prototype = {
             //this.listOpcode("0x0018");
             break;
 
-          // Fx1E - ADD I, Vx
-          // Set I = I + Vx.
+          // FX1E(I += Vx)
           case 0x001E:
             this.i += this.v[x];
             //this.listOpcode("0x001E");
             break;
 
-          // Fx29 - LD F, Vx
-          // Set I = location of sprite for digit Vx.
+          //FX29(Sets I to location of sprite for Vx)
           case 0x0029:
-            // Multiply by number of rows per character.
             this.i = this.v[x] * 5;
             //this.listOpcode("0x0029");
             break;
 
-          // Fx33 - LD B, Vx
-          //Store BCD representation of Vx in memory locations I, I+1, and I+2.
+          // FX33(Stores the binary-coded decimal representation of VX)
           case 0x0033:
             var number = this.v[x];
             for (var i = 3; i > 0; i--) {
@@ -537,8 +512,7 @@ chip8.prototype = {
             //this.listOpcode("0x0033");
             break;
 
-          // Fx55 - LD [I], Vx
-          // Store registers V0 through Vx in memory starting at location I.
+          // FX55(write register into memory)
           case 0x0055:
             for (var i = 0; i <= x; i++) {
               this.memory[this.i + i] = this.v[i];
@@ -546,8 +520,8 @@ chip8.prototype = {
             //this.listOpcode("0x0055");
             break;
 
-            // Fx65 - LD Vx, [I]
-            // Read registers V0 through Vx from memory starting at location I.
+
+            // FX65(write memory into register)
           case 0x0065:
             for (var i = 0; i <= x; i++) {
               this.v[i] = this.memory[this.i + i];

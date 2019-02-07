@@ -20,9 +20,9 @@
 
     canvas.width = 640;
     canvas.height = 320;
-    canvas.style.left = "10px";
-    canvas.style.top = "4430px";
-    canvas.style.position = "absolute";
+    canvas.style.left = "-300px";
+    canvas.style.top = "5px";
+    canvas.style.position = "relative";
 
     var bre = "&nbsp";
     var input = "";
@@ -924,16 +924,16 @@
       }
 
       input += "<strong>" + bre + "Operation is: " + detector + symbol + "</strong>" + "<br />";
-      for( j = 0; j < 20; j++) {
+      //for( j = 0; j < 20; j++) {
         input += "<br />";
-      }
+      //}
       check = false;
       //ch.i = 0xf + 0xf + 0xf;
     }
 
     function testFX1E() {
       var ch = new chip8;
-      input += "<strong>" + "Test FXIE(I += Vx):" + "</strong>" + "<br />";
+      input += "<strong>" + "Test FX1E(I += Vx):" + "</strong>" + "<br />";
       input += bre + "*True if I += Vx*" + "<br />";
       ch.reset();
       ch.v[5] = 23;
@@ -1164,20 +1164,18 @@
     testFX65();
 
 
-
+    input += "<span style = 'font-style : italic;'>" + "Display from 0xDXYN" + "</span>" + "<br />";
 
     document.getElementById("output").innerHTML = input;
+    //if all opcodes are right, then give the text a green font
     if(tally == 33){
       correct = tally + " out of 33 tests Successful." + "<br />" + "<br />";
-      //correct.fontcolor("Lime");
-      //document.write(correct.fontcolor( "lime" ));
       document.getElementById("finalS").style.color = "Lime";
       document.getElementById("finalS").innerHTML = correct;
     }
+    //if there is at least one opcode that is not correct, then give the text a red font
     else{
       var incorrect = tally + " out of 33 tests Successful." + "<br />" + "<br />";
-      //incorrect.fontcolor("red");
-      //document.write(incorrect.fontcolor( "red" ));
       document.getElementById("finalS").style.color = "Red";
       document.getElementById("finalS").innerHTML = incorrect;
     }
