@@ -50,12 +50,12 @@ _<font size = "3">
 
 | Name   | Release 1 Tasks |
 | ------ | --------------- |
-| Nichol | Display(1 week)/ Updates to Product Document(2 days) |
-| Jeremy | Automated Testing(1 week) |
-| Mac    | Display(1 week) |
-| Eric   | Visualizer(1 week) (MOVED TO RELEASE 2) |
-| Tanvir | Visualizer(1 week) (MOVED TO RELEASE 2) |
-| all    | debug(1 week)   |
+| Nichol | Visualizer / Chip 8 Tool / Updates to Product Document(2 days) |
+| Jeremy | Automated Testing / Animation (1 week) |
+| Mac    | Automated Testing / Animation (1 week) |
+| Eric   | Visualizer / Keyboard (MOVED TO RELEASE 2) |
+| Tanvir | Game 1 Snake (MOVED TO RELEASE 2) |
+| all    | debug(1 week) |
 
 | Name   | Release 2 Tasks ( UPDATED )|
 | ------ | --------------- |
