@@ -6,12 +6,40 @@
   Your browser does not support the canvas element.
 </canvas>
 
+<audio id="audio" src="sound/Beep2.wav" autoplay="false" ></audio>
+<!--visualizer table-->
+<style>
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 25%;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+</style>
+
+<!--</div>-->
+<div id = "gameSpeed" class = "gameSpeed1">
+  <center>
+  <img  class = "button" id = "up" onclick="upSpeed()" src = "images/button6.jpg">
+  <img class = "button"id = "gameSpeedIcon" onclick = "resetSpeed()" src = "images/button5.1.jpg">
+  <img class = "button" id = "down"  onclick="downSpeed()" src = "images/button7.jpg">
+</center>
+</div>
+
 <div id = "chooseRom">
     <label for="files">
         <img id = "button1" src="images/button1.jpg">
     </label>
 
     <input type="file" id="files" name="files[]" multiple />
+      <img id = "button3" src="images/button3.jpg">
+      <img id = "button4" src = "images/button4.jpg">
 </div>
 
 <div id = "autoTest">
@@ -19,6 +47,152 @@
     <img id = "button2" src = "images/button2.jpg">
   </a>
 </div>
+<!--<div style="height:250px; overflow:auto;">-->
+
+<table id = "Visualizer">
+  <tr>
+    <th>Opcode</th>
+    <th>Description</th>
+  </tr>
+  <tr id="0x00E0">
+    <td>0x00E0</td>
+    <td>Clears Screen</td>
+  </tr>
+  <tr id="0x00EE">
+    <td>0x00EE</td>
+    <td>Returns from Subroutine</td>
+  </tr>
+  <tr id="0x1NNN">
+    <td>0x1NNN</td>
+    <td>Jumps to Address NNN</td>
+  </tr>
+  <tr id="0x2NNN">
+    <td>0x2NNN</td>
+    <td>Calls Subroutine at NNN</td>
+  </tr>
+  <tr id="0x3XNN">
+    <td>0x3XNN</td>
+    <td>Skips the next instruction if VX == NN</td>
+  </tr>
+  <tr id="0x4XNN">
+    <td>0x4XNN</td>
+    <td>Skips the next instruction if VX == NN</td>
+  </tr>
+  <tr id="0x5XY0">
+    <td>0x5XY0</td>
+    <td>Skips instruction if Vx == Vy</td>
+  </tr>
+  <tr id="0x6XNN">
+    <td>0x6XNN</td>
+    <td>Sets Vx to NN</td>
+  </tr>
+  <tr id="0x7XNN">
+    <td>0x7XNN</td>
+    <td>Adds NN to Vx</td>
+  </tr>
+  <tr id="0x8XY0">
+    <td>0x8XY0</td>
+    <td>Sets Vx to the value of Vy</td>
+  </tr>
+  <tr id="0x8XY1">
+    <td>0x8XY1</td>
+    <td>Sets Vx to the value of Vy or Vx</td>
+  </tr>
+  <tr id="0x8XY2">
+    <td>0x8XY2</td>
+    <td>Sets Vx to the value of Vy and Vx</td>
+  </tr>
+  <tr id="0x8XY3">
+    <td>0x8XY3</td>
+    <td>Sets Vx to the value of Vy xor Vx</td>
+  </tr>
+  <tr id="0x8XY4">
+    <td>0x8XY4</td>
+    <td>Adds Vy to Vx</td>
+  </tr>
+  <tr id="0x8XY5">
+    <td>0x8XY5</td>
+    <td>Vx -= Vy</td>
+  </tr>
+  <tr id="0x8XY6">
+    <td>0x8XY6</td>
+    <td>Stores Least Significant Bit and shifts Vx to the right by 1</td>
+  </tr>
+  <tr id="0x8XY7">
+    <td>0x8XY7</td>
+    <td>Subtracts Vx from Vy</td>
+  </tr>
+  <tr id="0x8XYE">
+    <td>0x8XYE</td>
+    <td>Stores Most Significant Bit and shifts Vx to the left by 1</td>
+  </tr>
+  <tr id="0x9XY0">
+    <td>0x9XY0</td>
+    <td>Skips instruction if Vx != Vy</td>
+  </tr>
+  <tr id="0xANNN">
+    <td>0xANNN</td>
+    <td>Sets I to Address NNN</td>
+  </tr>
+  <tr id="0xBNNN">
+    <td>0xBNNN</td>
+    <td>Sets PC to V[0] + NNN</td>
+  </tr>
+  <tr id="0xCXNN">
+    <td>0xCXNN</td>
+    <td>Sets Vx to bitwise and operation on random number and NN</td>
+    <br/>
+  </tr>
+  <tr id="0xDXYN">
+    <td>0xDXYN</td>
+    <td>Displays sprite at (Vx,Vy), with height of N</td>
+  </tr>
+  <tr id="0xEX9E">
+    <td>0xEX9E</td>
+    <td>Skip next instruction if the key with the value Vx is pressed</td>
+  </tr>
+  <tr id="0xEXA1">
+    <td>0xEXA1</td>
+    <td>Skip next instruction if the key with the value Vx is NOT pressed</td>
+  </tr>
+  <tr id="0xFX07">
+    <td>0xFX07</td>
+    <td>Set Vx = delay timer value</td>
+  </tr>
+  <tr id="0xFX0A">
+    <td>0xFX0A</td>
+    <td>Wait for a keypress, then store the value of the key in Vx</td>
+  </tr>
+  <tr id="0xFX15">
+    <td>0xFX15</td>
+    <td>Set delay timer = Vx</td>
+  </tr>
+  <tr id="0xFX18">
+    <td>0xFX18</td>
+    <td>Set sound timer = Vx</td>
+  </tr>
+  <tr id="0xFX1E">
+    <td>0xFX1E</td>
+    <td>I += Vx</td>
+  </tr>
+  <tr id="0xFX29">
+    <td>0xFX29</td>
+    <td>Sets I to location of sprite for Vx</td>
+  </tr>
+  <tr id="0xFX33">
+    <td>0xFX33</td>
+    <td>Stores the binary-coded decimal representation of VX</td>
+  </tr>
+  <tr id="0xFX55">
+    <td>0xFX55</td>
+    <td>write register into memory</td>
+  </tr>
+  <tr id="0xFX65">
+    <td>0xFX65</td>
+    <td>write memory into register</td>
+  </tr>
+</table>
+
 
 <div id="list"></div>
 
@@ -33,7 +207,58 @@
   var dot = canvas.getContext("2d");
   var ch = new chip8;
 
- //Read hex file from selected directory 
+  window.requestAnimFrame = (function () {
+ return window.requestAnimationFrame //||
+        //window.webkitRequestAnimationFrame ||
+      //  window.mozRequestAnimationFrame ||
+    //   window.oRequestAnimationFrame ||
+      //  window.msRequestAnimationFrame ||
+      //  function (callback) {
+        //    window.setTimeout(callback, 0);
+    //    };
+})();
+/*
+Function.prototype.bind = Function.prototype.bind || function(context) {
+    var boundArgs = [].slice.call(arguments, 1);
+    var boundFn = this;
+
+    return function() {
+        return boundFn.apply(context, boundArgs.concat([].slice.call(arguments)));
+    };
+};
+*/
+
+
+
+                 var translateKeys = {
+                     49: 0x1,  // 1
+                     50: 0x2,  // 2
+                     51: 0x3,  // 3
+                     52: 0x4,  // 4
+                     81: 0x5,  // Q
+                     87: 0x6,  // W
+                     69: 0x7,  // E
+                     82: 0x8,  // R
+                     65: 0x9,  // A
+                     83: 0xA,  // S
+                     68: 0xB,  // D
+                     70: 0xC,  // F
+                     90: 0xD,  // Z
+                     88: 0xE,  // X
+                     67: 0xF,  // C
+                     86: 0x10  // V
+                 };
+
+                 document.addEventListener("keydown", function(event) {
+                     ch.setKey(translateKeys[event.keyCode]);
+                 });
+
+                 document.addEventListener("keyup", function(event) {
+                     ch.unsetKey(translateKeys[event.keyCode]);
+                 });
+
+
+ //Read hex file from selected directory
   function handleFileSelect(evt) {
     var files = evt.target.files;
     for (var i = 0, f; f = files[i]; i++) {
@@ -52,6 +277,7 @@
     }
   }
   document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
 </script>
 </body>
 

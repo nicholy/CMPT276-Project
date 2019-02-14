@@ -13,11 +13,23 @@
     display : none;
 }
 
-#button1, #button2{
+#button1, #button2, #button3, #button4{
   margin-top : 10px;
   height : 50px;
   width : auto;
   display : block;
+  margin-left : auto;
+  margin-right : auto;
+}
+
+#down, #up, #gameSpeedIcon{
+  margin-top : 10px;
+  height : 50px;
+  width : auto;
+}
+
+#gameSpeed{
+  display: block;
   margin-left : auto;
   margin-right : auto;
 }

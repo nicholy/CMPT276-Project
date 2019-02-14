@@ -4,7 +4,7 @@
 <body>
   <h1>Team 3 Chip 8 Testing</h1>
 
-  <div id = "finalS" style = "font-weight : bold; font-size : 20px;"></div>
+  <div id="finalS" style="font-weight : bold; font-size : 20px;"></div>
   <div id="output"></div>
   <div id="outdisplay"></div>
   <div id="opnumber"></div>
@@ -12,7 +12,7 @@
     Your browser does not support the canvas element.
   </canvas>
 
-  <link rel = "stylesheet" href = "style.css">
+  <link rel="stylesheet" href="style.css">
   <script src="chip8.js"></script>
   <script>
     var canvas = document.getElementById("myCanvas"); //get canvas function from html
@@ -29,8 +29,34 @@
     var check = false;
     var symbol = "";
     var tally = 0; //counter variable
+    var total = 0;
 
     //TEST FUNCTIONS
+    function pcCheck() {
+      var ch = new chip8;
+      ch.reset();
+
+      input += "<strong>" + "Test Point Counter(pc):" + "</strong>" + "<br />";
+      input += bre + "*Will return true if PC exists and has value 0x200" + "<br />";
+      if (ch.pc && ch.pc == 0x200) {
+        check = true;
+        tally++;
+      }
+      input += bre + "PC: 0x" + ch.pc.toString(16) + "<br />";
+
+      if (check) {
+        symbol = " &#x2705";
+      } else {
+        symbol = " &#10060";
+      }
+
+      input += "<strong>" + bre + "PC is enabled: " + check + symbol + "</strong>" + "<br />";
+      check = false;
+      input += "<br />"
+      total++;
+    }
+
+
     function stackCheck() {
       var ch = new chip8;
       ch.reset();
@@ -39,7 +65,7 @@
       input += bre + "*Will return true if Stack exists and stack length is 16*" + "<br />";
       if (ch.stack && ch.stack.length == 16) {
         check = true;
-        tally ++;
+        tally++;
       }
       input += bre + "Stack length: " + ch.stack.length + "<br />";
 
@@ -52,6 +78,7 @@
       input += "<strong>" + bre + "Stack is enabled: " + check + symbol + "</strong>" + "<br />";
       check = false;
       input += "<br />"
+      total++;
     }
 
     function memoryCheck() {
@@ -62,7 +89,7 @@
 
       if (ch.memory.length == 4096) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -74,6 +101,7 @@
       input += "<strong>" + bre + "Memory is enabled: " + check + symbol + "</strong>" + "<br />";
       check = false;
       input += "<br />"
+      total++;
     }
 
     function test00E0() {
@@ -111,7 +139,7 @@
       }
       if (detector) {
         check = true;
-        tally ++;
+        tally++;
         input += bre + "No 1's detected: " + detector + "<br />";
       }
       if (check) {
@@ -123,6 +151,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test00EE() {
@@ -148,7 +177,7 @@
       input += bre + "Stack pointer located at: " + ch.sp + "<br />";
       if (ch.sp == comp - 1) {
         check = true;
-        tally ++;
+        tally++;
       }
       //ch.list();
       if (check) {
@@ -160,6 +189,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test1NNN() {
@@ -177,7 +207,7 @@
       input += bre + "Program counters new position(in hex): 0x" + ch.pc.toString(16) + "<br />";
       if (ch.pc == 564 /*234 in hex*/ ) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -188,6 +218,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test2NNN() {
@@ -213,7 +244,7 @@
       input += bre + "Stack Pointers New Position: " + ch.sp.toString(16) + "<br />";
       if (ch.sp == comp + 1) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -224,6 +255,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test3XNN() { //needs fixing
@@ -244,7 +276,7 @@
       //input += ch.pc.toString(16) + comp.toString(16);
       if (comp + 3 < ch.pc) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -255,6 +287,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test4XNN() {
@@ -275,7 +308,7 @@
       //input += ch.pc.toString(16) + comp.toString(16);
       if (comp + 3 < ch.pc) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -286,6 +319,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test5XY0() {
@@ -311,7 +345,7 @@
       //input += comp + ch.pc.toString(16);
       if (ch.pc > comp + 3) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -322,6 +356,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test6XNN() {
@@ -341,7 +376,7 @@
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       if (ch.v[5] == 164) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -352,6 +387,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test7XNN() {
@@ -371,7 +407,7 @@
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       if (ch.v[5] == 28) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -382,6 +418,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test8XY0() {
@@ -402,7 +439,7 @@
       input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
       if (ch.v[5] == ch.v[10]) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -413,6 +450,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test8XY1() {
@@ -436,7 +474,7 @@
       //input += ch.v[5] + bre + ch.v[10] + bre + comp + bre + comp2;
       if (ch.v[5] == 31) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -447,6 +485,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test8XY2() {
@@ -468,7 +507,7 @@
       //input += ch.v[5] + bre + ch.v[10] + bre + comp + bre + comp2;
       if (ch.v[5] == 17) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -479,6 +518,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test8XY3() {
@@ -500,7 +540,7 @@
       //input += ch.v[5] + bre + ch.v[10] + bre + comp + bre + comp2;
       if (ch.v[5] == 14) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -511,6 +551,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test8XY4() {
@@ -536,7 +577,7 @@
       input += bre + "ch.v[0xF](carry flag - if 0 then no borrow): " + ch.v[0xF] + "<br />";
       if (ch.v[0xF] == 0 && ch.v[5] == comp + comp2) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -547,6 +588,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
 
       ch.reset();
       input += bre + "If ch.v[0xF] = 1" + "<br />";
@@ -564,7 +606,7 @@
       input += bre + "ch.v[0xF](carry flag - if 1 then borrow): " + ch.v[0xF] + "<br />";
       if (ch.v[0xF] == 1 && ch.v[5] == comp + comp2 - 256) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -575,6 +617,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test8XY5() {
@@ -599,7 +642,7 @@
       input += bre + "ch.v[0xF](borrow flag - if 1 then no borrow): " + ch.v[0xF] + "<br />";
       if (ch.v[0xF] == 1 && ch.v[5] == comp - comp2) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -610,6 +653,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
 
       ch.reset();
       input += bre + "If ch.v[0xF] = 0" + "<br />";
@@ -627,7 +671,7 @@
       input += bre + "ch.v[0xF](borrow flag - if 0 then borrow): " + ch.v[0xF] + "<br />";
       if (ch.v[0xF] == 0 && ch.v[5] == comp - comp2 + 256) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -638,6 +682,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test8XY6() {
@@ -662,7 +707,7 @@
       //input += comp;
       if (comp == comp2) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -673,6 +718,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test8XY7() {
@@ -697,7 +743,7 @@
       input += bre + "ch.v[0xF](borrow flag - if 1 then no borrow): " + ch.v[0xF] + "<br />";
       if (ch.v[0xF] == 1 && ch.v[5] == comp2 - comp) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -708,6 +754,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
 
       ch.reset();
       input += bre + "If ch.v[0xF] = 0" + "<br />";
@@ -725,7 +772,7 @@
       input += bre + "ch.v[0xF](borrow flag - if 0 then borrow): " + ch.v[0xF] + "<br />";
       if (ch.v[0xF] == 0 && ch.v[5] == comp2 - comp + 256) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -736,6 +783,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test8XYE() {
@@ -756,7 +804,7 @@
       input += bre + "ch.v[0xF]: " + ch.v[0xF] + "<br />";
       if (comp * 2 == ch.v[5]) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -767,6 +815,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function test9XY0() {
@@ -791,7 +840,7 @@
       //input += comp + ch.pc.toString(16);
       if (ch.pc > comp + 3) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -802,6 +851,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function testANNN() {
@@ -819,7 +869,7 @@
       input += bre + "I New Position(hex): " + ch.i.toString(16) + "<br />";
       if (ch.i == 564) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -830,6 +880,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function testBNNN() {
@@ -849,7 +900,7 @@
       input += bre + "PC New Position: " + ch.pc + "<br />";
       if (ch.pc == 568) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -860,6 +911,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function testCXNN() {
@@ -881,7 +933,7 @@
 
       //input += bre + "random: " + (Math.floor(Math.random() * 0xFF) & (0xC534 & 0xFF)) + "<br />";
       check = true;
-      tally ++;
+      tally++;
       if (check) {
         symbol = " &#x2705";
       } else {
@@ -891,6 +943,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function testDXYN() {
@@ -911,7 +964,7 @@
         if (ch.display[i] == 1) {
           detector = true;
           input += bre + "1 detected at " + i + "<br />";
-          tally ++;
+          tally++;
           break;
         } else {
           detector = false;
@@ -925,10 +978,207 @@
 
       input += "<strong>" + bre + "Operation is: " + detector + symbol + "</strong>" + "<br />";
       //for( j = 0; j < 20; j++) {
-        input += "<br />";
+      input += "<br />";
       //}
       check = false;
+      total++;
       //ch.i = 0xf + 0xf + 0xf;
+    }
+
+    function testEX9E() {
+      var ch = new chip8;
+      input += "<strong>" + "Test EX9E(Skips Instruction if key stored in Vx is pressed):" + "</strong>" + "<br />";
+      input += bre + "*True if pc new position == pc old position + 4" + "<br />";
+      ch.reset();
+      ch.v[5] = 49;
+      input += bre + "Setting Vx = " + ch.v[5] + "<br />";
+      ch.keys[49] = 1; //setting value of 49 to an arbitrary value
+      input += bre + "Setting key 49 to being pressed" + "<br />";
+      ch.memory[512] = 0xE5;
+      ch.memory[513] = 0x9E;
+      ch.pc = 512;
+      var comp = ch.pc;
+      input += bre + "Program Counters Current Position: " + ch.pc.toString(16) + "<br />";
+      ch.opCycle();
+      input += bre + "Performing E59E" + "<br />";
+      input += bre + "Program Counters New Position: " + ch.pc.toString(16) + "<br />";
+      //input += comp + ch.pc.toString(16);
+      if (ch.pc > comp + 3) {
+        check = true;
+        tally++;
+      }
+      if (check) {
+        symbol = " &#x2705";
+      } else {
+        symbol = " &#10060";
+      }
+
+      input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
+      input += "<br />";
+      check = false;
+      total++;
+    }
+
+    function testEXA1() {
+      var ch = new chip8;
+      input += "<strong>" + "Test EXA1(Skips Instruction if key stored in Vx is not pressed):" + "</strong>" + "<br />";
+      input += bre + "*True if pc new position == pc old position + 4" + "<br />";
+      ch.reset();
+      ch.v[5] = 49;
+      input += bre + "Setting Vx = " + ch.v[5] + "<br />";
+      ch.keys[48] = 1; //setting value of 49 to an arbitrary value
+      input += bre + "Setting key 48 to being pressed" + "<br />";
+      ch.memory[512] = 0xE5;
+      ch.memory[513] = 0xA1;
+      ch.pc = 512;
+      var comp = ch.pc;
+      input += bre + "Program Counters Current Position: " + ch.pc.toString(16) + "<br />";
+      ch.opCycle();
+      input += bre + "Performing E5A1" + "<br />";
+      input += bre + "Program Counters New Position: " + ch.pc.toString(16) + "<br />";
+      //input += comp + ch.pc.toString(16);
+      if (ch.pc > comp + 3) {
+        check = true;
+        tally++;
+      }
+      if (check) {
+        symbol = " &#x2705";
+      } else {
+        symbol = " &#10060";
+      }
+
+      input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
+      input += "<br />";
+      check = false;
+      total++;
+    }
+
+    function testFX07() {
+      var ch = new chip8;
+      input += "<strong>" + "Test FX07(delay_timer(Vx)):" + "</strong>" + "<br />";
+      input += bre + "*True if Delay timer equals Vx" + "<br />";
+      ch.reset();
+      input += bre + "ch.v[5] initial: " + ch.v[5] + "<br />";
+      input += bre + "Setting delayTimer to 23" + "<br />";
+      ch.delayTimer = 23;
+      input += bre + "ch.delayTimer = " + ch.delayTimer + "<br />";
+      ch.memory[512] = 0xF5;
+      ch.memory[513] = 0x07;
+      ch.pc = 512;
+      ch.opCycle();
+      input += bre + "Performing F507" + "<br />";
+      input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
+      if (ch.delayTimer == ch.v[5]) {
+        check = true;
+        tally++;
+      }
+      if (check) {
+        symbol = " &#x2705";
+      } else {
+        symbol = " &#10060";
+      }
+
+      input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
+      input += "<br />";
+      check = false;
+      total++;
+    }
+
+    function testFX0A(){
+      var ch = new chip8;
+      input += "<strong>" + "Test FX0A(Awaits Key press to store value in Vx)" + "</strong>" + "<br />";
+      input += bre + "*True if ch.key[x] == ch.v[X] && ch.running == false during waiting period" + "<br />";
+      ch.reset();
+      ch.v[5] = 23;
+      input += bre + "ch.v[5] = " + ch.v[5] + "<br />";
+      ch.running = true;
+      input += bre + "ch.running: " + ch.running + "<br />";
+      ch.keys = 1;
+      ch.memory[512] = 0xF5;
+      ch.memory[513] = 0x0A;
+      ch.pc = 512;
+      ch.opCycle();
+      input += bre + "Performing FX0A" + "<br />";
+      input += bre + "ch.running during operation: " + ch.running + "<br />";
+      input += bre + "new ch.v[5]: " + ch.v[5] + "<br />";
+      console.log(ch.keys);
+      if(ch.v[5] == ch.keys){
+        check = true;
+        tally ++;
+      }
+
+      if (check) {
+        symbol = " &#x2705";
+      } else {
+        symbol = " &#10060";
+      }
+
+      input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
+      input += "<br />";
+      check = false;
+      total++;
+    }
+
+    function testFX15() {
+      var ch = new chip8;
+      input += "<strong>" + "Test FX15(delay_timer(Vx)):" + "</strong>" + "<br />";
+      input += bre + "*True if Vx equals Delay Timer" + "<br />";
+      ch.reset();
+      input += bre + "delayTimer initial: " + ch.delayTimer + "<br />";
+      input += bre + "Setting Vx to 23" + "<br />";
+      ch.v[5] = 23;
+      input += bre + "ch.v[5] = " + ch.v[5] + "<br />";
+      ch.memory[512] = 0xF5;
+      ch.memory[513] = 0x15;
+      ch.pc = 512;
+      ch.opCycle();
+      input += bre + "Performing F515" + "<br />";
+      input += bre + "ch.delayTimer: " + ch.delayTimer + "<br />";
+      if (ch.delayTimer == ch.v[5]) {
+        check = true;
+        tally++;
+      }
+      if (check) {
+        symbol = " &#x2705";
+      } else {
+        symbol = " &#10060";
+      }
+
+      input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
+      input += "<br />";
+      check = false;
+      total++;
+    }
+
+    function testFX18() {
+      var ch = new chip8;
+      input += "<strong>" + "Test FX18(Sound_timer(Vx)):" + "</strong>" + "<br />";
+      input += bre + "*True if Sound timer equals Vx" + "<br />";
+      ch.reset();
+      input += bre + "ch.v[5] initial: " + ch.v[5] + "<br />";
+      input += bre + "Setting Sound to 23" + "<br />";
+      ch.soundTimer = 23;
+      input += bre + "ch.delayTimer = " + ch.delayTimer + "<br />";
+      ch.memory[512] = 0xF5;
+      ch.memory[513] = 0x15;
+      ch.pc = 512;
+      ch.opCycle();
+      input += bre + "Performing F515" + "<br />";
+      input += bre + "ch.v[5]: " + ch.v[5] + "<br />";
+      if (ch.soundTimer == ch.v[5]) {
+        check = true;
+        tally++;
+      }
+      if (check) {
+        symbol = " &#x2705";
+      } else {
+        symbol = " &#10060";
+      }
+
+      input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
+      input += "<br />";
+      check = false;
+      total++;
     }
 
     function testFX1E() {
@@ -947,19 +1197,21 @@
       ch.opCycle();
       input += bre + "Performing F51E" + "<br />";
       input += bre + "ch.i: " + ch.i + "<br />";
-      if (ch.i = ch.v[5] + comp) {
+      //check = false;
+      if (ch.i == ch.v[5] + comp) {
         check = true;
-        tally ++;
+        tally++;
       }
-      if (detector) {
+      if (check) {
         symbol = " &#x2705";
       } else {
         symbol = " &#10060";
       }
 
-      input += "<strong>" + bre + "Operation is: " + detector + symbol + "</strong>" + "<br />";
+      input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function testFX29() {
@@ -981,7 +1233,7 @@
       input += bre + "ch.i: " + ch.i + "<br />";
       if (ch.i == ch.v[5] * 5) {
         check = true;
-        tally ++;
+        tally++;
       }
       if (check) {
         symbol = " &#x2705";
@@ -992,6 +1244,7 @@
       input += "<strong>" + bre + "Operation is: " + check + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function testFX33() {
@@ -1030,7 +1283,7 @@
 
       if (doublecheck) {
         symbol = " &#x2705";
-        tally ++;
+        tally++;
       } else {
         symbol = " &#10060";
       }
@@ -1038,6 +1291,7 @@
       input += "<strong>" + bre + "Operation is: " + doublecheck + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
 
@@ -1076,7 +1330,7 @@
 
       if (doublecheck) {
         symbol = " &#x2705";
-        tally ++;
+        tally++;
       } else {
         symbol = " &#10060";
       }
@@ -1084,6 +1338,7 @@
       input += "<strong>" + bre + "Operation is: " + doublecheck + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
     function testFX65() {
@@ -1119,7 +1374,7 @@
 
       if (doublecheck) {
         symbol = " &#x2705";
-        tally ++;
+        tally++;
       } else {
         symbol = " &#10060";
       }
@@ -1127,11 +1382,13 @@
       input += "<strong>" + bre + "Operation is: " + doublecheck + symbol + "</strong>" + "<br />";
       input += "<br />";
       check = false;
+      total++;
     }
 
 
 
     //TEST FUNCTION CALL:
+    pcCheck();
     stackCheck();
     memoryCheck();
     test00E0();
@@ -1157,6 +1414,11 @@
     testBNNN();
     testCXNN();
     testDXYN();
+    testEX9E();
+    testEXA1();
+    testFX0A();
+    testFX07();
+    testFX15();
     testFX1E();
     testFX29();
     testFX33();
@@ -1168,18 +1430,17 @@
 
     document.getElementById("output").innerHTML = input;
     //if all opcodes are right, then give the text a green font
-    if(tally == 33){
-      correct = tally + " out of 33 tests Successful." + "<br />" + "<br />";
+    if (tally == total) {
+      correct = tally + " out of " + total + " tests Successful." + "<br />" + "<br />";
       document.getElementById("finalS").style.color = "Lime";
       document.getElementById("finalS").innerHTML = correct;
     }
     //if there is at least one opcode that is not correct, then give the text a red font
-    else{
-      var incorrect = tally + " out of 33 tests Successful." + "<br />" + "<br />";
+    else {
+      var incorrect = tally + " out of " + total + " tests Successful." + "<br />" + "<br />";
       document.getElementById("finalS").style.color = "Red";
       document.getElementById("finalS").innerHTML = incorrect;
     }
-
   </script>
 </body>
 

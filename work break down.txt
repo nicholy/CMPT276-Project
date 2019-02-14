@@ -1,0 +1,78 @@
+DEADLINE for working code for each section FEB 18
+
+
+
+Animation(IMPORTANT)(CORE PERFORMANCE)(Mac and Jeremy)
+	-learning(1-2 days) create canvas prototype pixel scan animation/ learn the structure  - FEB 11
+		-structure
+		-requst animation
+		-run time
+		-timer
+		-sound
+		-efficienty
+	-Timer function and Sound function and opcode timer and opcode sound and testing for them(1 day) -FEB 13(online discord)
+	-prototype(1 day) - FEB 15
+	-improve efficency(1-2 days) -FEB 18
+		-stop the program rather than running in loop in background doing nothing
+
+Sound timer(Mac)
+	-create a prototype to making a beep sound(1 day)
+	-make it work in our code(1 day)
+
+Keyboard(Eric)
+	-copy code make it work(3 hours)(optional)
+	-Html take input from user and output to screen(1 day) -FEB 11
+	-Opcode for Hex keyboard(1 day) -FEB 15
+	-Functions for hex keyboard(1 day) -FEB 18
+
+Load function (Nichol)
+	-copy code make it work(3 hours)(optional)
+	-directly load program through directory path(New File = file(C:\\test\\))(1 day)
+	-link the path to a html button (3 hours)
+	-Create a html button with the 2 game we want the game to load(2 hours) -FEB 8
+	-Create animation for the button(optional)
+
+Visualizer (Eric and Nichol)
+	-Create 32 icon for each opcode and 16 icon for stacks and 16 icon registers and 1 icon pc and timer and 1 icon i(1 day)(or find other ways to do visualizer it may cause more time) -FEB 14
+	-Make it fit in our load.html and look good(4 hours) -FEB 14
+	-When opcode is called change the icon for that opcode from green to red or anything that look good(2 hours) -FEB 14
+	-Display brief operation for each opcode icon(2 hours) -FEB 14
+	-When Stack and Register and i or pc called change color from green to red and display the changes(2 hours) -FEB 14
+
+Testing(Mac and Jeremy)
+	-update the testing for each new opcode(4 hours) -FEB 10
+	-modify the new opcode if they are directly copy from source(2 hours)(optional)
+	-update the front end so the test only show the result Passed/Failed but with a separated button to show the detail(1 day)
+	//OPTIONAL DEPEND ON RELEASE 1 TEST GRADE
+	-depend on the marks for release 1 we may have to use professional tool(Jester) for testing
+	-learning jester(1 day)
+	-Change testing code so they work with jester(1-2 days)
+
+Game 1 Snake(Tanvir) BEFORE FEB 18
+	-travse MAZE or IBM from hex to each opcode operation to learn how game works(1 day)
+	-Use octo to generate hex for pixel display and write hex to show static image of the game starting screen(1 day)
+	-traverse INVADER to learn animation work(1 day)
+	-design start screen animation and make hex code to display the animation(1 day)
+
+Note Taker
+	-Take quality notes update to google notice team if anything useful(4 hours) (Eric)
+
+Document updater
+	-updates the documents to github update read me update work schedule update calcender(4 hours) (Nichol) -FEB 11
+
+Chip8 tool(Nichol)
+	-learn from octo to see how sprite editor work(1 day) Before FEB 15
+	-teach team with detailed presentation(during meeting) -FEB 15 absolute
+	-modify the code so it works 8x5 (1 day) Before FEB 15
+	-email to ta or professor
+
+
+Rules
+	-Everyone choose date they want to work on for each part of the work
+	-If they choose the date they are expected to do a progress report on messenger
+		-if the part is completed memeber should upload the code in google drive and mention the name with the comment showing witch part is updated
+		-if the part is not completed memeber are expected to report the problem encountered and the extra time or person needed to finish the selected part and the date they will work to add to the calendar
+		-if the member finished expected work on time and handed in the code with comments they don't have to come to the meeting(more sleep)
+		-if anyone is not finishing the code in time everyone have to come meeting to discuss and change workload to adjust delayed progress
+		-if anyone decide to changed the work date they have to tell the team 3 days before in the meeting and new date they will plan to replace the old date on
+		-if anyone selected work date but did not do any work and didn't do progress report that day we have to exclude him from the schedule and put him into document disscussion for problems encountered and we may email to the TA or professer to disscuss about the problem
