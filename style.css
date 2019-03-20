@@ -5,27 +5,69 @@
   margin-left : auto;
   margin-right : auto;
   margin-top : 5px;
-
 }
 
-#chooseRom > input
-{
+#spriteM{
+  user-select: none;
+}
+
+#canvasTest {
+  background-color: black;
+  border : 1px solid MediumBlue;
+}
+
+
+#hexOutput{
+  border: 3px solid white;
+}
+
+#chooseRom > input{
     display : none;
 }
 
-#button1, #button2, #button3, #button4{
+#romSelector, #autoTesting, #game1, #game2, #pause, #spriteE{
   margin-top : 10px;
   height : 50px;
   width : auto;
   display : block;
   margin-left : auto;
   margin-right : auto;
+  user-select: none;
 }
 
-#down, #up, #gameSpeedIcon{
-  margin-top : 10px;
-  height : 50px;
+#backButton, #forwardButton{
+  margin-left : 24px;
+  padding-top : -10px;
+  height : 68px;
   width : auto;
+  user-select: none;
+  margin-top : -680px;
+}
+
+#timeWarp{
+  margin-left : 73%;
+  float : right;
+  margin-top : -400px;
+}
+
+#down, #up{
+  margin-left: -12px;
+  margin-top : 10px;
+
+  margin-bottom: -4px;
+  height : 52px;
+  /*width : auto;*/
+  user-select: none;
+}
+
+#gameSpeedIcon{
+  margin-left: -12px;
+  margin-top : 10px;
+
+  margin-bottom: -4px;
+  height : 52px;
+  width : auto;
+  user-select: none;
 }
 
 #gameSpeed{
@@ -46,4 +88,47 @@ html{
   display : block;
   margin-left : auto;
   margin-right : auto;
+}
+
+#VisualizerOpcode{
+  font-size: 9px;
+  border: 3px solid #dddddd;
+  width: 22%;
+  border: 3px solid #dddddd;
+  float : left;
+  margin-top: -680px;
+  position : absolute;
+}
+
+#VisualizerRegister{
+  font-size: 15px;
+  line-height: 8px;
+  padding: -5px;
+  width: 22%;
+  margin-left : 77%;
+  float:right;
+  margin-top : -680px;
+  position : absolute;
+  border: 3px solid #dddddd;
+
+}
+
+#titlepic{
+  width : 650px;
+  height : auto;
+}
+
+#keyboard{
+  float:right;
+  padding-top : -10px;
+  height : 340px;
+  width : auto;
+  user-select: none;
+  margin-top : -400px;
+  margin-right:32px;
+}
+
+.invis0{
+  position : fixed;
+  margin-right : 1000000%
 }

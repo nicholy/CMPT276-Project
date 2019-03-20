@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <canvas id="myCanvas" width="640" height="320" style="border : 5px solid green;">
+    Your browser does not support the canvas element.
+  </canvas>
+  <script>
+    var canvas = document.getElementById("myCanvas");
+    var dot = canvas.getContext("2d");
+    dot.fillStyle = "black";
+    //food random positions
+    blockX = Math.round((Math.random() * (54 - 5) + 5) / 10) * 10;
+    blockY = Math.round((Math.random() * (22 - 5) + 5) / 10) * 10;
+    //loop variables
+    var i = 0;
+    var j = 0;
+    var x = 15;
+    var y = 15;
+    var snakeLength = 1;
+    var temp = 0;
+    var food;
+    var snake;
+    var snakeX = [];
+    var snakeY = [];
+    var i = 1;
+    var flagW = false;
+    var flagA = false;
+    var flagS = false;
+    var flagD = false;
+    var speed = 0;
+    var snakeComp = 0;
+    snakeX.push(x);
+    snakeY.push(y);
+
+    function xMovement() {
+      if(speed < 4){
+        speed++;
+        return x*10;
+      }else{
+        speed = 0;
+      }
+      if (flagD) {
+        if (snakeX.length == snakeLength) {
+          dot.clearRect(snakeX.shift() * 10, snakeY.shift() * 10, 10, 10);
+        }
+        snakeX.push(x);
+        snakeY.push(y);
+        x++;
+        if (x >= 64) {
+          alert("GAME OVER");
+        }
+      } else if (flagA) {
+        if (snakeX.length == snakeLength) {
+          dot.clearRect(snakeX.shift() * 10, snakeY.shift() * 10, 10, 10);
+        }
+        snakeX.push(x);
+        snakeY.push(y);
+        x--;
+        if (x < 0) {
+          alert("GAME OVER");
+        }
+      }
+
+      if ((x == blockX) && (y == blockY)) {
+        this.running = true;
+        blockX = Math.round((Math.random() * (54 - 5) + 5) / 10) * 10;
+        blockY = Math.round((Math.random() * (22 - 5) + 5) / 10) * 10;
+        dot.fillRect(blockX * 10, blockY * 10, 10, 10);
+        snakeLength++;
+        // snakeX.push(x);
+        // snakeY.push(y);
+      }
+      if(snakeLength >= 3){
+        if(snakeLength > snakeComp){
+          snakeComp++;
+          console.log(snakeComp);
+        }
+        else{
+          for( i = 0; i < snakeLength-1; i++){
+            if (snakeX[i] == snakeX[snakeLength-1]) {
+              if(snakeY[i] == snakeY[snakeLength-1]){
+                alert("game over");
+              }
+            }
+          }
+        }
+      }
+      return x * 10;
+    }
+
+    function yMovement() {
+      if(speed < 4){
+        speed++;
+        return y*10;
+      }else{
+        speed = 0;
+      }
+      if (flagW) {
+        if (snakeY.length == snakeLength) {
+          dot.clearRect(snakeX.shift() * 10, snakeY.shift() * 10, 10, 10);
+        }
+        snakeX.push(x);
+        snakeY.push(y);
+        y--;
+        if (y < 0) {
+          alert("GAME OVER");
+        }
+      } else if (flagS) {
+        if (snakeY.length == snakeLength) {
+          dot.clearRect(snakeX.shift() * 10, snakeY.shift() * 10, 10, 10);
+        }
+        snakeX.push(x);
+        snakeY.push(y);
+        y++;
+        if (y >= 32) {
+          alert("GAME OVER");
+
+        }
+      }
+      return y * 10;
+    }
+
+
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key == 'd') { //D
+        if(!flagA){
+          flagA = false;
+          flagS = false;
+          flagW = false;
+          flagD = true;
+        }
+      }
+      if (event.key == 'w') { //W
+        if(!flagS){
+          flagD = false;
+          flagA = false;
+          flagS = false;
+          flagW = true;
+        }
+      }
+      if (event.key == 's') { //S
+        if(!flagW){
+          flagD = false;
+          flagA = false;
+          flagW = false;
+          flagS = true;
+        }
+      }
+      if (event.key == 'a') { //A
+        if(!flagD){
+          flagS = false;
+          flagW = false;
+          flagD = false;
+          flagA = true;
+        }
+      }
+    });
+    var chip8 = function() {
+      this.memory = new Uint8Array(4096);
+      // Register
+      this.v = new Array(16);
+      this.i = null;
+
+      // Stack
+      this.stack = new Array(16);
+      this.sp = null;
+      this.keys = {};
+
+      this.start = false;
+    }
+
+    chip8.prototype = {
+      draw: function() {
+        this.running = true;
+
+        snake = dot.fillRect(xMovement(), yMovement(), 10, 10);
+        food = dot.fillRect(blockX * 10, blockY * 10, 10, 10);
+
+        window.requestAnimationFrame(ch.draw);
+      },
+
+
+      setKey: function(key) {
+        this.keys[key] = true;
+      },
+      //delete the key in the array
+      unsetKey: function(key) {
+        delete this.keys[key];
+      },
+      start: function() {
+
+        this.running = true;
+        this.reset();
+        this.draw();
+      }
+    }
+
+    var ch = new chip8;
+    window.requestAnimationFrame(ch.draw);
+  </script>
+</body>
+
+</html>

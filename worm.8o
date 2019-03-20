@@ -1,0 +1,587 @@
+﻿:alias x v0
+:alias y v1
+:alias foodX v3
+:alias foodY v4
+:alias tailX v9
+:alias tailY vA
+:alias endX v5
+:alias endY v6
+:alias sound v7
+:alias score vD
+:alias speed vB
+:const stop 0
+:alias dir v8 #directions: 0=up,1=right,2=down,3=left
+:alias playerP vE
+:alias prev vC
+:const up 0x00
+:const right 0x01
+:const down 0x02
+:const left 0x03
+
+: main
+	jump title
+
+: title
+	x := 14
+  y := 9
+	i := W
+  sprite x y 5
+  x += 6
+  i := O
+  sprite x y 5
+  x += 5
+  i := R
+  sprite x y 5
+  x += 5
+  i := M
+  sprite x y 5
+  x += 10
+  y += -8
+  i := pic1
+  sprite x y 15
+  x += 8
+  i := pic2
+  sprite x y 15
+  x += -8
+  y += 14
+  i := pic3
+  sprite x y 2
+  x += 8
+  y += 1
+  i := pic4
+  sprite x y 1
+  
+  x := 5
+  y := 20
+  i := P
+  sprite x y 5
+  x += 5
+  i := R
+  sprite x y 5
+  x += 5 
+  i := E
+  sprite x y 5  
+  x += 5
+  i := S
+  sprite x y 5
+  x += 5
+  i := S
+  sprite x y 5
+  x += 7
+  i := ONE
+  sprite x y 5
+  x += 6
+  i := T
+  sprite x y 5
+  x += 6
+  i := H
+  sprite x y 5
+  i := E
+  x += 5
+  sprite x y 5
+  x += 5
+  i := N
+  sprite x y 5
+  x := 5
+  y += 6
+  i := TWO
+  sprite x y 5
+  x += 8
+  i := T
+  sprite x y 5
+  x += 6
+  i := O
+  sprite x y 5
+  x += 8
+  i := S
+  sprite x y 5
+  x += 5
+  i := T
+  sprite x y 5
+  x += 6
+  i := A
+  sprite x y 5
+  x += 5
+  i := R
+  sprite x y 5
+  x += 5
+  i := T
+  sprite x y 5
+  loop
+    v2 := 0x01
+    if v2 key then
+    jump instruction
+  again
+  
+: instruction
+	clear
+	x := 28
+  y := 1
+  i := wpicl
+  sprite x y 9
+  x += 8
+  i := keyr
+  sprite x y 9
+  x += -18
+  y += 10
+  i := apicl
+  sprite x y 9
+  x += 8
+  i := keyr
+  sprite x y 9
+  x += 2
+  i := spicl
+  sprite x y 9
+  x += 8
+  i := keyr
+  sprite x y 9
+  x += 2
+  i := dpicl
+  sprite x y 9
+  x += 8
+  i := keyr
+  sprite x y 9
+  x := 15
+  y += 12
+  i := T
+  sprite x y 5
+  x += 6
+  i := O
+  sprite x y 5
+  x += 8
+  i := M
+  sprite x y 5
+  x += 6
+  i := O
+  sprite x y 5
+  x += 5
+  i := V
+  sprite x y 5
+  x += 6
+  i := E
+  sprite x y 5
+	loop
+    v2 := 0x02
+    if v2 key then
+    jump game
+  again
+
+: snake
+  0x80
+: food
+  0x80
+: W
+	0x88 0x88 0xA8 0xA8 0xF8
+: M
+	0xF8 0xA8 0xA8 0xA8 0xA8
+:	pic1
+	0x3E 0x41 0x80 0xA8 0xA8 0xA8 0x80 0x80 0x45 0x79 0x42 0x82 0x83 0x80 0x00
+: pic2
+	0x00 0x00 0x80 0x80 0x80 0x80 0x80 0x80 0x00 0x00 0x00 0xC0 0x20 0x10 0xC8
+: pic3
+	0x80 0x7F 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+: pic4
+	0x30
+: wpicl
+	0xFF 0x80 0xA2 0xA2 0xAA 0xAA 0x94 0x80 0xFF
+: apicl
+	0xFF 0x80 0x88 0x94 0x9C 0xA2 0xA2 0x80 0xFF
+: spicl
+	0xFF 0x80 0x9E 0xA0 0x9C 0x82 0xBC 0x80 0xFF
+: dpicl
+	0xFF 0x80 0xBC 0xA2 0xA2 0xA2 0xBC 0x80 0xFF
+: keyr
+  0x80 0x80 0x80 0x80 0x80 0x80 0x80 0x80 0x80
+: S
+	0xF0 0x80 0xF0 0x10 0xF0
+: C
+	0xF0 0x80 0x80 0x80 0xF0
+: O
+	0xF0 0x90 0x90 0x90 0xF0
+: R
+	0xF0 0x80 0x80 0x80 0x80
+: E
+	0xF0 0x90 0xF0 0x80 0xF0
+: P
+  0xF0 0x90 0xF0 0x80 0x80
+: ONE
+  0x20 0x60 0x20 0x20 0x70
+: N
+	0xF8 0x88 0x88 0x88 0x88
+: H
+	0x80 0x80 0xF0 0x90 0x90
+: TWO
+  0xF0 0x10 0xF0 0x80 0xF0
+: T
+	0xF8 0x20 0x20 0x20 0x20
+: A
+  0xE0 0x10 0xF0 0x90 0xF0
+: D
+	0xE0 0x90 0x90 0x90 0xE0
+: V
+	0x88 0x88 0x50 0x50 0x20
+: rock1
+	0x30 0x78 0xFC 0xFC 0x78
+: rock2
+	0x78 0xFC 0xFC 0x78
+: rock3
+  0x78 0xF8 0xFC 0xFC 0xF8
+: rock4
+  0x60 0xF0 0xF8 0x78 0x30
+: rock5
+	0x70 0xF0 0xF8 0xF8 0x60
+: rock6
+	0x60 0xF0 0xF0 0xF0 0x60
+: rock7
+	0xC0 0xC0 0xE0 0xF8 0xF8
+: rock8
+  0x04 0x0C 0x3C 0xFC 0x78
+: rock9
+  0x30 0x78 0xFC 0x78 0x30
+: rock10
+  0x34 0x7C 0xFC 0x7C 0xF8
+
+: game
+  x := 0x00
+  y := 0x00
+  score := 0x00
+  foodX := 0x02
+  foodY := 0x10
+  tailX := 0x00
+  tailY := 0x00
+  speed := 0
+  endX := 0x00
+  endY := 0x00
+  sound := 0x01
+  dir := 0x02
+  prev := 0x02
+  jump load-rocks
+
+: initializeplayer
+  #food
+  foodX := 10
+  foodY := 10
+  i := food
+  sprite foodX foodY 1
+  i := snake
+  
+  sprite x y 1
+
+  jump label-loop
+: label-loop
+  loop
+    if dir == up begin
+        y += -1
+        if y == -1 then
+          jump load-score
+    end
+    if dir == right begin
+        x += 1
+        if x > 64 then
+          jump load-score
+       end
+    if dir == down begin
+        y += 1
+        if y > 32 then
+          jump load-score
+
+    end
+    if dir == left begin
+        x += -1
+        if x == -1 then
+          jump load-score
+    end
+
+		if foodX == x begin
+    	if foodY == y begin
+      		 :call hitfood
+        end
+    end
+		
+
+    #Collision detection using flag F
+    sprite x y 1
+	  if vF == 1 begin
+      #hitting rocks
+					if endY >= 15 begin 
+          buzzer := sound
+          clear
+          jump load-score
+
+
+   	 end
+    end
+    sprite foodX foodY 1
+    if endY < 15 then
+    	buzzer := sound
+    endY += 1
+    if endY > 100 then
+    	endY := 20
+    
+: case-switch
+    #Case Switches
+    v2 := 0x05 #w
+    if v2 key begin
+      if prev != down begin
+        dir := 0x00
+        prev := 0x00
+        v2 := 0x05
+      end
+    end
+    v2 := 0x08 #s
+    if v2 key begin
+      if prev != up begin
+        dir := 0x02
+        prev := 0x02
+      end
+    end
+    v2 := 0x07 #a
+    if v2 key begin
+      if prev != right begin
+        dir := 0x03
+        prev := 0x03
+      end
+    end
+    v2 := 0x09 #d
+    if v2 key begin
+      if prev != left begin
+        prev := 0x01
+        dir := 0x01
+      end
+    end
+    
+    v2 := 0x0D
+    if v2 key begin
+      score += -1
+      :call hitfood
+   end
+    #delay
+    speed := 7
+    delay := speed
+    sprite tailX tailY 1
+    tailX := x
+    tailY := y
+    again
+
+: load-score
+    clear
+    i := S
+    x := 14
+    y := 2
+    sprite x y 5
+    i := C
+    x += 5
+    sprite x y 5
+    i := O
+    x += 5
+    sprite x y 5
+    i := R
+    x += 5
+    sprite x y 5
+    i := E
+    x += 5
+    sprite x y 5
+
+    i := 0xE00
+    save v2
+    i := 0xC00
+    bcd score
+    load v2
+    v5 := v1
+    v6 := v2
+    i := 0xE00
+    load v2
+    x += 8
+    i := hex v5
+    sprite x y 5
+    x += 5
+    i := hex v6
+    sprite x y 5
+
+    i := P
+    x := 14
+    y := 13
+    sprite x y 5
+    i := R
+    x += 5
+    sprite x y 5
+    i := E
+    x += 5
+    sprite x y 5
+    i := S
+    x += 5
+    sprite x y 5
+    i := S
+    x += 5
+    sprite x y 5
+
+    i := ONE
+    x += 8
+    sprite x y 5
+
+    i := T
+    x := 24
+    y += 6
+    sprite x y 5
+    i := O
+    x += 6
+    sprite x y 5
+
+    i := R
+    x := 14
+    y += 6
+    sprite x y 5
+    i := E
+    x += 5
+    sprite x y 5
+    i := S
+    x += 5
+    sprite x y 5
+    i := T
+    x += 5
+    sprite x y 5
+    i := A
+    x += 6
+    sprite x y 5
+    i := R
+    x += 5
+    sprite x y 5
+    i := T
+    x += 5
+    sprite x y 5
+    loop
+      v2 := 0x01
+      if v2 key then
+      jump game
+    again
+
+  : load-rocks
+    clear
+    :call rockA
+    :call rockA
+    :call rockA
+    :call rockA
+    :call rockA
+    :call rockA
+    :call rockA
+    :call rockA
+    :call rockA
+    :call rockA
+    :call rockA
+    :call rockA
+    :call rockA
+    :call rockA
+    :call rockA
+    :call rockA
+    :call rockA
+    :call rockA
+    
+		tailX := x
+    tailY := y
+
+    :call foodSpawn
+    jump case-switch
+
+    jump initializeplayer
+   
+  : rockA
+    foodX := random 63
+    foodY := random 31
+    :call randomR
+    return
+
+	: r1
+  i := rock1
+  sprite foodX foodY 5
+  return
+  
+	: r2
+  i := rock2
+  sprite foodX foodY 4
+  return
+  
+  : r3
+  i := rock3
+  sprite foodX foodY 5
+  return
+  
+  : r4
+  i := rock4
+  sprite foodX foodY 5
+  return
+  
+  : r5
+  i := rock5
+  sprite foodX foodY 5
+  return
+  
+  : r6
+  i := rock6
+  sprite foodX foodY 5
+  return
+  
+  : r7
+  i := rock7
+  sprite foodX foodY 5
+  return
+  
+  : r8
+  i := rock8
+  sprite foodX foodY 5
+  return
+  
+  : r9
+  i := rock9
+  sprite foodX foodY 5
+  return
+  
+  : r10
+  i := rock10
+  sprite foodX foodY 5
+  return
+  
+  : randomR
+    endX := random 9
+    if endX == 0 then
+    :call r1
+    if endX == 1 then
+    :call r2
+    if endX == 2 then
+    :call r3
+    if endX == 3 then
+    :call r4
+    if endX == 4 then
+    :call r5
+    if endX == 5 then
+    :call r6
+    if endX == 6 then
+    :call r7
+    if endX == 7 then
+    :call r8
+    if endX == 8 then
+    :call r9
+    if endX == 9 then
+    :call r10
+    return
+
+  : foodSpawn
+    i := food
+    foodX := random 63
+    foodY := random 31
+ 		sprite foodX foodY 1
+ 	: foodLoop
+    if vF == 1 begin
+    sprite foodX foodY 1
+    foodX := random 63
+    foodY := random 31
+    sprite foodX foodY 1
+    jump foodLoop
+    end
+    return
+    
+  : hitfood
+    clear
+    buzzer := sound
+    score += 1
+    endY := 0
+    jump load-rocks

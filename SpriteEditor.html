@@ -1,0 +1,358 @@
+<!doctype html>
+
+<html>
+
+<head>
+  <title>Sprite Editor</title>
+  <img src = "images/SpriteEditorTitle.png" id = "spriteTitle" alt = "Sprite Title Icon" usemap="#spriteMap">
+  <canvas id="canvasTest" width="80" height="160"></canvas>
+  <!-- <button type="button" onclick="clearS()">Clears the Canvas</button>
+  <button type="button" onclick="shiftL()">Lshift</button>
+  <button type="button" onclick="shiftU()">Ushift</button>
+  <button type="button" onclick="shiftR()">Rshift</button>
+  <button type="button" onclick="shiftD()">Dshift</button> -->
+
+  <map name="spriteMap" id = "spriteM">
+    <area target="" alt="Clear" title="Clears the Editor" onclick="clearS()" coords="58,95,219,159" shape="rect">
+    <area target="" alt="up" title="Shifts all pixels up" onclick="shiftU()" coords="58,163,219,227" shape="rect">
+    <area target="" alt="down" title="Shifts all pixels down" onclick="shiftD()" coords="57,232,219,296" shape="rect">
+    <area target="" alt="left" title="Shifts all pixels left" onclick="shiftL()" coords="57,302,219,366" shape="rect">
+    <area target="" alt="right" title="Shifts all pixels right" onclick="shiftR()" coords="58,371,219,434" shape="rect">
+  </map>
+
+  <table id="hexOutput">
+    <tr>
+      <td align = "center">
+        <p id="output"></p>
+      <td>
+    </tr>
+  </table>
+
+
+  <link rel="stylesheet" href="style.css">
+
+<body oncontextmenu="return false">
+
+  <script>
+    var scale = 10;
+    var flag1 = false;
+    var flag2 = false;
+    // var arrx = [];
+    // var arry = [];
+    var arrF = new Array(16);
+    var newX;
+    var newY;
+    var arrTemp = false;
+    var output = document.getElementById("output");
+    for (var i = 0; i < arrF.length; i++) {
+      arrF[i] = new Array(8);
+    }
+
+    var total = 0;
+
+    var outP = document.getElementById("output");
+    var canvas = document.getElementById("canvasTest");
+    var dot = canvas.getContext("2d");
+    document.addEventListener("DOMContentLoaded", init, false);
+
+    function reScale(size){
+      canvas.width = canvas.width*size;
+      canvas.height = canvas.height*size;
+      this.scale = this.scale*size;
+    }
+
+    reScale(3);
+    //arrF initializer
+    function clearS() {
+      for (var i = 0; i < arrF.length; i++) {
+        for (var j = 0; j < arrF[0].length; j++) {
+          arrF[i][j] = 0;
+          dot.clearRect(j * scale, i * scale, scale, scale);
+        }
+      }
+      console.log("clear");
+      console.log(arrF);
+      scanF();
+    }
+
+    function init() {
+      var canvas = document.getElementById("canvasTest");
+      canvas.addEventListener("mousedown", setFlag, false);
+      canvas.addEventListener("mousemove", getPosition, false);
+      canvas.addEventListener("mouseup", unsetFlag, false);
+    }
+
+    function unsetFlag() {
+      switch (event.which) {
+        case 1:
+          flag1 = false;
+          console.log("unsetFlag: " + flag1);
+          break;
+        case 3:
+          console.log('right');
+          flag2 = false;
+          console.log("unsetFlag: " + flag2);
+          break;
+      }
+    }
+
+    function setFlag(event) {
+      switch (event.which) {
+        case 1:
+          console.log('left');
+          flag1 = true;
+          if (event.x != undefined && event.y != undefined) {
+            x = event.x;
+            y = event.y;
+          } else // Firefox method to get the position
+          {
+            x = event.clientX + document.body.scrollLeft +
+              document.documentElement.scrollLeft;
+            y = event.clientY + document.body.scrollTop +
+              document.documentElement.scrollTop;
+          }
+
+          x -= canvas.offsetLeft;
+          y -= canvas.offsetTop;
+          dot.fillStyle = "white";
+          // console.log("x before: " + x + "  y before: " + y);
+          x = Math.floor(x / scale, scale) * scale;
+          y = Math.floor(y / scale, scale) * scale;
+          dot.fillRect(x, y, scale, scale);
+          console.log("x: " + x + "  y: " + y);
+          console.log("setX and setY:" + (x) + " " + (y));
+          newX = Math.floor(x / scale) + 1;
+          newY = Math.floor(y / scale) + 1;
+          console.log(newX + " " + newY);
+          arrF[newY - 1][newX - 1] = 1;
+          scanF();
+          // var x1 = Math.floor(x/10) + 1;
+          // var y2 = Math.floor(y/10) + 1;
+          // if(y2 > 1){
+          //   y2--;
+          //   y2 == y2*8;
+          //   y2++;
+          //   console.log("new y2:" + y2);
+          // }
+          // arrF[(x1)*(y2)-1] = 1;
+          // console.log("x1:" + x1);
+          // console.log("y2:" + y2);
+          console.log("setFlag: " + flag1);
+          console.log(arrF);
+          break;
+        case 3:
+          console.log('right');
+          flag2 = true;
+          if (event.x != undefined && event.y != undefined) {
+            x = event.x;
+            y = event.y;
+          } else // Firefox method to get the position
+          {
+            x = event.clientX + document.body.scrollLeft +
+              document.documentElement.scrollLeft;
+            y = event.clientY + document.body.scrollTop +
+              document.documentElement.scrollTop;
+          }
+
+          x -= canvas.offsetLeft;
+          y -= canvas.offsetTop;
+          x = Math.floor(x / scale);
+          y = Math.floor(y / scale);
+          dot.clearRect(x * scale, y * scale, scale, scale);
+          console.log("x: " + x * scale + "  y: " + y * scale);
+          // console.log("clearX and clearY:" + (x*10) + " " + (y*10));
+          console.log("setFlag: " + flag2);
+          newX = Math.floor(x) + 1;
+          newY = Math.floor(y) + 1;
+          console.log(newX + " " + newY);
+          arrF[newY - 1][newX - 1] = 0;
+          scanF();
+          console.log(arrF);
+          break;
+      }
+    }
+
+    function getPosition(event) {
+      if (flag1) {
+        if (event.x != undefined && event.y != undefined) {
+          x = event.x;
+          y = event.y;
+        } else // Firefox method to get the position
+        {
+          x = event.clientX + document.body.scrollLeft +
+            document.documentElement.scrollLeft;
+          y = event.clientY + document.body.scrollTop +
+            document.documentElement.scrollTop;
+        }
+
+        x -= canvas.offsetLeft;
+        y -= canvas.offsetTop;
+        dot.fillStyle = "white";
+        x = Math.floor(x / scale);
+        y = Math.floor(y / scale);
+        dot.fillRect(x * scale, y * scale, scale, scale);
+        newX = Math.floor(x) + 1;
+        newY = Math.floor(y) + 1;
+        arrF[newY - 1][newX - 1] = 1;
+        console.log(arrF);
+        scanF();
+        // var x1 = x + 1;
+        // var y2 = y + 1
+        // arrF[(x1)*(y2)] = 1;
+        // console.log("x: " + x * 10 + "  y: " + y * 10);
+      }
+      if (flag2) {
+        if (event.x != undefined && event.y != undefined) {
+          x = event.x;
+          y = event.y;
+        } else // Firefox method to get the position
+        {
+          x = event.clientX + document.body.scrollLeft +
+            document.documentElement.scrollLeft;
+          y = event.clientY + document.body.scrollTop +
+            document.documentElement.scrollTop;
+        }
+
+        x -= canvas.offsetLeft;
+        y -= canvas.offsetTop;
+        dot.fillStyle = "white";
+        x = Math.floor(x / scale);
+        y = Math.floor(y / scale);
+        dot.clearRect(x * scale, y * scale, scale, scale);
+        newX = Math.floor(x) + 1;
+        newY = Math.floor(y) + 1;
+        arrF[newY - 1][newX - 1] = 0;
+        scanF();
+        // console.log("x: " + x * 10 + "  y: " + y * 10);
+      }
+    }
+
+    function scanF() {
+      var outP = "";
+      for (var i = 0; i < 16; i++) {
+        var counter = 7;
+        var rowTally = 0;
+        for (var j = 0; j < 8; j++) {
+          if (arrF[i][j] == 1) {
+            rowTally = rowTally + 2 ** counter;
+          }
+          counter--;
+        }
+        var out = rowTally.toString(16);
+        outP = outP + "0x" + out + " ";
+        console.log(out);
+      }
+      output.innerHTML = outP;
+    }
+
+    function shiftL() {
+      for (var i = 0; i < arrF.length; i++) {
+        if (arrF[i][0] == 1) {
+          arrTemp = true;
+          arrF[i][0] = 0;
+          dot.clearRect(0, i * scale, scale, scale);
+        }
+        for (var j = 1; j < arrF[0].length; j++) {
+          if (arrF[i][j] == 1) {
+            arrF[i][j - 1] = 1;
+            arrF[i][j] = 0;
+            dot.fillRect((j - 1) * scale, i * scale, scale, scale);
+            dot.clearRect(j * scale, i * scale, scale, scale);
+          }
+        }
+        if (arrTemp == true) {
+          arrF[i][7] = 1;
+          dot.fillRect(7 * scale, i * scale, scale, scale);
+          arrTemp = false;
+        }
+      }
+      console.log(arrF);
+      scanF();
+    }
+
+    function shiftR() {
+      for (var i = 0; i < arrF.length; i++) {
+        if (arrF[i][7] == 1) {
+          arrTemp = true;
+          arrF[i][7] = 0;
+          dot.clearRect(7 * scale, i * scale, scale, scale);
+        }
+        for (var j = arrF[0].length - 1; j >= 0; j--) {
+          if (arrF[i][j] == 1) {
+            arrF[i][j + 1] = 1;
+            arrF[i][j] = 0;
+            dot.fillRect((j + 1) * scale, i * scale, scale, scale);
+            dot.clearRect(j * scale, i * scale, scale, scale);
+          }
+        }
+        if (arrTemp == true) {
+          arrF[i][0] = 1;
+          dot.fillRect(0, i * scale, scale, scale);
+          arrTemp = false;
+        }
+      }
+      console.log(arrF);
+      scanF();
+    }
+
+
+    function shiftU() {
+      for (var i = 0; i < arrF[0].length; i++) {
+        if (arrF[0][i] == 1) {
+          arrTemp = true;
+          arrF[0][i] = 0;
+          dot.clearRect(i * scale, 0, scale, scale);
+        }
+        for (var j = 0; j < arrF.length; j++) {
+          if (arrF[j][i] == 1) {
+            arrF[j - 1][i] = 1;
+            arrF[j][i] = 0;
+            dot.fillRect(i * scale, (j - 1) * scale, scale, scale);
+            dot.clearRect(i * scale, j * scale, scale, scale);
+          }
+        }
+        if (arrTemp == true) {
+          arrF[arrF.length - 1][i] = 1;
+          dot.fillRect(i * scale, (arrF.length - 1) * scale, scale, scale);
+          arrTemp = false;
+        }
+      }
+      console.log(arrF);
+      scanF();
+    }
+
+    function shiftD() {
+      for (var i = 0; i < arrF[0].length; i++) {
+        if (arrF[arrF.length - 1][i] == 1) {
+          arrTemp = true;
+          arrF[arrF.length - 1][i] = 0;
+          dot.clearRect(i * scale, (arrF.length - 1) * scale, scale, scale);
+        }
+        for (var j = arrF.length - 1; j >= 0; j--) {
+          if (arrF[j][i] == 1) {
+            arrF[j + 1][i] = 1;
+            arrF[j][i] = 0;
+            dot.fillRect(i * scale, (j + 1) * scale, scale, scale);
+            dot.clearRect(i * scale, j * scale, scale, scale);
+          }
+        }
+        if (arrTemp == true) {
+          arrF[0][i] = 1;
+          dot.fillRect(i * scale, 0, scale, scale);
+          arrTemp = false;
+        }
+      }
+      console.log(arrF);
+      scanF();
+    }
+
+
+    clearS();
+  </script>
+
+  </head>
+
+  <body>
+  </body>
+
+</html>

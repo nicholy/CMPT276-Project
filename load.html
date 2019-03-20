@@ -1,284 +1,389 @@
 <!DOCTYPE html>
 <html>
-<body>
-<img id = "titlepic" src = "images/Title.png">
-<canvas id="myCanvas" width="640" height="320">
-  Your browser does not support the canvas element.
-</canvas>
+  <body>
+    <img id="titlepic" src="images/Title.png">
+    <canvas id="myCanvas" width="640" height="320">
+      Your browser does not support the canvas element.
+    </canvas>
 
-<audio id="audio" src="sound/Beep2.wav" autoplay="false" ></audio>
-<!--visualizer table-->
-<style>
+    <audio id="audio" src="sound/Beep2.wav" autoplay="false"></audio>
+    <div id="overall">
+      <div id="mainCol">
+        <center>
+          <table>
+            <tr>
+              <td>
+                <div id="gameSpeed" class="gameSpeed1">
+                  <center>
+                    <img class="button" title="Speeds up the game by one increment" id="up" onclick="upSpeed()" src="images/button6.jpg">
+                    <img class="button" title="Reset to original speed" id="gameSpeedIcon" onclick="resetSpeed()" src="images/button5.1.jpg">
+                    <img class="button" title="Slows down the game by one increment" id="down" onclick="downSpeed()" src="images/button7.jpg">
+                  </center>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <img class="button" title="Pauses/unpauses the game" id="pause" onclick="pause()" src="images/button8.jpg">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div id="chooseRom">
+                  <label for="files">
+                    <img id="romSelector" title="Opens up ROM selection" src="images/button1.jpg">
+                  </label>
+                  <input type="file" id="files" name="files[]" multiple />
+                </div>
+              </td>
+              <td>
+                <div id="autoTest">
+                  <a href="test.html">
+                    <img id="autoTesting" title="Opens up Automatic Testing Page" src="images/button2.jpg">
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img id="game1" title="Opens Game 1: Worm" src="images/button3.jpg">
+              </td>
+              <td>
+                <img id="game2" title="Opens Game 2(N/A)" src="images/button4.jpg">
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <a href="SpriteEditor.html" target="_blank">
+                  <img id="spriteE" title="Opens Sprite Editor Application in another window" src="images/spriteButton.jpg">
+                </a>
+              </td>
+            </tr>
+          </table>
+        </center>
+      </div>
+      <div id="visO">
+        <table id="VisualizerOpcode">
+          <tr>
+            <th>Opcode</th>
+            <th>Description</th>
+          </tr>
+          <tr id="0x00E0">
+            <td>0x00E0</td>
+            <td>Clears Screen</td>
+          </tr>
+          <tr id="0x00EE">
+            <td>0x00EE</td>
+            <td>Returns from Subroutine</td>
+          </tr>
+          <tr id="0x1NNN">
+            <td>0x1NNN</td>
+            <td>Jumps to Address NNN</td>
+          </tr>
+          <tr id="0x2NNN">
+            <td>0x2NNN</td>
+            <td>Calls Subroutine at NNN</td>
+          </tr>
+          <tr id="0x3XNN">
+            <td>0x3XNN</td>
+            <td>Skips the next instruction if VX == NN</td>
+          </tr>
+          <tr id="0x4XNN">
+            <td>0x4XNN</td>
+            <td>Skips the next instruction if VX == NN</td>
+          </tr>
+          <tr id="0x5XY0">
+            <td>0x5XY0</td>
+            <td>Skips instruction if Vx == Vy</td>
+          </tr>
+          <tr id="0x6XNN">
+            <td>0x6XNN</td>
+            <td>Sets Vx to NN</td>
+          </tr>
+          <tr id="0x7XNN">
+            <td>0x7XNN</td>
+            <td>Adds NN to Vx</td>
+          </tr>
+          <tr id="0x8XY0">
+            <td>0x8XY0</td>
+            <td>Sets Vx to the value of Vy</td>
+          </tr>
+          <tr id="0x8XY1">
+            <td>0x8XY1</td>
+            <td>Sets Vx to the value of Vy or Vx</td>
+          </tr>
+          <tr id="0x8XY2">
+            <td>0x8XY2</td>
+            <td>Sets Vx to the value of Vy and Vx</td>
+          </tr>
+          <tr id="0x8XY3">
+            <td>0x8XY3</td>
+            <td>Sets Vx to the value of Vy xor Vx</td>
+          </tr>
+          <tr id="0x8XY4">
+            <td>0x8XY4</td>
+            <td>Adds Vy to Vx</td>
+          </tr>
+          <tr id="0x8XY5">
+            <td>0x8XY5</td>
+            <td>Vx -= Vy</td>
+          </tr>
+          <tr id="0x8XY6">
+            <td>0x8XY6</td>
+            <td>Stores LSB and shifts Vx to the right by 1</td>
+          </tr>
+          <tr id="0x8XY7">
+            <td>0x8XY7</td>
+            <td>Subtracts Vx from Vy</td>
+          </tr>
+          <tr id="0x8XYE">
+            <td>0x8XYE</td>
+            <td>Stores MSB and shifts Vx to the left by 1</td>
+          </tr>
+          <tr id="0x9XY0">
+            <td>0x9XY0</td>
+            <td>Skips instruction if Vx != Vy</td>
+          </tr>
+          <tr id="0xANNN">
+            <td>0xANNN</td>
+            <td>Sets I to Address NNN</td>
+          </tr>
+          <tr id="0xBNNN">
+            <td>0xBNNN</td>
+            <td>Sets PC to V[0] + NNN</td>
+          </tr>
+          <tr id="0xCXNN">
+            <td>0xCXNN</td>
+            <td>Sets Vx to bitwise and operation on random number and NN</td>
+            <br />
+          </tr>
+          <tr id="0xDXYN">
+            <td>0xDXYN</td>
+            <td>Displays sprite at (Vx,Vy), with height of N</td>
+          </tr>
+          <tr id="0xEX9E">
+            <td>0xEX9E</td>
+            <td>Skip next instruction if the key with the value Vx is pressed</td>
+          </tr>
+          <tr id="0xEXA1">
+            <td>0xEXA1</td>
+            <td>Skip next instruction if the key with the value Vx is NOT pressed</td>
+          </tr>
+          <tr id="0xFX07">
+            <td>0xFX07</td>
+            <td>Set Vx = delay timer value</td>
+          </tr>
+          <tr id="0xFX0A">
+            <td>0xFX0A</td>
+            <td>Wait for a keypress, then store the value of the key in Vx</td>
+          </tr>
+          <tr id="0xFX15">
+            <td>0xFX15</td>
+            <td>Set delay timer = Vx</td>
+          </tr>
+          <tr id="0xFX18">
+            <td>0xFX18</td>
+            <td>Set sound timer = Vx</td>
+          </tr>
+          <tr id="0xFX1E">
+            <td>0xFX1E</td>
+            <td>I += Vx</td>
+          </tr>
+          <tr id="0xFX29">
+            <td>0xFX29</td>
+            <td>Sets I to location of sprite for Vx</td>
+          </tr>
+          <tr id="0xFX33">
+            <td>0xFX33</td>
+            <td>Stores the binary-coded decimal representation of VX</td>
+          </tr>
+          <tr id="0xFX55">
+            <td>0xFX55</td>
+            <td>write register into memory</td>
+          </tr>
+          <tr id="0xFX65">
+            <td>0xFX65</td>
+            <td>write memory into register</td>
+          </tr>
+        </table>
+        <div id = "timeWarp">
+          <img class="button" title="Goes backward one instruction" id="backButton" onclick="backward()" src="images/button10.jpg">
+          <img class="button" title="Goes forward one instruction" id="forwardButton" onclick="forward()" src="images/button11.jpg">
+        </div>
+          <img class = "keyboard" title = "keyboard diagram" id = "keyboard" onclick = "keyboard()" src = "images/keyboard.png">
+      </div>
+      <div id="visR">
+        <table id="VisualizerRegister">
+          <tr>
+            <td>V0</td>
+            <td id="v0"></td>
+            <td>DT</td>
+            <td id="dt"></td>
+            <td>S0</td>
+            <td id="s0"></td>
+          </tr>
+          <tr>
+            <td>V1</td>
+            <td id="v1"></td>
+            <td>ST</td>
+            <td id="st"></td>
+            <td>S1</td>
+            <td id="s1"></td>
+          </tr>
+          <tr>
+            <td>V2</td>
+            <td id="v2"></td>
+            <td></td>
+            <td></td>
+            <td>S2</td>
+            <td id="s2"></td>
+          </tr>
+          <tr>
+            <td>V3</td>
+            <td id="v3"></td>
+            <td>I</td>
+            <td id="i"></td>
+            <td>S3</td>
+            <td id="s3"></td>
+          </tr>
+          <tr>
+            <td>V4</td>
+            <td id="v4"></td>
+            <td></td>
+            <td></td>
+            <td>S4</td>
+            <td id="s4"></td>
+          </tr>
+          <tr>
+            <td>V5</td>
+            <td id="v5"></td>
+            <td>PC</td>
+            <td id="pc"></td>
+            <td>S5</td>
+            <td id="s5"></td>
+          </tr>
+          <tr>
+            <td>V6</td>
+            <td id="v6"></td>
+            <td>SP</td>
+            <td id="sp"></td>
+            <td>S6</td>
+            <td id="s6"></td>
+          </tr>
+          <tr>
+            <td>V7</td>
+            <td id="v7"></td>
+            <td></td>
+            <td></td>
+            <td>S7</td>
+            <td id="s7"></td>
+          </tr>
+          <tr>
+            <td>V8</td>
+            <td id="v8"></td>
+            <td></td>
+            <td></td>
+            <td>S8</td>
+            <td id="s8"></td>
+          </tr>
+          <tr>
+            <td>V9</td>
+            <td id="v9"></td>
+            <td></td>
+            <td></td>
+            <td>S9</td>
+            <td id="s9"></td>
+          </tr>
+          <tr>
+            <td>VA</td>
+            <td id="va"></td>
+            <td></td>
+            <td></td>
+            <td>SA</td>
+            <td id="sa"></td>
+          </tr>
+          <tr>
+            <td>VB</td>
+            <td id="vb"></td>
+            <td></td>
+            <td></td>
+            <td>SB</td>
+            <td id="sb"></td>
+          </tr>
+          <tr>
+            <td>VC</td>
+            <td id="vc"></td>
+            <td></td>
+            <td></td>
+            <td>SC</td>
+            <td id="sc"></td>
+          </tr>
+          <tr>
+            <td>VD</td>
+            <td id="vd"></td>
+            <td></td>
+            <td></td>
+            <td>SD</td>
+            <td id="sd"></td>
+          </tr>
+          <tr>
+            <td>VE</td>
+            <td id="ve"></td>
+            <td></td>
+            <td></td>
+            <td>SE</td>
+            <td id="se"></td>
+          </tr>
+          <tr>
+            <td>VF</td>
+            <td id="vf"></td>
+            <td></td>
+            <td></td>
+            <td>SF</td>
+            <td id="sf"></td>
+          </tr>
+        </table>
+      </div>
 
-  table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 25%;
-  }
 
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-</style>
+      <div id="list"></div>
+    </div>
+    <div id="output"></div>
+    <div id="outdisplay"></div>
+    <div id="opnumber"></div>
 
-<!--</div>-->
-<div id = "gameSpeed" class = "gameSpeed1">
-  <center>
-  <img  class = "button" id = "up" onclick="upSpeed()" src = "images/button6.jpg">
-  <img class = "button"id = "gameSpeedIcon" onclick = "resetSpeed()" src = "images/button5.1.jpg">
-  <img class = "button" id = "down"  onclick="downSpeed()" src = "images/button7.jpg">
-</center>
-</div>
+    <link rel="stylesheet" href="style.css">
+    <script src="chip8.js"></script>
+    <script src="keyboard.js"></script>
+    <script src="Visualizer.js"></script>
+    <script src="games.js"></script>
+    <script>
+      var canvas = document.getElementById("myCanvas");
+      var dot = canvas.getContext("2d");
+      var ch = new chip8;
+      document.getElementById("output").innerHTML = "Speed:" + Math.round(ch.speed * 100) / 100;
+      window.requestAnimationFrame(ch.draw);
 
-<div id = "chooseRom">
-    <label for="files">
-        <img id = "button1" src="images/button1.jpg">
-    </label>
-
-    <input type="file" id="files" name="files[]" multiple />
-      <img id = "button3" src="images/button3.jpg">
-      <img id = "button4" src = "images/button4.jpg">
-</div>
-
-<div id = "autoTest">
-  <a href = "test.html">
-    <img id = "button2" src = "images/button2.jpg">
-  </a>
-</div>
-<!--<div style="height:250px; overflow:auto;">-->
-
-<table id = "Visualizer">
-  <tr>
-    <th>Opcode</th>
-    <th>Description</th>
-  </tr>
-  <tr id="0x00E0">
-    <td>0x00E0</td>
-    <td>Clears Screen</td>
-  </tr>
-  <tr id="0x00EE">
-    <td>0x00EE</td>
-    <td>Returns from Subroutine</td>
-  </tr>
-  <tr id="0x1NNN">
-    <td>0x1NNN</td>
-    <td>Jumps to Address NNN</td>
-  </tr>
-  <tr id="0x2NNN">
-    <td>0x2NNN</td>
-    <td>Calls Subroutine at NNN</td>
-  </tr>
-  <tr id="0x3XNN">
-    <td>0x3XNN</td>
-    <td>Skips the next instruction if VX == NN</td>
-  </tr>
-  <tr id="0x4XNN">
-    <td>0x4XNN</td>
-    <td>Skips the next instruction if VX == NN</td>
-  </tr>
-  <tr id="0x5XY0">
-    <td>0x5XY0</td>
-    <td>Skips instruction if Vx == Vy</td>
-  </tr>
-  <tr id="0x6XNN">
-    <td>0x6XNN</td>
-    <td>Sets Vx to NN</td>
-  </tr>
-  <tr id="0x7XNN">
-    <td>0x7XNN</td>
-    <td>Adds NN to Vx</td>
-  </tr>
-  <tr id="0x8XY0">
-    <td>0x8XY0</td>
-    <td>Sets Vx to the value of Vy</td>
-  </tr>
-  <tr id="0x8XY1">
-    <td>0x8XY1</td>
-    <td>Sets Vx to the value of Vy or Vx</td>
-  </tr>
-  <tr id="0x8XY2">
-    <td>0x8XY2</td>
-    <td>Sets Vx to the value of Vy and Vx</td>
-  </tr>
-  <tr id="0x8XY3">
-    <td>0x8XY3</td>
-    <td>Sets Vx to the value of Vy xor Vx</td>
-  </tr>
-  <tr id="0x8XY4">
-    <td>0x8XY4</td>
-    <td>Adds Vy to Vx</td>
-  </tr>
-  <tr id="0x8XY5">
-    <td>0x8XY5</td>
-    <td>Vx -= Vy</td>
-  </tr>
-  <tr id="0x8XY6">
-    <td>0x8XY6</td>
-    <td>Stores Least Significant Bit and shifts Vx to the right by 1</td>
-  </tr>
-  <tr id="0x8XY7">
-    <td>0x8XY7</td>
-    <td>Subtracts Vx from Vy</td>
-  </tr>
-  <tr id="0x8XYE">
-    <td>0x8XYE</td>
-    <td>Stores Most Significant Bit and shifts Vx to the left by 1</td>
-  </tr>
-  <tr id="0x9XY0">
-    <td>0x9XY0</td>
-    <td>Skips instruction if Vx != Vy</td>
-  </tr>
-  <tr id="0xANNN">
-    <td>0xANNN</td>
-    <td>Sets I to Address NNN</td>
-  </tr>
-  <tr id="0xBNNN">
-    <td>0xBNNN</td>
-    <td>Sets PC to V[0] + NNN</td>
-  </tr>
-  <tr id="0xCXNN">
-    <td>0xCXNN</td>
-    <td>Sets Vx to bitwise and operation on random number and NN</td>
-    <br/>
-  </tr>
-  <tr id="0xDXYN">
-    <td>0xDXYN</td>
-    <td>Displays sprite at (Vx,Vy), with height of N</td>
-  </tr>
-  <tr id="0xEX9E">
-    <td>0xEX9E</td>
-    <td>Skip next instruction if the key with the value Vx is pressed</td>
-  </tr>
-  <tr id="0xEXA1">
-    <td>0xEXA1</td>
-    <td>Skip next instruction if the key with the value Vx is NOT pressed</td>
-  </tr>
-  <tr id="0xFX07">
-    <td>0xFX07</td>
-    <td>Set Vx = delay timer value</td>
-  </tr>
-  <tr id="0xFX0A">
-    <td>0xFX0A</td>
-    <td>Wait for a keypress, then store the value of the key in Vx</td>
-  </tr>
-  <tr id="0xFX15">
-    <td>0xFX15</td>
-    <td>Set delay timer = Vx</td>
-  </tr>
-  <tr id="0xFX18">
-    <td>0xFX18</td>
-    <td>Set sound timer = Vx</td>
-  </tr>
-  <tr id="0xFX1E">
-    <td>0xFX1E</td>
-    <td>I += Vx</td>
-  </tr>
-  <tr id="0xFX29">
-    <td>0xFX29</td>
-    <td>Sets I to location of sprite for Vx</td>
-  </tr>
-  <tr id="0xFX33">
-    <td>0xFX33</td>
-    <td>Stores the binary-coded decimal representation of VX</td>
-  </tr>
-  <tr id="0xFX55">
-    <td>0xFX55</td>
-    <td>write register into memory</td>
-  </tr>
-  <tr id="0xFX65">
-    <td>0xFX65</td>
-    <td>write memory into register</td>
-  </tr>
-</table>
-
-
-<div id="list"></div>
-
-<div id="output"></div>
-<div id="outdisplay"></div>
-<div id="opnumber"></div>
-
-<link rel = "stylesheet" href = "style.css">
-<script src="chip8.js"></script>
-<script>
-  var canvas = document.getElementById("myCanvas");
-  var dot = canvas.getContext("2d");
-  var ch = new chip8;
-
-  window.requestAnimFrame = (function () {
- return window.requestAnimationFrame //||
-        //window.webkitRequestAnimationFrame ||
-      //  window.mozRequestAnimationFrame ||
-    //   window.oRequestAnimationFrame ||
-      //  window.msRequestAnimationFrame ||
-      //  function (callback) {
-        //    window.setTimeout(callback, 0);
-    //    };
-})();
-/*
-Function.prototype.bind = Function.prototype.bind || function(context) {
-    var boundArgs = [].slice.call(arguments, 1);
-    var boundFn = this;
-
-    return function() {
-        return boundFn.apply(context, boundArgs.concat([].slice.call(arguments)));
-    };
-};
-*/
-
-
-
-                 var translateKeys = {
-                     49: 0x1,  // 1
-                     50: 0x2,  // 2
-                     51: 0x3,  // 3
-                     52: 0x4,  // 4
-                     81: 0x5,  // Q
-                     87: 0x6,  // W
-                     69: 0x7,  // E
-                     82: 0x8,  // R
-                     65: 0x9,  // A
-                     83: 0xA,  // S
-                     68: 0xB,  // D
-                     70: 0xC,  // F
-                     90: 0xD,  // Z
-                     88: 0xE,  // X
-                     67: 0xF,  // C
-                     86: 0x10  // V
-                 };
-
-                 document.addEventListener("keydown", function(event) {
-                     ch.setKey(translateKeys[event.keyCode]);
-                 });
-
-                 document.addEventListener("keyup", function(event) {
-                     ch.unsetKey(translateKeys[event.keyCode]);
-                 });
-
-
- //Read hex file from selected directory
-  function handleFileSelect(evt) {
-    var files = evt.target.files;
-    for (var i = 0, f; f = files[i]; i++) {
-      var reader = new FileReader();
-      reader.onload = (function(theFile) {
-        return function(e) {
-          var raw = e.target.result;
-          var rawBytes = new Uint8Array(raw);
-          ch.reset();
-          ch.stop();
-          ch.loadProgram(rawBytes);
-          ch.start();
-        };
-      })(f);
-      reader.readAsArrayBuffer(f);
-    }
-  }
-  document.getElementById('files').addEventListener('change', handleFileSelect, false);
-
-</script>
-</body>
-
+      //Read hex file from selected directory
+      function handleFileSelect(evt) {
+        var files = evt.target.files;
+        for (var i = 0, f; f = files[i]; i++) {
+          var reader = new FileReader();
+          reader.onload = (function(theFile) {
+            return function(e) {
+              var raw = e.target.result;
+              var rawBytes = new Uint8Array(raw);
+              ch.reset();
+              ch.stop();
+              ch.loadProgram(rawBytes);
+              ch.start();
+            };
+          })(f);
+          reader.readAsArrayBuffer(f);
+        }
+      }
+      document.getElementById('files').addEventListener('change', handleFileSelect, false);
+      document.getElementById('game1').addEventListener('click',game1);
+    </script>
+  </body>
 </html>
